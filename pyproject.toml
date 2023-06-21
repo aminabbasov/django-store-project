@@ -1,0 +1,38 @@
+[project]
+name = "src"
+version = "0.0.1"
+dependencies = [
+    "django==4.2",
+    "pillow",
+    "django-environ",
+    "django-split-settings",
+    "bcrypt",
+    "django-behaviors",
+    # "djangorestframework",  # djangorestframework-camel-case
+    # "djangorestframework-simplejwt",  # drf-jwt
+    # "django-filter",
+    # "redis",
+
+    # "drf-spectacular-sidecar",
+    # "django-healthchecks",  # deprecated
+    # "sentry-sdk",
+    "psycopg2-binary",
+    # "celery",
+
+    # "django-ipware",
+    # "django-axes",
+    # "whitenoise",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipython",
+    "black",
+    # "dotenv-linter",
+
+    # "pytest",
+
+    # "mypy",
+
+    # "flake8",
+]
