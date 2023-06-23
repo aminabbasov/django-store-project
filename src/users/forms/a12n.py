@@ -5,7 +5,7 @@ from users.forms import NameValidatorMixin
 from users.models import User
 
 
-class WebsiteRegisterForm(UserCreationForm, NameValidatorMixin):
+class UsersRegisterForm(UserCreationForm, NameValidatorMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -71,7 +71,7 @@ class WebsiteRegisterForm(UserCreationForm, NameValidatorMixin):
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
 
-class WebsiteLoginForm(AuthenticationForm):
+class UsersLoginForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -92,13 +92,13 @@ class WebsiteLoginForm(AuthenticationForm):
     )
 
 
-class WebsitePasswordChangeForm(PasswordChangeForm):
+class UsersPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
                 'class': "form-control",
                 'placeholder': "Current Password",
-                'form': "WebsitePasswordChangeForm",
+                'form': "PasswordChangeForm",
             }
         )
     )
@@ -107,7 +107,7 @@ class WebsitePasswordChangeForm(PasswordChangeForm):
             attrs={
                 'class': "form-control",
                 'placeholder': "New password",
-                'form': "WebsitePasswordChangeForm",
+                'form': "PasswordChangeForm",
             }
         )
     )
@@ -116,7 +116,7 @@ class WebsitePasswordChangeForm(PasswordChangeForm):
             attrs={
                 'class': "form-control",
                 'placeholder': "Confirm password",
-                'form': "WebsitePasswordChangeForm",
+                'form': "PasswordChangeForm",
             }
         )
     )

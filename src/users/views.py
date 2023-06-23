@@ -10,13 +10,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 
 from users.forms import (
-    WebsiteRegisterForm, WebsiteLoginForm, WebsitePasswordChangeForm, WebsiteAccountForm
+    UsersRegisterForm, UsersLoginForm, UsersPasswordChangeForm, UsersAccountForm
 )
 
 
-class WebsiteRegisterView(SuccessMessageMixin, FormView):
+class UsersRegisterView(SuccessMessageMixin, FormView):
     template_name = 'users/register.html'
-    form_class = WebsiteRegisterForm
+    form_class = UsersRegisterForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('users:account')
     success_message = 'You have successfully registered!'
@@ -27,25 +27,25 @@ class WebsiteRegisterView(SuccessMessageMixin, FormView):
         if user is not None:
             login(self.request, user)
 
-        return super(WebsiteRegisterView, self).form_valid(form)
+        return super(UsersRegisterView, self).form_valid(form)
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('users:index')
 
-        return super(WebsiteRegisterView, self).get(request, *args, **kwargs)
+        return super(UsersRegisterView, self).get(request, *args, **kwargs)
 
 
-class WebsiteLoginView(SuccessMessageMixin, LoginView):
+class UsersLoginView(SuccessMessageMixin, LoginView):
     template_name = 'users/login.html'
-    form_class = WebsiteLoginForm
+    form_class = UsersLoginForm
     redirect_authenticated_user = True
     next_page = reverse_lazy('users:index')
     success_url = reverse_lazy('users:account')
     success_message = 'You have successfully logged in!'
     
     def setup(self, request, *args, **kwargs):
-        super(WebsiteLoginView, self).setup(request, *args, **kwargs)
+        super(UsersLoginView, self).setup(request, *args, **kwargs)
         self.just_logged_in = False
     
     def form_valid(self, form):
@@ -53,14 +53,14 @@ class WebsiteLoginView(SuccessMessageMixin, LoginView):
             self.request.session.set_expiry(settings.KEEP_LOGGED_DURATION)
 
         self.just_logged_in = True
-        return super(WebsiteLoginView, self).form_valid(form)
+        return super(UsersLoginView, self).form_valid(form)
     
     def form_invalid(self, form):
         if form.errors:
             for error in form.errors.values():
                 messages.error(self.request, error)
         
-        return super(WebsiteLoginView, self).form_invalid(form)
+        return super(UsersLoginView, self).form_invalid(form)
     
     def get_success_url(self):
         if self.just_logged_in:
@@ -70,37 +70,39 @@ class WebsiteLoginView(SuccessMessageMixin, LoginView):
 
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# class AccountServices:
-#     def get_orders_by_user(self, user):
-#         filtered_orders = Order.objects.annotate().filter(user=user)
-#         return filtered_orders
+from checkout.models import Order
+
+class AccountServices:
+    def get_orders_by_user(self, user):
+        filtered_orders = Order.objects.annotate().filter(user=user)
+        return filtered_orders
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
 
-class WebsiteAccountView(LoginRequiredMixin, TemplateView):
+class UsersAccountView(LoginRequiredMixin, TemplateView):
     template_name = 'users/account.html'
     
     def setup(self, request, *args, **kwargs):
-        super(WebsiteAccountView, self).setup(request, *args, **kwargs)
-        #! self.service = AccountServices()                                                 # XXX XXX XXX XXX XXX XXX
+        super(UsersAccountView, self).setup(request, *args, **kwargs)
+        self.service = AccountServices()                                                 # XXX XXX XXX XXX XXX XXX
     
     def get_context_data(self, *args, **kwargs):
-        context = super(WebsiteAccountView, self).get_context_data(*args, **kwargs)
-        context['password_form'] = WebsitePasswordChangeForm(user=self.request)
-        context['account_form'] = WebsiteAccountForm(self.request.user)
+        context = super(UsersAccountView, self).get_context_data(*args, **kwargs)
+        context['password_form'] = UsersPasswordChangeForm(user=self.request)
+        context['account_form'] = UsersAccountForm(self.request.user)
         context['orders'] = self.service.get_orders_by_user(user=self.request.user.pk)
 
         return context
 
 
-class WebsitePasswordChangeView(PasswordChangeView):
+class UsersPasswordChangeView(PasswordChangeView):
     template_name = 'users/account.html'
     http_method_names = ['post']
-    form_class = WebsitePasswordChangeForm
+    form_class = UsersPasswordChangeForm
     success_url = reverse_lazy('users:account')
     
     def get_form_kwargs(self):
-        kwargs = super(WebsitePasswordChangeView, self).get_form_kwargs()
+        kwargs = super(UsersPasswordChangeView, self).get_form_kwargs()
 
         if self.request.method.lower() == 'post':
             kwargs['user'] = self.request.user
@@ -113,7 +115,7 @@ class WebsitePasswordChangeView(PasswordChangeView):
         update_session_auth_hash(self.request, form.user)
         messages.success(self.request, 'Password successfully changed!')
 
-        return super(WebsitePasswordChangeView, self).form_valid(form)
+        return super(UsersPasswordChangeView, self).form_valid(form)
     
     def form_invalid(self, form):
         if form.errors:
@@ -125,32 +127,34 @@ class WebsitePasswordChangeView(PasswordChangeView):
 
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# class WebsiteAccountServices:
-#     def __init__(self):
-#         self.User = get_user_model()
+from django.contrib.auth import get_user_model
+
+class UsersAccountServices:
+    def __init__(self):
+        self.User = get_user_model()
     
-#     def is_username_available(self, username):
-#         is_available = self.User.objects.filter(username=username).exists()
-#         return not is_available
+    def is_username_available(self, username):
+        is_available = self.User.objects.filter(username=username).exists()
+        return not is_available
 
-#     def get_user_by_username(self, username):
-#         user = self.User.objects.get(username=username)
-#         return user
+    def get_user_by_username(self, username):
+        user = self.User.objects.get(username=username)
+        return user
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
 # XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
 
-class WebsiteAccountEditView(LoginRequiredMixin, FormView):
+class UsersAccountEditView(LoginRequiredMixin, FormView):
     template_name = 'users/account.html'
     http_method_names = ['post']
-    form_class = WebsiteAccountForm
+    form_class = UsersAccountForm
     success_url = reverse_lazy('users:account')
     
     def setup(self, request, *args, **kwargs):
-        super(WebsiteAccountEditView, self).setup(request, *args, **kwargs)
-        #! self.service = WebsiteAccountServices()                                          # XXX XXX XXX XXX XXX XXX
+        super(UsersAccountEditView, self).setup(request, *args, **kwargs)
+        self.service = UsersAccountServices()                                          # XXX XXX XXX XXX XXX XXX
 
     def get_form_kwargs(self):
-        kwargs = super(WebsiteAccountEditView, self).get_form_kwargs()
+        kwargs = super(UsersAccountEditView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
@@ -178,7 +182,7 @@ class WebsiteAccountEditView(LoginRequiredMixin, FormView):
         else:
             messages.error(self.request, f"Username {cleaned_data['username']} is not available.")
 
-        return super(WebsiteAccountEditView, self).form_valid(form)
+        return super(UsersAccountEditView, self).form_valid(form)
     
     def form_invalid(self, form):
         if form.errors:

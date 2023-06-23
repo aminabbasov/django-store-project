@@ -3,9 +3,9 @@ from django import forms
 from users.forms import NameValidatorMixin
 
 
-class WebsiteAccountForm(forms.Form, NameValidatorMixin):
+class UsersAccountForm(forms.Form, NameValidatorMixin):
     def __init__(self, user, *args, **kwargs):
-        super(WebsiteAccountForm, self).__init__(*args, **kwargs)
+        super(UsersAccountForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs['placeholder'] = getattr(user, 'first_name', '')
         self.fields['last_name'].widget.attrs['placeholder'] = getattr(user, 'last_name', '')
         self.fields['username'].widget.attrs['placeholder'] = getattr(user, 'username', '')
@@ -18,7 +18,7 @@ class WebsiteAccountForm(forms.Form, NameValidatorMixin):
             attrs={
                 'class': "form-control",
                 'placeholder': "John",
-                'form': "WebsiteAccountEditForm",
+                'form': "AccountEditForm",
             }
         )
     )
@@ -28,7 +28,7 @@ class WebsiteAccountForm(forms.Form, NameValidatorMixin):
             attrs={
                 'class': "form-control",
                 'placeholder': "Doe",
-                'form': "WebsiteAccountEditForm",
+                'form': "AccountEditForm",
             }
         )
     )
@@ -38,7 +38,7 @@ class WebsiteAccountForm(forms.Form, NameValidatorMixin):
             attrs={
                 'class': "form-control",
                 'placeholder': "johndoe",
-                'form': "WebsiteAccountEditForm",
+                'form': "AccountEditForm",
             }
         )
     )
@@ -48,7 +48,7 @@ class WebsiteAccountForm(forms.Form, NameValidatorMixin):
             attrs={
                 'class': "form-control",
                 'placeholder': "example@email.com",
-                'form': "WebsiteAccountEditForm",
+                'form': "AccountEditForm",
             }
         )
     )
@@ -58,7 +58,7 @@ class WebsiteAccountForm(forms.Form, NameValidatorMixin):
             attrs={
                 'class': "form-control",
                 'placeholder': "+123 456 789",
-                'form': "WebsiteAccountEditForm",
+                'form': "AccountEditForm",
             }
         )
     )

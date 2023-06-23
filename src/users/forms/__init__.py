@@ -1,17 +1,17 @@
 from users.forms.mixins import NameValidatorMixin
-from users.forms.a12n import WebsiteRegisterForm, WebsiteLoginForm, WebsitePasswordChangeForm
-from users.forms.account import WebsiteAccountForm
+from users.forms.a12n import UsersRegisterForm, UsersLoginForm, UsersPasswordChangeForm
+from users.forms.account import UsersAccountForm
 
 
 __all__ = [
     # mixins.py
     "NameValidatorMixin",
     
-    #a12n.py
-    "WebsiteRegisterForm",
-    "WebsiteLoginForm",
-    "WebsitePasswordChangeForm",
+    # a12n.py
+    "UsersRegisterForm",
+    "UsersLoginForm",
+    "UsersPasswordChangeForm",
     
     # account.py
-    "WebsiteAccountForm",
+    "UsersAccountForm",
 ]

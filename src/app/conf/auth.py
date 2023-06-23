@@ -4,7 +4,9 @@
 from django.urls import reverse_lazy
 
 
-#! AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
+
+AUTHENTICATION_BACKENDS = ['users.backends.UsernameOrEmailModelBackend']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
