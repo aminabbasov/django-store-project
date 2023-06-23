@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <!-- My Stylesheet -->
+    <link href="{% static 'css/extended-styles.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block content %}
+
+    <!-- Breadcrumb Start -->
+    {% include 'inc/_breadcrumbs.html' %}
+    <!-- Breadcrumb End -->
+
+    <!-- Messages Start -->
+    {% include 'inc/_messages.html' %}
+    <!-- Messages End -->
+
+    <!-- Login Start -->
+    <div class="login">
+        <div class="container-fluid">
+            <div class="row px-xl-5">
+                <div class="col-lg-12 form-group">
+                    <div class="bg-light p-30 mb-5">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>E-mail / Username</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Password</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" form="LoginForm" name="remember_me" value="True" class="custom-control-input" id="newaccount">
+                                    <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                                </div>
+                            </div>
+                            <form method="POST" id="LoginForm">
+                                {% csrf_token %}
+                                <div class="col-md-12 form-group">
+                                    <input type="submit" class="btn btn-form" value="Submit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login End -->
+        
+{% endblock content %}

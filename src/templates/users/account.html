@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <!-- My Stylesheet -->
+    <link href="{% static 'css/extended-styles.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block content %}
+
+    <!-- Breadcrumb Start -->
+    {% include 'inc/_breadcrumbs.html' %}
+    <!-- Breadcrumb End -->
+
+    <!-- Messages Start -->
+    {% include 'inc/_messages.html' %}
+    <!-- Messages End -->
+
+    <!-- My Account Start -->
+    <div class="my-account">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab">Dashboard</a>
+                        <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab">Orders</a>
+                        <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab">Payment Method</a>
+                        {% comment %}! __________________________________________________________________________________________________ {% endcomment %}
+                        {% comment %}! <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab">Address</a> {% endcomment %}
+                        {% comment %}! __________________________________________________________________________________________________ {% endcomment %}
+                        <a class="nav-item nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab">Account Details</a>
+                        <a class="nav-link" href="{% url 'users:logout' %}" style="color: red;">Logout</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+                            <h4>Dashboard</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+                            </p> 
+                        </div>
+                        <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Order ID</th>
+                                            <th>Price</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                        <tr>
+                                            <td>{{ order.created }}</td>
+                                            <td>{{ order.pk }}</td>
+                                            <td>{{ order.price }}</td>
+                                            <td>{{ order.status }}</td>
+                                            <td><button>View</button></td>
+                                        </tr>
+                                        {% empty %}
+                                        <h5>You don't have any orders.</h5>
+                                        {% endfor %}
+                                        {% comment %}
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Product Name</td>
+                                            <td>01 Jan 2020</td>
+                                            <td>$22</td>
+                                            <td>Approved</td>
+                                            <td><button>View</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Product Name</td>
+                                            <td>01 Jan 2020</td>
+                                            <td>$22</td>
+                                            <td>Approved</td>
+                                            <td><button>View</button></td>
+                                        </tr>
+                                        {% endcomment %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+                            <h4>Payment Method</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+                            </p> 
+                        </div>
+                        {% comment %}! __________________________________________________________________________________________________
+                        <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+                            <h4>Address</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Payment Address</h5>
+                                    <p>123 Payment Street, Los Angeles, CA</p>
+                                    <p>Mobile: 012-345-6789</p>
+                                    <button>Edit Address</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Shipping Address</h5>
+                                    <p>123 Shipping Street, Los Angeles, CA</p>
+                                    <p>Mobile: 012-345-6789</p>
+                                    <button>Edit Address</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endcomment %}
+                        {% comment %}! __________________________________________________________________________________________________ {% endcomment %}
+                        <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                            <h4>Account Details</h4>
+                            <form method="POST" action="{% url 'users:edit-account-details' %}" id="WebsiteAccountEditForm">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>First Name</label>
+                                        {{ account_form.first_name }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                        {{ account_form.last_name }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Username</label>
+                                        {{ account_form.username }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>E-mail</label>
+                                        {{ account_form.email }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Phone number</label>
+                                        {{ account_form.phone_number }}
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button>Update Account</button>
+                                        <br><br>
+                                    </div>
+                                </div>
+                            </form>
+                            <h4>Password change</h4>
+                            <form method="POST" action="{% url 'users:change-password' %}" id="WebsitePasswordChangeForm">
+                                <div class="row">
+                                    {% csrf_token %}
+                                    <div class="col-md-12">
+                                        <label>Old password</label>
+                                        {{ password_form.old_password }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>New password</label>
+                                        {{ password_form.new_password1 }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Confirm password</label>
+                                        {{ password_form.new_password2 }}
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button>Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- My Account End -->
+
+{% endblock content %}
