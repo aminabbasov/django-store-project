@@ -1,0 +1,167 @@
+.my-account .tab-content {
+	padding: 30px;
+	background: rgba(113, 135, 169, 0.1);
+}
+
+.my-account .nav.nav-pills .nav-link:hover, .my-account .nav.nav-pills .nav-link.active {
+	color: #ffffff;
+	background: #454d55;
+}
+
+.my-account .nav.nav-pills .nav-link {
+	padding: 15px 22px;
+	color: #6C757D;
+	font-weight: 400;
+	background: rgba(113, 135, 169, 0.1);
+	border-radius: 0;
+	border-bottom: 1px solid #ffffff;
+}
+
+.my-account .tab-content .table .thead-dark th {
+	text-align: center;
+	background: #343a40;
+	border-color: #454d55;
+	vertical-align: middle;
+}
+
+.my-account .tab-content button {
+	height: 35px;
+	padding: 2px 15px;
+	text-align: center;
+	color: #ffffff;
+	background: #343a40;
+	border: none;
+}
+
+.my-account .tab-content .table {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.my-account .tab-content input {
+	width: 100%;
+	height: 35px;
+	padding: 0 15px;
+	color: #666666;
+	background: #ffffff;
+	border: 1px solid #ffffff;
+	margin-bottom: 15px;
+}
+
+/* --- */
+
+.cart-page .table .thead-dark th {
+	text-align: center;
+	background: #343a40;
+	border-color: #454d55;
+	vertical-align: middle;
+}
+
+.cart-page .table input:not(.unstyled) {
+	width: 60px;
+	height: 30px;
+	color: #ffffff;
+	text-align: center;
+	background: rgba(159, 162, 167, 0.5);
+	border: none;
+}
+
+.cart-page .table button:not(.unstyled) {
+	height: 30px;
+	padding: 2px 10px;
+	text-align: center;
+	color: #ffffff;
+	background: #343a40;  /* #ffcb0d */
+	border: none;
+}
+
+.cart-page .table {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 45px;
+}
+
+.cart-page .table td {
+	color: #666666;
+	font-size: 16px;
+	font-weight: 600;
+	vertical-align: middle;
+}
+
+/* a:hover, a:active, a:focus {
+	color: #666666;
+	outline: none;
+	text-decoration: none;
+} */
+
+.cart-page .table img {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+/* --- */
+
+.login {
+	position: relative;
+	padding-top: 30px;
+}
+
+.login .login-form, .login .register-form {
+	padding: 30px;
+	background: #ffffff;
+	margin-bottom: 30px;
+}
+
+*, ::after, ::before {
+	box-sizing: border-box;
+}
+
+.row {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+.login .login-form, .login .register-form {
+	padding: 30px;
+	background: #ffffff;
+	margin-bottom: 30px;
+}
+
+.col-md-6 {
+	-ms-flex: 0 0 50%;
+	flex: 0 0 50%;
+	max-width: 50%;
+}
+
+.form-control, .custom-select {
+	width: 100%;
+	height: 35px;
+	padding: 0 15px;
+	color: #343a40;
+	border: 1px solid #dddddd;
+	margin-bottom: 15px;
+}
+
+.btn-form {
+	color: #343a40;
+	background: white;
+	border: 1px solid #343a40;
+}
+
+.btn:hover, .btn:active, .btn:focus {
+	color: #343a40;
+	background: #ffcb0d;
+	box-shadow: none;
+}
+
+label {
+	display: inline-block;
+	margin-bottom: .5rem;
+}
+
+
