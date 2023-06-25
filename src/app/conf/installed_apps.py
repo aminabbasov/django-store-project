@@ -13,6 +13,7 @@ APPS = [
     # "users",
     
     "users",
+    "products",
 ]
 
 THIRD_PARTY_APPS = [
