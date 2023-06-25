@@ -14,6 +14,7 @@ APPS = [
     
     "users",
     "products",
+    "checkout",
 ]
 
 THIRD_PARTY_APPS = [
