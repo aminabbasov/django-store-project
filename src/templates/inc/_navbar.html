@@ -11,20 +11,20 @@
                     <div class="nav-item dropdown dropright">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
                         <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                            <a href="{% url 'website:category' 'man' %}" class="dropdown-item">Men's Dresses</a>
-                            <a href="{% url 'website:category' 'woman' %}" class="dropdown-item">Women's Dresses</a>
-                            <a href="{% url 'website:category' 'baby' %}" class="dropdown-item">Baby's Dresses</a>
+                            <a href="{% url 'products:category' 'man' %}" class="dropdown-item">Men's Dresses</a>
+                            <a href="{% url 'products:category' 'woman' %}" class="dropdown-item">Women's Dresses</a>
+                            <a href="{% url 'products:category' 'baby' %}" class="dropdown-item">Baby's Dresses</a>
                         </div>
                     </div>
-                    <a href="{% url 'website:category' 'shirts' %}" class="nav-item nav-link">Shirts</a>
-                    <a href="{% url 'website:category' 'jeans' %}" class="nav-item nav-link">Jeans</a>
-                    <a href="{% url 'website:category' 'swimwear' %}" class="nav-item nav-link">Swimwear</a>
-                    <a href="{% url 'website:category' 'sleepwear' %}" class="nav-item nav-link">Sleepwear</a>
-                    <a href="{% url 'website:category' 'sportswear' %}" class="nav-item nav-link">Sportswear</a>
-                    <a href="{% url 'website:category' 'jumpsuits' %}" class="nav-item nav-link">Jumpsuits</a>
-                    <a href="{% url 'website:category' 'blazers' %}" class="nav-item nav-link">Blazers</a>
-                    <a href="{% url 'website:category' 'jackets' %}" class="nav-item nav-link">Jackets</a>
-                    <a href="{% url 'website:category' 'shoes' %}" class="nav-item nav-link">Shoes</a>
+                    <a href="{% url 'products:category' 'shirts' %}" class="nav-item nav-link">Shirts</a>
+                    <a href="{% url 'products:category' 'jeans' %}" class="nav-item nav-link">Jeans</a>
+                    <a href="{% url 'products:category' 'swimwear' %}" class="nav-item nav-link">Swimwear</a>
+                    <a href="{% url 'products:category' 'sleepwear' %}" class="nav-item nav-link">Sleepwear</a>
+                    <a href="{% url 'products:category' 'sportswear' %}" class="nav-item nav-link">Sportswear</a>
+                    <a href="{% url 'products:category' 'jumpsuits' %}" class="nav-item nav-link">Jumpsuits</a>
+                    <a href="{% url 'products:category' 'blazers' %}" class="nav-item nav-link">Blazers</a>
+                    <a href="{% url 'products:category' 'jackets' %}" class="nav-item nav-link">Jackets</a>
+                    <a href="{% url 'products:category' 'shoes' %}" class="nav-item nav-link">Shoes</a>
                 </div>
             </nav>
         </div>
@@ -39,25 +39,25 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="{% url 'website:index' %}" class="nav-item nav-link active">Home</a>
-                        <a href="{% url 'website:shop' %}" class="nav-item nav-link">Shop</a>
-                        <a href="{% url 'website:detail' pk=5 %}" class="nav-item nav-link">Shop Detail</a>
+                        <a href="{% url 'products:index' %}" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'products:shop' %}" class="nav-item nav-link">Shop</a>
+                        <a href="{% url 'products:detail' pk=1 %}" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                <a href="{% url 'website:cart' %}" class="dropdown-item">Shopping Cart</a>
-                                <a href="{% url 'website:checkout' %}" class="dropdown-item">Checkout</a>
+                                <a href="{% url 'checkout:cart' %}" class="dropdown-item">Shopping Cart</a>
+                                <a href="{% url 'checkout:checkout' %}" class="dropdown-item">Checkout</a>
                             </div>
                         </div>
                         <a href="{% url 'users:account' %}" class="nav-item nav-link">Account</a>
-                        <a href="{% url 'website:contact' %}" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'products:contact' %}" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a hidden href="#" class="btn px-0">
                             <i hidden class="fas fa-heart text-primary"></i>
                             <span  hidden class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                         </a>
-                        <a href="{% url 'website:cart' %}" class="btn px-0 ml-3">
+                        <a href="{% url 'checkout:cart' %}" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{ cart|length }}</span>
                         </a>
