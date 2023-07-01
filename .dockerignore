@@ -1,0 +1,13 @@
+venv/
+.venv/
+.vscode/
+static/
+db.sqlite
+db.sqlite3
+__pycache__/
+.cache/
+.git
+.gitignore
+*.log
+.mypy_cache
+.pytest_cache

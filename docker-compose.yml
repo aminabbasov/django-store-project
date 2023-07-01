@@ -1,15 +1,46 @@
-version: '2'
+version: '3.8'
+name: "django-shop"
 
 services:
+  # django:
+  #   build: .
+  #   ports:
+  #     - "8000:8000"
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   volumes:
+  #     - .:/code
+
   postgres:
     image: postgres:13-alpine
+    container_name: postgres-dev
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATESTYLE: ISO  # ISO, SQL, Postgres, German
     ports:
-     - 5432:5432
+     - 5432:5432 
     command: --autovacuum=off --fsync=off --synchronous_commit=off --full_page_writes=off --work_mem=12MB --max-connections=10 --max_wal_senders=0
+    volumes:
+      - dev-db:/var/lib/postgresql/data
+    shm_size: '2gb'
 
-  redis:
-    image: redis:6-alpine
-    ports:
-      - 6379:6379
+  # redis:
+  #   image: redis:6-alpine
+  #   ports:
+  #     - 6379:6379
+
+  # pgadmin:
+  #   image: dpage/pgadmin4:7.2
+  #   # restart: always
+  #   container_name: pg-admin
+  #   ports:
+  #     - '5555:80'
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: admin
+  #   volumes:
+  #     - airtrans-pgadmin:/var/lib/pgadmin
+
+volumes:
+  dev-db:
+  # external: true
+    name: "dev-db"
