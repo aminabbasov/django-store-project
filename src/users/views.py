@@ -12,6 +12,8 @@ from django.views.generic.base import TemplateView
 from users.forms import (
     UsersRegisterForm, UsersLoginForm, UsersPasswordChangeForm, UsersAccountForm
 )
+from users.services import UserUpdater
+from users.models import User
 
 
 class UsersRegisterView(SuccessMessageMixin, FormView):
@@ -125,64 +127,35 @@ class UsersPasswordChangeView(PasswordChangeView):
         return redirect('users:account')
 
 
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-from django.contrib.auth import get_user_model
-
-class UsersAccountServices:
-    def __init__(self):
-        self.User = get_user_model()
-    
-    def is_username_available(self, username):
-        is_available = self.User.objects.filter(username=username).exists()
-        return not is_available
-
-    def get_user_by_username(self, username):
-        user = self.User.objects.get(username=username)
-        return user
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-
 class UsersAccountEditView(LoginRequiredMixin, FormView):
     template_name = 'users/account.html'
     http_method_names = ['post']
     form_class = UsersAccountForm
     success_url = reverse_lazy('users:account')
-    
-    def setup(self, request, *args, **kwargs):
-        super(UsersAccountEditView, self).setup(request, *args, **kwargs)
-        self.service = UsersAccountServices()                                          # XXX XXX XXX XXX XXX XXX
 
     def get_form_kwargs(self):
-        kwargs = super(UsersAccountEditView, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
     def form_valid(self, form):
         cleaned_data = form.cleaned_data
-
-        if self.service.is_username_available(username=cleaned_data['username']):
+        user = self.request.user
+        username = cleaned_data['username']
         
+        if User.objects.is_username_available(username=username):
             if any(cleaned_data.values()):
-                user = self.service.get_user_by_username(username=self.request.user.username)
-
-                user.first_name = cleaned_data['first_name'] or user.first_name
-                user.last_name = cleaned_data['last_name'] or user.last_name
-                user.username = cleaned_data['username'] or user.username
-                user.email = cleaned_data['email'] or user.email
-                user.phone_number = cleaned_data['phone_number'] or user.phone_number
-
-                user.save()
+                UserUpdater(user=user, user_data=cleaned_data)()
                 messages.success(self.request, 'Your account has been successfully edited!')
             else:
                 messages.info(self.request, 'You have not entered any data to change.')
-
-        elif self.request.user.username == cleaned_data['username']:
-            messages.error(self.request, f"You are already using {cleaned_data['username']} username.")
         else:
-            messages.error(self.request, f"Username {cleaned_data['username']} is not available.")
+            if user.username == username:
+                messages.error(self.request, f"You are already using {username} username.")
+            else:
+                messages.error(self.request, f"Username {username} is not available.")
 
-        return super(UsersAccountEditView, self).form_valid(form)
+        return super().form_valid(form)
     
     def form_invalid(self, form):
         if form.errors:
