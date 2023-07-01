@@ -39,10 +39,13 @@
                             </div>
                             <form method="POST" id="LoginForm">
                                 {% csrf_token %}
-                                <div class="col-md-12 form-group">
+                                <div class="col-md-6 form-group">
                                     <input type="submit" class="btn btn-form" value="Submit" />
                                 </div>
                             </form>
+                          <div class="col-md-6-right">
+                            <a href={% url 'users:register' %} class="btn btn-form" value="Submit"/>Register</a>
+                          </div>
                         </div>
                     </div>
                 </div>
