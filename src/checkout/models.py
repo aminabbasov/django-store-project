@@ -1,10 +1,10 @@
-from app.models import models, Timestamped
+from app.models import models, TimestampedModel
 
 from users.models import User
 from products.models import Product
 
 
-class Order(Timestamped):
+class Order(TimestampedModel):
     COUNTRY_CHOICES = [
         ('us', 'United States'),
         ('germany', 'Germany'),
@@ -67,7 +67,7 @@ COLOR_CHOICES = [
     ('green', 'Green'),
 ]
 
-class OrderItem(Timestamped):    
+class OrderItem(TimestampedModel):    
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name='ordered_items')  #! ordered_item
     price = models.DecimalField(max_digits=7, decimal_places=2)

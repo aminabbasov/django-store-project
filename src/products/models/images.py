@@ -1,8 +1,8 @@
-from app.models import Timestamped, models
+from app.models import TimestampedModel, models
 from products.models import Category, Product
 
 
-class Image(Timestamped):
+class Image(TimestampedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')  # related_query_name='images'
     image = models.ImageField(upload_to=r'product/%Y/%m/%d/')
     

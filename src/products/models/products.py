@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
-from app.models import Timestamped, models
+from app.models import TimestampedModel, models
 
 
 def validate_discount(number: int) -> int:
@@ -15,7 +15,7 @@ def validate_discount(number: int) -> int:
         return number
 
 
-class Product(Timestamped):
+class Product(TimestampedModel):
     
     class SIZES(models.TextChoices):        
         __empty__ = _('Select size')

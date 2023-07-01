@@ -1,9 +1,9 @@
 from products.models import Product
-from app.models import Timestamped, models
+from app.models import TimestampedModel, models
 from users.models import User
 
 
-class Review(Timestamped):
+class Review(TimestampedModel):
     RATING_CHOICES = [
         (None, 'Rate product'),
         ('1', '1 star'),

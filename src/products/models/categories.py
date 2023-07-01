@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.utils.text import slugify
 
-from app.models import Timestamped, models
+from app.models import TimestampedModel, models
 
 
 #! class CategoryManager(models.Manager):
@@ -10,7 +10,7 @@ from app.models import Timestamped, models
 #!         return cat
 
 
-class Category(Timestamped):
+class Category(TimestampedModel):
     CATEGORY_CHOICES = [
         (None, 'Select category'),
         
