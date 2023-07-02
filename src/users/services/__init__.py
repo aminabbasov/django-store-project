@@ -1,4 +1,4 @@
-from users.services.user_updater import UserUpdater
+from .user_updater import UserUpdater
 
 
 __all__ = [
