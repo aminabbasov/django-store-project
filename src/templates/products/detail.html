@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load product_cards %}
 
 {% block content %}
 
@@ -56,39 +57,39 @@
                     <h3>{{ product.name }}</h3>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
-                            {% with product.average_rating as avg_rating %}
-                                <small class="fa{% if avg_rating > 0 %}s{% else %}r{% endif %} fa-star{% if avg_rating <= 0.5 and avg_rating > 0 %}-half-alt{% endif %}"></small>
-                                <small class="fa{% if avg_rating >= 1 %}s{% else %}r{% endif %} fa-star{% if avg_rating <= 1.5 and avg_rating > 1 %}-half-alt{% endif %}"></small>
-                                <small class="fa{% if avg_rating >= 2 %}s{% else %}r{% endif %} fa-star{% if avg_rating <= 2.5 and avg_rating > 2 %}-half-alt{% endif %}"></small>
-                                <small class="fa{% if avg_rating >= 3 %}s{% else %}r{% endif %} fa-star{% if avg_rating <= 3.5 and avg_rating > 3 %}-half-alt{% endif %}"></small>
-                                <small class="fa{% if avg_rating >= 4 %}s{% else %}r{% endif %} fa-star{% if avg_rating <= 4.5 and avg_rating > 4 %}-half-alt{% endif %}"></small>
-                            {% endwith %}
+                          {% with product.average_rating as avg_rating %}
+                            <small class="fa{% if avg_rating <= 0 %}r{% endif %} fa-star{% if avg_rating <= 0.5 and avg_rating > 0 %}-half-alt{% endif %} text-primary mr-1"></small>
+                            <small class="fa{% if avg_rating <= 1 %}r{% endif %} fa-star{% if avg_rating <= 1.5 and avg_rating > 1 %}-half-alt{% endif %} text-primary mr-1"></small>
+                            <small class="fa{% if avg_rating <= 2 %}r{% endif %} fa-star{% if avg_rating <= 2.5 and avg_rating > 2 %}-half-alt{% endif %} text-primary mr-1"></small>
+                            <small class="fa{% if avg_rating <= 3 %}r{% endif %} fa-star{% if avg_rating <= 3.5 and avg_rating > 3 %}-half-alt{% endif %} text-primary mr-1"></small>
+                            <small class="fa{% if avg_rating <= 4 %}r{% endif %} fa-star{% if avg_rating <= 4.5 and avg_rating > 4 %}-half-alt{% endif %} text-primary mr-1"></small>
+                          {% endwith %}
                         </div>
                         <small class="pt-1">({{ product.reviews.count }} Reviews)</small>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">${{ product.actual_price }}</h3>
+                    <h3 class="font-weight-semi-bold mb-4">{{ product.discounted_price_range }}</h3>
                     <p class="mb-4">{{ product.short_description }}</p>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
                         {% comment %} <form> {% endcomment %}
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="XS" class="custom-control-input" id="size-1" name="size" form="cart-form">
+                                <input type="radio" value="XS" class="custom-control-input" id="size-1" name="size" form="basket-form">
                                 <label class="custom-control-label" for="size-1">XS</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="S" class="custom-control-input" id="size-2" name="size" form="cart-form">
+                                <input type="radio" value="S" class="custom-control-input" id="size-2" name="size" form="basket-form">
                                 <label class="custom-control-label" for="size-2">S</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="M" class="custom-control-input" id="size-3" name="size" form="cart-form">
+                                <input type="radio" value="M" class="custom-control-input" id="size-3" name="size" form="basket-form">
                                 <label class="custom-control-label" for="size-3">M</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="L" class="custom-control-input" id="size-4" name="size" form="cart-form">
+                                <input type="radio" value="L" class="custom-control-input" id="size-4" name="size" form="basket-form">
                                 <label class="custom-control-label" for="size-4">L</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="XL" class="custom-control-input" id="size-5" name="size" form="cart-form">
+                                <input type="radio" value="XL" class="custom-control-input" id="size-5" name="size" form="basket-form">
                                 <label class="custom-control-label" for="size-5">XL</label>
                             </div>
                         {% comment %} </form> {% endcomment %}
@@ -97,23 +98,23 @@
                         <strong class="text-dark mr-3">Colors:</strong>
                         {% comment %} <form> {% endcomment %}
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="black" class="custom-control-input" id="color-1" name="color" form="cart-form">
+                                <input type="radio" value="black" class="custom-control-input" id="color-1" name="color" form="basket-form">
                                 <label class="custom-control-label" for="color-1">Black</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="white" class="custom-control-input" id="color-2" name="color" form="cart-form">
+                                <input type="radio" value="white" class="custom-control-input" id="color-2" name="color" form="basket-form">
                                 <label class="custom-control-label" for="color-2">White</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="red" class="custom-control-input" id="color-3" name="color" form="cart-form">
+                                <input type="radio" value="red" class="custom-control-input" id="color-3" name="color" form="basket-form">
                                 <label class="custom-control-label" for="color-3">Red</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="blue" class="custom-control-input" id="color-4" name="color" form="cart-form">
+                                <input type="radio" value="blue" class="custom-control-input" id="color-4" name="color" form="basket-form">
                                 <label class="custom-control-label" for="color-4">Blue</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" value="green" class="custom-control-input" id="color-5" name="color" form="cart-form">
+                                <input type="radio" value="green" class="custom-control-input" id="color-5" name="color" form="basket-form">
                                 <label class="custom-control-label" for="color-5">Green</label>
                             </div>
                         {% comment %} </form> {% endcomment %}
@@ -125,17 +126,17 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center" name="quantity" value="1" form="cart-form">
+                            <input type="text" class="form-control bg-secondary border-0 text-center" name="quantity" value="1" form="basket-form">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <form method="POST" id="cart-form">
+                        <form method="POST" id="basket-form">
                             {% csrf_token %}
                             <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                                Cart</button>
+                              Basket</button>
                         </form>
                     </div>
                     <div class="d-flex pt-2">
@@ -182,13 +183,13 @@
                                     {% for review in product.reviews.all %}
                                         <div class="media mb-4">
                                             <div class="media-body">
-                                                <h6>{{ review.user.username }}<small> - <i>{{ review.date }}</i></small></h6>
+                                                <h6>{{ review.user.username }}<small> - <i>{{ review.get_date }}</i></small></h6>
                                                 <div class="text-primary mb-2">
-                                                    <i class="fa{% if review.rating <= '0' %}r{% else %}s{% endif %} fa-star"></i>
-                                                    <i class="fa{% if review.rating <= '1' %}r{% else %}s{% endif %} fa-star"></i>
-                                                    <i class="fa{% if review.rating <= '2' %}r{% else %}s{% endif %} fa-star"></i>
-                                                    <i class="fa{% if review.rating <= '3' %}r{% else %}s{% endif %} fa-star"></i>
-                                                    <i class="fa{% if review.rating <= '4' %}r{% else %}s{% endif %} fa-star"></i>
+                                                    <i class="fa{% if review.rating <= 0 %}r{% else %}s{% endif %} fa-star"></i>
+                                                    <i class="fa{% if review.rating <= 1 %}r{% else %}s{% endif %} fa-star"></i>
+                                                    <i class="fa{% if review.rating <= 2 %}r{% else %}s{% endif %} fa-star"></i>
+                                                    <i class="fa{% if review.rating <= 3 %}r{% else %}s{% endif %} fa-star"></i>
+                                                    <i class="fa{% if review.rating <= 4 %}r{% else %}s{% endif %} fa-star"></i>
                                                 </div>
                                                 {{ review.comment }}
                                             </div>
@@ -214,7 +215,7 @@
                                                     <label for="message">Your Review</label>
                                                     {{ review_form.comment }}
                                                 </div>
-                                            <form method="POST" action="{% url 'products:rate' pk=product.pk %}" id="RatingForm">
+                                            <form method="POST" action="{% url 'products:rate' pk=product.public_id %}" id="RatingForm">
                                                 {% csrf_token %}
                                                 <div class="form-group mb-0">
                                                     <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
@@ -252,18 +253,20 @@
                             <div class="text-center py-4">
                                 <a class="h6 text-decoration-none text-truncate" href="">{{ related_product.name }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    {% if related_product.discount %}
-                                        <h5>{{ related_product.actual_price }}</h5><h6 class="text-muted ml-2"><del>{{ related_product.price }}</del></h6>
+                                    {% if related_product.has_discount %}
+                                        <h5>{{ related_product.discounted_price_range }}</h5><h6 class="text-muted ml-2"><del>{{ related_product.price_range }}</del></h6>
                                     {% else %}
-                                        <h5>{{ related_product.actual_price }}</h5></h6>
+                                        <h5>{{ related_product.discounted_price_range }}</h5></h6>
                                     {% endif %}
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
+                                  {% with related_product.average_rating as avg_rating %}
+                                    <small class="fa{% if avg_rating <= 0 %}r{% endif %} fa-star{% if avg_rating <= 0.5 and avg_rating > 0 %}-half-alt{% endif %} text-primary mr-1"></small>
+                                    <small class="fa{% if avg_rating <= 1 %}r{% endif %} fa-star{% if avg_rating <= 1.5 and avg_rating > 1 %}-half-alt{% endif %} text-primary mr-1"></small>
+                                    <small class="fa{% if avg_rating <= 2 %}r{% endif %} fa-star{% if avg_rating <= 2.5 and avg_rating > 2 %}-half-alt{% endif %} text-primary mr-1"></small>
+                                    <small class="fa{% if avg_rating <= 3 %}r{% endif %} fa-star{% if avg_rating <= 3.5 and avg_rating > 3 %}-half-alt{% endif %} text-primary mr-1"></small>
+                                    <small class="fa{% if avg_rating <= 4 %}r{% endif %} fa-star{% if avg_rating <= 4.5 and avg_rating > 4 %}-half-alt{% endif %} text-primary mr-1"></small>
+                                  {% endwith %}
                                     <small>{{ related_product.reviews.count }}</small>
                                 </div>
                             </div>

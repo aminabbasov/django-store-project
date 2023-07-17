@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-
+from django.conf import settings
 from split_settings.tools import include
 
 from app.conf.environ import env
@@ -38,6 +38,9 @@ include(
     "conf/static.py",
     "conf/templates.py",
     "conf/timezone.py",
-    "conf/cart.py",
+    "conf/basket.py",
     "conf/email.py",
 )
+
+if settings.DEBUG:
+    include("conf/debug_toolbar.py")

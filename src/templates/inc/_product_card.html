@@ -13,19 +13,19 @@
         <div class="text-center py-4">
             <a class="h6 text-decoration-none text-truncate" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
             <div class="d-flex align-items-center justify-content-center mt-2">
-                {% if product.discount %}
-                    <h5>{{ product.actual_price }}</h5><h6 class="text-muted ml-2"><del>{{ product.price }}</del></h6>
+                {% if product.has_discount %}
+                    <h5>{{ product.discounted_price_range }}</h5><h6 class="text-muted ml-2"><del>{{ product.price_range }}</del></h6>
                 {% else %}
-                    <h5>{{ product.actual_price }}</h5></h6>
+                    <h5>{{ product.price_range }}</h5></h6>
                 {% endif %}
             </div>
             <div class="d-flex align-items-center justify-content-center mb-1">
                 {% with product.average_rating as avg_rating %}
-                    <small class="fa{% if avg_rating < 0 %}r{% endif %} fa-star{% if avg_rating <= 0.5 and avg_rating > 0 %}-half-alt{% endif %} text-primary mr-1"></small>
-                    <small class="fa{% if avg_rating < 1 %}r{% endif %} fa-star{% if avg_rating <= 1.5 and avg_rating > 1 %}-half-alt{% endif %} text-primary mr-1"></small>
-                    <small class="fa{% if avg_rating < 2 %}r{% endif %} fa-star{% if avg_rating <= 2.5 and avg_rating > 2 %}-half-alt{% endif %} text-primary mr-1"></small>
-                    <small class="fa{% if avg_rating < 3 %}r{% endif %} fa-star{% if avg_rating <= 3.5 and avg_rating > 3 %}-half-alt{% endif %} text-primary mr-1"></small>
-                    <small class="fa{% if avg_rating < 4 %}r{% endif %} fa-star{% if avg_rating <= 4.5 and avg_rating > 4 %}-half-alt{% endif %} text-primary mr-1"></small>
+                  <small class="fa{% if avg_rating <= 0 %}r{% endif %} fa-star{% if avg_rating <= 0.5 and avg_rating > 0 %}-half-alt{% endif %} text-primary mr-1"></small>
+                  <small class="fa{% if avg_rating <= 1 %}r{% endif %} fa-star{% if avg_rating <= 1.5 and avg_rating > 1 %}-half-alt{% endif %} text-primary mr-1"></small>
+                  <small class="fa{% if avg_rating <= 2 %}r{% endif %} fa-star{% if avg_rating <= 2.5 and avg_rating > 2 %}-half-alt{% endif %} text-primary mr-1"></small>
+                  <small class="fa{% if avg_rating <= 3 %}r{% endif %} fa-star{% if avg_rating <= 3.5 and avg_rating > 3 %}-half-alt{% endif %} text-primary mr-1"></small>
+                  <small class="fa{% if avg_rating <= 4 %}r{% endif %} fa-star{% if avg_rating <= 4.5 and avg_rating > 4 %}-half-alt{% endif %} text-primary mr-1"></small>
                 {% endwith %}
                 <small>{{ product.reviews.count }}</small>
             </div>

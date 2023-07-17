@@ -1,3 +1,6 @@
+from django.conf import settings
+
+
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -11,6 +14,8 @@ APPS = [
     # "app",
     # "a12n",
     # "users",
+
+    "app",
     
     "users",
     "products",
@@ -26,5 +31,10 @@ THIRD_PARTY_APPS = [
     # "django_filters",
     # "axes",
 ]
+
+if settings.DEBUG:
+    THIRD_PARTY_APPS += [
+        "debug_toolbar",
+    ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS + THIRD_PARTY_APPS

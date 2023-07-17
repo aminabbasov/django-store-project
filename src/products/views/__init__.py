@@ -1,6 +1,6 @@
-from products.views.index import ProductsIndexView
-from products.views.contact import ProductsContactView
-from products.views.shop import (
+from .index import ProductsIndexView
+from .contact import ProductsContactView
+from .shop import (
     ProductsShopView, ProductsCategoryView, ProductsDetailView, ProductsReviewView
 )
 

@@ -116,4 +116,8 @@ venv
 db.sqlite
 db.sqlite3
 
+src/static/images/product/*
+src/static/images/category/*
+!.gitkeep
+
 .cache

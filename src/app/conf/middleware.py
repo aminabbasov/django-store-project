@@ -1,3 +1,6 @@
+from django.conf import settings
+
+
 DJANGO_MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -9,7 +12,16 @@ DJANGO_MIDDLEWARE = [
 ]
 
 CUSTOM_MIDDLEWARE = [
-    'checkout.middleware.CartMiddleware',
+    'checkout.middleware.BasketMiddleware',
 ]
 
-MIDDLEWARE = DJANGO_MIDDLEWARE + CUSTOM_MIDDLEWARE
+THIRD_PARTY_MIDDLEWARE = [
+    
+]
+
+if settings.DEBUG:
+    THIRD_PARTY_MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
+
+MIDDLEWARE = DJANGO_MIDDLEWARE + CUSTOM_MIDDLEWARE + THIRD_PARTY_MIDDLEWARE

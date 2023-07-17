@@ -8,8 +8,8 @@ app_name = 'products'
 shop = [
     path('', views.ProductsShopView.as_view(), name='shop'),
     path('category/<slug:slug>/', views.ProductsCategoryView.as_view(), name='category'),
-    path('product/<int:pk>/', views.ProductsDetailView.as_view(), name='detail'),
-    path('product/<int:pk>/rate/', views.ProductsReviewView.as_view(), name='rate'),
+    path('product/<uuid:pk>/', views.ProductsDetailView.as_view(), name='detail'),
+    path('product/<uuid:pk>/rate/', views.ProductsReviewView.as_view(), name='rate'),
 ]
 
 urlpatterns = [

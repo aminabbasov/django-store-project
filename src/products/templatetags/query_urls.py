@@ -50,7 +50,7 @@ def query_url(parameters, **kwargs):
     if parameters:
         querystring = parameters.split('&')
         used_fields = kwargs.keys()
-        filtered_querystring = filter(lambda p: p.split('=')[0] not in used_fields, querystring)
+        filtered_querystring = filter(lambda param: param.split('=')[0] not in used_fields, querystring)
         encoded_querystring = '&'.join(filtered_querystring)
         
         if encoded_querystring:

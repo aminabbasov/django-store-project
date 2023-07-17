@@ -13,19 +13,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Order",
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "modified",
-                    models.DateTimeField(blank=True, db_index=True, null=True),
-                ),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("modified", models.DateTimeField(blank=True, db_index=True, null=True)),
                 ("first_name", models.CharField(max_length=255)),
                 ("last_name", models.CharField(max_length=255)),
                 ("email", models.EmailField(max_length=255)),
@@ -75,32 +64,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="OrderItem",
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("created", models.DateTimeField(auto_now_add=True, db_index=True)),
-                (
-                    "modified",
-                    models.DateTimeField(blank=True, db_index=True, null=True),
-                ),
+                ("modified", models.DateTimeField(blank=True, db_index=True, null=True)),
                 ("price", models.DecimalField(decimal_places=2, max_digits=7)),
                 (
                     "size",
                     models.CharField(
-                        choices=[
-                            (None, "Select size"),
-                            ("XS", "XS"),
-                            ("S", "S"),
-                            ("M", "M"),
-                            ("L", "L"),
-                            ("XL", "XL"),
-                        ],
+                        choices=[(None, "Select size"), ("XS", "XS"), ("S", "S"), ("M", "M"), ("L", "L"), ("XL", "XL")],
                         max_length=30,
                     ),
                 ),
@@ -122,9 +93,7 @@ class Migration(migrations.Migration):
                 (
                     "order",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="items",
-                        to="checkout.order",
+                        on_delete=django.db.models.deletion.CASCADE, related_name="items", to="checkout.order"
                     ),
                 ),
             ],

@@ -18,7 +18,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 
                 # my context processors
-                'checkout.context_processors.cart',
+                'checkout.context_processors.basket',
             ],
         },
     },

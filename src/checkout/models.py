@@ -1,25 +1,26 @@
-from app.models import models, TimestampedModel
+from django.utils.translation import gettext_lazy as _
 
+from app.models import models, TimestampedModel
 from users.models import User
 from products.models import Product
 
 
 class Order(TimestampedModel):
-    COUNTRY_CHOICES = [
-        ('us', 'United States'),
-        ('germany', 'Germany'),
-        ('turkey', 'Turkey'),
-        ('uae', 'United Arab Emirates'),                 #! СДЕЛАТЬ ДВОЙНЫЕ КОДЫ СТРАН КАК У США
-        ('thailand', 'Thailand'),
-        ('japan', 'Japan'),
-    ]
+    
+    class COUNTRY(models.TextChoices):
+        US = 'US', _('United States')
+        DE = 'DE', _('Germany')
+        TR = 'TR', _('Turkey')
+        AE = 'AE', _('United Arab Emirates')
+        TH = 'TH', _('Thailand')
+        JP = 'JP', _('Japan')
 
-    STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('Approved', 'Approved'),
-        ('In transit', 'In transit'),
-        ('Shipped', 'Shipped'),
-    ]
+    class STATUS(models.TextChoices):
+        NOT_PAID = 'Not paid', _('Not paid')
+        PENDING = 'Pending', _('Pending')
+        APPROVED = 'Approved', _('Approved')
+        IN_TRANSIT = 'In transit', _('In transit')
+        SHIPPED = 'Shipped', _('Shipped')
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='address')
     first_name = models.CharField(max_length=255)
@@ -28,16 +29,14 @@ class Order(TimestampedModel):
     phone_number = models.CharField(max_length=255, blank=True)
     address_line_1 = models.CharField(max_length=255)
     address_line_2 = models.CharField(max_length=255, blank=True)
-    country = models.CharField(default='us', max_length=30, choices=COUNTRY_CHOICES)
+    country = models.CharField(default=COUNTRY.US, max_length=255, choices=COUNTRY.choices)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255, blank=True)
     zip_code = models.CharField(max_length=255, blank=True)
 
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     paid = models.BooleanField(default=False)
-    status = models.CharField(default='Pending', max_length=30, choices=STATUS_CHOICES)
+    status = models.CharField(default=STATUS.NOT_PAID, max_length=255, choices=STATUS.choices)
     
     def __str__(self):
         return str(self.id)
@@ -47,32 +46,11 @@ class Order(TimestampedModel):
         return sum(item.get_cost() for item in self.items.all())
 
 
-SIZE_CHOICES = [
-    (None, 'Select size'),
-
-    ('XS', 'XS'),
-    ('S', 'S'),
-    ('M', 'M'),
-    ('L', 'L'),
-    ('XL', 'XL'),
-]
-
-COLOR_CHOICES = [
-    (None, 'Select color'),
-    
-    ('black', 'Black'),
-    ('white', 'White'),
-    ('red', 'Red'),
-    ('blue', 'Blue'),
-    ('green', 'Green'),
-]
-
 class OrderItem(TimestampedModel):    
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name='ordered_items')  #! ordered_item
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name='ordered_items')
+    option = models.JSONField()  # Example: {"color": "red", "size": "xl"}
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    size = models.CharField(max_length=30, choices=SIZE_CHOICES)
-    color = models.CharField(max_length=30, choices=COLOR_CHOICES)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):

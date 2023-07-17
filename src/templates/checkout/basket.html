@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load json_humanize %}
+
 
 {% block content %}
 
@@ -11,7 +13,7 @@
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="#">Home</a>
                     <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Shopping Cart</span>
+                    <span class="breadcrumb-item active">Shopping Basket</span>
                 </nav>
             </div>
         </div>
@@ -27,7 +29,7 @@
     {% include 'inc/_breadcrumbs.html' %}
     <!-- Breadcrumb End -->
 
-    <!-- Cart Start -->
+    <!-- Basket Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
@@ -43,46 +45,44 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        {% for item in cart %}
-                            {% with product=item.product %}
-                                <tr>
-                                    <td class="align-middle"><img src="{{ product.images.first.get_absolute_url }}" alt="" style="width: 50px;"></td>
-                                    <td class="align-middle"><a href="{% url 'products:detail' pk=item.pk %}" style="color: #cfa200">{{ product.name }}</a></td>
-                                    <td class="align-middle">{{ item.price|floatformat:"2g" }}</td>
-                                    <td class="align-middle">{{ item.quantity }}</td>
-                                    <td class="align-middle">{{ item.total_price|floatformat:"2g" }}</td>
-                                    <td class="align-middle">
-                                        <form method="POST">
-                                            {% csrf_token %}
-                                            <button class="btn btn-sm btn-danger" name="delete_product" value="{{ item.pk }}"/><i class="fa fa-times"></i></button>
-                                            <input type="hidden" name="_method" value="delete">
-                                        </form>
-                                    </td>
-                                </tr>
-                            {% endwith %}
+                        {% for item, product in basket_and_products %}
+                          <tr>
+                              <td class="align-middle"><img src="{{ product.images.first.get_absolute_url }}" alt="" style="width: 50px;"></td>
+                              <td class="align-middle"><a href="{% url 'products:detail' pk=product.public_id %}" style="color: #cfa200">{{ product.name }} ({{ product.option|json_humanize }})</a></td>
+                              <td class="align-middle">{{ item.price|floatformat:"2g" }}</td>
+                              <td class="align-middle">{{ item.quantity }}</td>
+                              <td class="align-middle">{{ item.total_price|floatformat:"2g" }}</td>
+                              <td class="align-middle">
+                                  <form method="POST">
+                                      {% csrf_token %}
+                                      <button class="btn btn-sm btn-danger" name="delete_product" value="{{ product.variant_id }}"/><i class="fa fa-times"></i></button>
+                                      <input type="hidden" name="_method" value="delete">
+                                  </form>
+                              </td>
+                          </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="col-lg-4">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Basket Summary</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <h6>{{ request.cart.get_subtotal_price|floatformat:"2g" }}</h6>
+                            <h6>{{ basket.get_subtotal_price|floatformat:"2g" }}</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">{{ request.cart.get_shipping_price|floatformat:"2g" }}</h6>
+                            <h6 class="font-weight-medium">{{ basket.get_shipping_price|floatformat:"2g" }}</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>{{ request.cart.get_total_price|floatformat:"2g" }}</h5>
+                            <h5>{{ basket.get_total_price|floatformat:"2g" }}</h5>
                         </div>
-                        {% if cart|length < 1 %}
+                        {% if basket|length < 1 %}
                             <button disabled class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                         {% else %}
                             <a href="{% url 'checkout:checkout' %}" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</a>
@@ -92,6 +92,6 @@
             </div>
         </div>
     </div>
-    <!-- Cart End -->
+    <!-- Basket End -->
 
 {% endblock content %}

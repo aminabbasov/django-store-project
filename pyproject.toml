@@ -29,6 +29,7 @@ dev = [
     "ipython",
     "black",
     "isort",
+    "django-debug-toolbar",
     # "dotenv-linter",
 
     # "pytest",

@@ -7,31 +7,17 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from products.models import Product
-from products.forms import ProductsReviewForm
-
-
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
 from django.db.models import Avg
 
-class ShopServices:
-    def get_products(self):
-        products = Product.objects.annotate(avg_rating=Avg('reviews__rating'))
-        return products
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
+from ..models import SingleProductView, ProductView, ProductOption, Product, Category
+from ..forms import ProductsReviewForm
+
 
 class ProductsShopView(generic.ListView):
-    model = Product
+    model = SingleProductView
     context_object_name = 'products'
     template_name = 'products/shop.html'
     paginate_by = 3
-    
-    def setup(self, request, *args, **kwargs):
-        super(ProductsShopView, self).setup(request, *args, **kwargs)
-        self.service = ShopServices()
     
     def get_paginate_by(self, queryset):
         self.paginate_by = self.request.GET.get("paginate_by", self.paginate_by)  # example: ?paginate_by3&page=2
@@ -40,25 +26,44 @@ class ProductsShopView(generic.ListView):
     def paginate_queryset(self, queryset, page_size):
         paginator = Paginator(queryset, page_size)
         try:
-            return super(ProductsShopView, self).paginate_queryset(queryset, page_size)
+            return super().paginate_queryset(queryset, page_size)
         except Http404:
             self.kwargs['page'] = paginator.num_pages
 
-            # self.request.GET['page'] = 1  # FIX INCORRECT URL ON PAGE RESET!!!
-            return super(ProductsShopView, self).paginate_queryset(queryset, page_size)
+            # self.request.GET['page'] = 1  #. FIXME: FIX INCORRECT URL ON PAGE RESET!!!
+            return super().paginate_queryset(queryset, page_size)
     
     def get_queryset(self):
-        queryset = self.service.get_products()
+        queryset = self.model.objects.all()
         
+        # order
         ordering = self.get_ordering()
         if ordering and isinstance(ordering, str):
             ordering = (ordering,)
             queryset = queryset.order_by(*ordering)
+        elif ordering and isinstance(ordering, list):
+            queryset = queryset.manual_order(ordering)
+        
+        # filter by price
+        price_filter = self._get_price_query()
+        queryset = queryset.filter(price_filter)
+        
+        # filter by options (in fact only by color and size)
+        options_filter_list = [
+            self.request.GET.getlist('color_filter'),
+            self.request.GET.getlist('size_filter'),
+        ]
+        
+        filter_q = Q()
+        for options_filter in options_filter_list:
+            filter_q &= self._get_options_query(options_filter)
             
-        filtering = self._get_filtering()
-        queryset = queryset.filter(filtering)
+        options = ProductOption.objects.filter(filter_q)
+        product_ids = [item.product.id for item in options]
+        
+        queryset = queryset.filter(product_id__in=product_ids)
 
-        return queryset  #! УПОРЯДОЧИТЬ QUERYSET .order_by('name')                                   XXXXXXXXXXXXXXXXXXXXXX
+        return queryset
         
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -74,46 +79,59 @@ class ProductsShopView(generic.ListView):
         ordering  = self.request.GET.get('sort', None)
 
         if ordering == 'latest':
-            return '-date'
+            return '-created'
         elif ordering == 'popularity':
             return 'views'
         elif ordering == 'rating':
-            return '-avg_rating'
+            products = Product.objects.average_rating()
+            products = products.order_by("-avg_rating")
+            product_ids = [item.id for item in products]
+            return product_ids
 
         return ordering
-
-    def _get_filtering(self):
+    
+    def _get_options_query(self, options_filter: list):
+        """Method for ProductOption."""
+        option_q = Q()
+        
+        for option in options_filter:
+            if option:
+                option_q |= Q(values__overlap=[option])
+                
+        return option_q
+    
+    def _get_price_query(self):
+        """Method for SingleProductView.
+        
+        Example:
+        
+                $80____________$160
+        $0 ---------- $100 ---------- $200
+        
+        This product will be in 2 range filters.
+        """
         price_values = {
-            '1-100':   {'price__range': (0.01, 100)},
-            '100-200': {'price__range': (101.01, 200)},
-            '200-300': {'price__range': (201.01, 300)},
-            '300-400': {'price__range': (301.01, 400)},
-            '400+':    {'price__gte': 401.01},
+            '1-100':   {'max_discounted_price__gte': 0.01, 'min_discounted_price__lte': 100},  
+            '100-200': {'max_discounted_price__gte': 101.01, 'min_discounted_price__lte': 200},
+            '200-300': {'max_discounted_price__gte': 201.01, 'min_discounted_price__lte': 300},
+            '300-400': {'max_discounted_price__gte': 301.01, 'min_discounted_price__lte': 400},
+            '400+':    {'max_discounted_price__gte': 401.01},
         }
-
-        price_q, color_q, size_q = Q(), Q(), Q()
-
+        
+        price_q = Q()
+        
         for price in self.request.GET.getlist('price_filter'):
             if price:
                 price_q |= Q(**price_values[price])
-        
-        for color in self.request.GET.getlist('color_filter'):
-            if color:
-                color_q |= Q(color__iexact=color)
-
-        for size in self.request.GET.getlist('size_filter'):
-            if size:
-                size_q |= Q(size__iexact=size)
-
-        q_filters = price_q & color_q & size_q
-        return q_filters
+                
+        return price_q
 
 
 class ProductsCategoryView(ProductsShopView):
     def get_queryset(self):
-        queryset = super(ProductsCategoryView, self).get_queryset()
+        queryset = super().get_queryset()
         slug = self.kwargs.get('slug')
-        queryset = queryset.filter(category__slug=slug)
+        queryset = queryset.by_category(slug=slug)
 
         return queryset
 
@@ -124,58 +142,68 @@ class ProductsCategoryView(ProductsShopView):
         return context
 
 
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-class ProductServices:
-    def get_related_products(self, categories):
-        related_products = Product.objects.filter(category__in=categories)[:5]
-        return related_products
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-
 class ProductsDetailView(generic.DetailView):
-    model = Product
+    model = SingleProductView
     template_name = 'products/detail.html'
     context_object_name = 'product'
-    
-    def setup(self, request, *args, **kwargs):
-        super(ProductsDetailView, self).setup(request, *args, **kwargs)
-        self.service = ProductServices()
+
+    def get_object(self):
+        public_id = self.kwargs.get(self.pk_url_kwarg)
+        product = self.model.objects.get(public_id=public_id)
+        return product
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['related_products'] = self.service.get_related_products(categories=self.object.category.all())
+        context['related_products'] = self.model.objects.related_products(
+            categories=Category.objects.all(), exclude_model=self.get_object()
+            )[:5]
         context['review_form'] = ProductsReviewForm(
             instance=self.get_object()
         )
 
         return context
     
-    def post(self, *args, **kwargs):
-        product = get_object_or_404(Product, id=self.kwargs['pk'])
-
-        if int(self.request.POST['quantity']) < 1:
+    def post(self, *args, **kwargs):        
+        if not (quantity := int(self.request.POST['quantity'])):
             messages.error(self.request, 'Can\'t add less than one product.')
-    
             return redirect('products:detail', pk=self.kwargs['pk'])
 
         try:
-            self.request.cart.add(
-                product=product,
-                size=self.request.POST['size'],
-                color=self.request.POST['color'],
-                quantity=int(self.request.POST['quantity'])
+            product = get_object_or_404(
+                ProductView
+                .objects
+                .filter(
+                    public_id=(public_id := str(self.kwargs['pk'])),
+                )
+                .by_options(
+                    color=(color := str(self.request.POST.get('color'))),
+                    size=(size := str(self.request.POST.get('size'))),
+                )
             )
-            messages.success(self.request, 'Product added to cart.')
+            price = str(product.price)
+            variant_id = int(product.variant_id)
+        
+        except Http404:
+            messages.error(self.request, 'Sorry, this product is out of stock.')
+            return redirect('products:detail', pk=self.kwargs['pk'])
+
+        try:
+            self.request.basket.add(
+                variant_id=variant_id,
+                quantity=quantity,
+                price=price,
+                option={"size": size, "color": color}
+            )
+            messages.success(self.request, 'Product added to basket.')
 
         except MultiValueDictKeyError:
             messages.error(self.request, 'Please select an options.')
 
         except Exception:
-            #! logger.error('Product cannot be added to cart.', exc_info=True)                           XXXXXXXXXXXXXXXXXXXXXX
+            #! logger.error('Product cannot be added to basket.', exc_info=True)                           XXXXXXXXXXXXXXXXXXXXXX
             messages.error(self.request, 'Something went wrong, please try again later.')
 
-        return redirect('products:detail', pk=self.kwargs['pk'])
+        return redirect('products:detail', pk=public_id)
 
 
 class ProductsReviewView(LoginRequiredMixin, generic.FormView):
@@ -188,7 +216,7 @@ class ProductsReviewView(LoginRequiredMixin, generic.FormView):
 
     def form_valid(self, form):
         review = form.save(commit=False)
-        review.product_id = self.kwargs['pk']
+        review.product_id = SingleProductView.objects.get(public_id=self.kwargs['pk']).product_id  # because ForeingKey is for id, but pk gives uuid
         review.user_id = self.request.user.pk
         review.save()
         messages.success(self.request, 'You left a comment. Thank you!')

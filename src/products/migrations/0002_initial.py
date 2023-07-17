@@ -9,8 +9,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("products", "0001_initial"),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -18,9 +18,21 @@ class Migration(migrations.Migration):
             model_name="review",
             name="user",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE,
-                related_name="reviews",
-                to=settings.AUTH_USER_MODEL,
+                on_delete=django.db.models.deletion.CASCADE, related_name="reviews", to=settings.AUTH_USER_MODEL
+            ),
+        ),
+        migrations.AddField(
+            model_name="productvariant",
+            name="product_id",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, related_name="variants", to="products.product"
+            ),
+        ),
+        migrations.AddField(
+            model_name="productoption",
+            name="product_id",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, related_name="options", to="products.product"
             ),
         ),
         migrations.AddField(
@@ -32,9 +44,7 @@ class Migration(migrations.Migration):
             model_name="image",
             name="product",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE,
-                related_name="images",
-                to="products.product",
+                on_delete=django.db.models.deletion.CASCADE, related_name="images", to="products.product"
             ),
         ),
     ]

@@ -1,5 +1,5 @@
-from checkout.cart import Cart
+from checkout.basket import Basket
 
 
-def cart(request):
-    return {'cart': Cart(request)}
+def basket(request):
+    return {'basket': Basket(request)}

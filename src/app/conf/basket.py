@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 
-CART_SESSION_ID = 'cart'
+BASKET_SESSION_ID = "basket"
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 

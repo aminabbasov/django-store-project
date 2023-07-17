@@ -16,6 +16,6 @@ class OrderAdmin(ModelAdmin):
     list_display = (
         'id', 'first_name', 'last_name', 'email',
         'address_line_1', 'zip_code', 'city', 'paid',
-        'created', 'updated'
+        'created', 'modified'
     )
-    list_filter = ('paid', 'created', 'updated')
+    list_filter = ('paid', 'created', 'modified')

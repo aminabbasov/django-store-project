@@ -1,8 +1,8 @@
-from django.utils.deprecation import MiddlewareMixin
-from checkout.cart import Cart
+# from django.utils.deprecation import MiddlewareMixin
+from checkout.basket import Basket
 
  
-class CartMiddleware:
+class BasketMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         
@@ -18,4 +18,4 @@ class CartMiddleware:
         return response
     
     def process_view(self, request, view_func, view_args, view_kwargs):
-        request.cart = Cart(request)
+        request.basket = Basket(request)
