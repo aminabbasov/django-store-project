@@ -1,5 +1,6 @@
 import os
 from typing import Any
+from time import strftime
 import uuid
 
 from django.utils.deconstruct import deconstructible
@@ -18,7 +19,7 @@ class RandomFileName:
     """
 
     def __init__(self, path: str) -> None:
-        self.path = path
+        self.path = strftime(str(path))
 
     def __call__(self, _: Any, filename: str) -> str:
         extension = os.path.splitext(filename)[1]
