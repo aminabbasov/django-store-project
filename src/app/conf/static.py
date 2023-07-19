@@ -18,6 +18,7 @@ STATIC_ROOT = os.path.join(settings.BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
     os.path.join(settings.BASE_DIR, 'static'),
+    os.path.join(settings.BASE_DIR, 'app', 'admin', 'static'),
 ]
 
 MEDIA_ROOT = os.path.join(settings.BASE_DIR, 'static', 'images')
