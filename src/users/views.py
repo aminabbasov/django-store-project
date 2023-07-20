@@ -3,7 +3,7 @@ from django.contrib.auth import update_session_auth_hash, login
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic.edit import FormView
+from django.views import generic
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -14,9 +14,10 @@ from users.forms import (
 )
 from users.services import UserUpdater
 from users.models import User
+from checkout.models import Order
 
 
-class UsersRegisterView(SuccessMessageMixin, FormView):
+class UsersRegisterView(SuccessMessageMixin, generic.FormView):
     template_name = 'users/register.html'
     form_class = UsersRegisterForm
     redirect_authenticated_user = True
@@ -70,29 +71,14 @@ class UsersLoginView(SuccessMessageMixin, LoginView):
         return self.next_page
 
 
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-from checkout.models import Order
-
-class AccountServices:
-    def get_orders_by_user(self, user):
-        filtered_orders = Order.objects.annotate().filter(user=user)
-        return filtered_orders
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-# XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX --- XXX
-
 class UsersAccountView(LoginRequiredMixin, TemplateView):
     template_name = 'users/account.html'
-    
-    def setup(self, request, *args, **kwargs):
-        super(UsersAccountView, self).setup(request, *args, **kwargs)
-        self.service = AccountServices()                                                 # XXX XXX XXX XXX XXX XXX
     
     def get_context_data(self, *args, **kwargs):
         context = super(UsersAccountView, self).get_context_data(*args, **kwargs)
         context['password_form'] = UsersPasswordChangeForm(user=self.request)
         context['account_form'] = UsersAccountForm(self.request.user)
-        context['orders'] = self.service.get_orders_by_user(user=self.request.user.pk)
+        context['orders'] = Order.objects.filter_by_user(user=self.request.user.pk)
 
         return context
 
@@ -127,7 +113,7 @@ class UsersPasswordChangeView(PasswordChangeView):
         return redirect('users:account')
 
 
-class UsersAccountEditView(LoginRequiredMixin, FormView):
+class UsersAccountEditView(LoginRequiredMixin, generic.FormView):
     template_name = 'users/account.html'
     http_method_names = ['post']
     form_class = UsersAccountForm
