@@ -13,6 +13,7 @@ dependencies = [
     # "django-filter",
     # "redis",
 
+    "django-health-check",  # https://github.com/revsys/django-health-check/tree/master
     # "drf-spectacular-sidecar",
     # "django-healthchecks",  # deprecated
     # "sentry-sdk",

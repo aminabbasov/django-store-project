@@ -25,12 +25,15 @@ decorator==5.1.1
 django==4.2
     # via
     #   django-debug-toolbar
+    #   django-health-check
     #   src (pyproject.toml)
 django-behaviors==0.5.1
     # via src (pyproject.toml)
 django-debug-toolbar==4.2.0
     # via src (pyproject.toml)
 django-environ==0.10.0
+    # via src (pyproject.toml)
+django-health-check==3.17.0
     # via src (pyproject.toml)
 django-split-settings==1.2.0
     # via src (pyproject.toml)
