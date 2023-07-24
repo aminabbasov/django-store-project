@@ -85,7 +85,7 @@
                         {% for item, product in basket_and_products %}
                           <div class="d-flex justify-content-between">
                               <p>{{ product.name }} {% if item.quantity > 1 %} ({{ item.quantity }} pieces) {% endif %}</p>
-                              <p>{{ item.total_price }}</p>
+                              <p>${{ item.total_price }}</p>
                           </div>
                         {% empty %}
                           <p>You dont have any products in basket.</p>
@@ -94,17 +94,17 @@
                     <div class="border-bottom pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <h6>{{ basket.get_subtotal_price|floatformat:"2g" }}</h6>
+                            <h6>${{ basket.get_subtotal_price|floatformat:"2g" }}</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">{{ basket.get_shipping_price|floatformat:"2g" }}</h6>
+                            <h6 class="font-weight-medium">${{ basket.get_shipping_price|floatformat:"2g" }}</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>{{ basket.get_total_price|floatformat:"2g" }}</h5>
+                            <h5>${{ basket.get_total_price|floatformat:"2g" }}</h5>
                         </div>
                     </div>
                 </div>

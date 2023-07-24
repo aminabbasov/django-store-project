@@ -102,14 +102,14 @@ class SingleProductView(DefaultModel):
     @property
     def price_range(self):
         if self.min_price != self.max_price:
-            return f"{self.min_price} - {self.max_price}"
-        return str(self.max_price)
+            return f"${self.min_price} - ${self.max_price}"
+        return f'${self.max_price}'
     
     @property
     def discounted_price_range(self):
         if self.min_discounted_price != self.max_discounted_price:
-            return f"{self.min_discounted_price} - {self.max_discounted_price}"
-        return str(self.max_discounted_price)
+            return f"${self.min_discounted_price} - ${self.max_discounted_price}"
+        return f'${self.max_discounted_price}'
     
     def average_rating(self) -> int | float:
         """Calculate and return the average rating for the product based on reviews."""

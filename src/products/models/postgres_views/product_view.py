@@ -92,8 +92,8 @@ class ProductView(DefaultModel):
     def actual_price(self) -> Decimal:
         """Calculate and return the actual price, considering discounts if applicable."""
         if self.discount:
-            return round(self.price - ((self.price * self.discount) / 100), 2)
-        return self.price
+            return f'${round(self.price - ((self.price * self.discount) / 100), 2)}'
+        return f'${self.price}'
 
     def get_absolute_url(self):
         return reverse('products:detail', kwargs={'pk': self.public_id})
