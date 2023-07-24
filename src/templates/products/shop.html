@@ -3,6 +3,7 @@
 {% load fields_counter %}
 {% load query_urls %}
 {% load product_cards %}
+{% load split_url_parameters %}
 
 {% block content %}
 
@@ -53,6 +54,13 @@
                             <label class="custom-control-label" for="price-5">$400 +</label>
                             <span class="badge border font-weight-normal">{% get_price_amount category 400.01 %}</span>
                         </div>
+                        {% with parameters=request.GET.urlencode %}
+                          {% if parameters %}
+                            {% for key, value in parameters|split_url_parameters:"price_filter" %}
+                              <input type="hidden" name="{{ key }}" value="{{ value }}" />
+                            {% endfor %}
+                          {% endif %}
+                        {% endwith %}
                     </form>
                 </div>
                 <!-- Price End -->
@@ -91,6 +99,13 @@
                             <label class="custom-control-label" for="color-5">Green</label>
                             <span class="badge border font-weight-normal">{% get_color_amount category 'green'  %}</span>
                         </div>
+                        {% with parameters=request.GET.urlencode %}
+                          {% if parameters %}
+                            {% for key, value in parameters|split_url_parameters:"color_filter" %}
+                              <input type="hidden" name="{{ key }}" value="{{ value }}" />
+                            {% endfor %}
+                          {% endif %}
+                        {% endwith %}
                     </form>
                 </div>
                 <!-- Color End -->
@@ -129,6 +144,13 @@
                             <label class="custom-control-label" for="size-5">XL</label>
                             <span class="badge border font-weight-normal">{% get_size_amount category 'XL'  %}</span>
                         </div>
+                        {% with parameters=request.GET.urlencode %}
+                          {% if parameters %}
+                            {% for key, value in parameters|split_url_parameters:"size_filter" %}
+                              <input type="hidden" name="{{ key }}" value="{{ value }}" />
+                            {% endfor %}
+                          {% endif %}
+                        {% endwith %}
                     </form>
                 </div>
                 <!-- Size End -->
