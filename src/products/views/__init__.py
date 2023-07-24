@@ -3,6 +3,7 @@ from .contact import ProductsContactView
 from .shop import (
     ProductsShopView, ProductsCategoryView, ProductsDetailView, ProductsReviewView
 )
+from .search import ProductSearchView
 
 
 __all__ = [
@@ -17,4 +18,7 @@ __all__ = [
     "ProductsCategoryView",
     "ProductsDetailView",
     "ProductsReviewView",
+    
+    # search
+    "ProductSearchView",
 ]

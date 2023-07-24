@@ -12,9 +12,6 @@ from django.db.models import Avg, Value
 
 from app.models import TimestampedModel, models
 
-if __name__ == "__main__":
-    from products.models import ProductView
-
 
 # https://shopify.dev/docs/api/admin-rest/2023-07/resources/product#post-products
 
@@ -44,18 +41,19 @@ class Product(TimestampedModel):
     views = models.PositiveIntegerField(default=0)
     available = models.BooleanField(default=True)
     public_id = models.UUIDField(default=uuid.uuid4, editable=False)
-    # vendor = ...  # Example: Apple
     
     objects = ProductQuerySet.as_manager()
 
     def get_absolute_url(self):
-        return reverse('products:detail', kwargs={'uuid': self.public_id})
+        return reverse('products:detail', kwargs={'pk': self.public_id})
 
     @property
     def price_range(self):
-        products = ProductView.object.filter(product_id=self.pk)
-        min_price = products.get(price=Min())
-        max_price = products.get(price=Max())
+        from products.models import SingleProductView  # due to circular import exception
+
+        product = SingleProductView.objects.get(public_id=self.public_id)
+        min_price = product.min_discounted_price
+        max_price = product.max_discounted_price
         return f'{min_price} - {max_price}'
 
     def __str__(self):

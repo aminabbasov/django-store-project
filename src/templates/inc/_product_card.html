@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="text-center py-4">
-            <a class="h6 text-decoration-none text-truncate" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            <a class="h6 text-decoration-none text-truncate" href="{{ product.get_absolute_url }}">{% if product.headline %}{{ product.headline|safe }}{% else %}{{ product.name }}{% endif %}</a>
             <div class="d-flex align-items-center justify-content-center mt-2">
                 {% if product.has_discount %}
                     <h5>{{ product.discounted_price_range }}</h5><h6 class="text-muted ml-2"><del>{{ product.price_range }}</del></h6>

@@ -10,6 +10,7 @@ shop = [
     path('category/<slug:slug>/', views.ProductsCategoryView.as_view(), name='category'),
     path('product/<uuid:pk>/', views.ProductsDetailView.as_view(), name='detail'),
     path('product/<uuid:pk>/rate/', views.ProductsReviewView.as_view(), name='rate'),
+    path('search/', views.ProductSearchView.as_view(), name="search"),
 ]
 
 urlpatterns = [
