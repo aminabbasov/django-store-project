@@ -29,6 +29,7 @@ THIRD_PARTY_APPS = [
     'health_check',
     'health_check.db',
     'health_check.contrib.migrations',
+    'health_check.contrib.redis',
      
     # "drf_spectacular",
     # "drf_spectacular_sidecar",

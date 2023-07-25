@@ -29,10 +29,11 @@ services:
       - dev-db:/var/lib/postgresql/data
     shm_size: '2gb'
 
-  # redis:
-  #   image: redis:6-alpine
-  #   ports:
-  #     - 6379:6379
+  redis:
+    image: redis:6-alpine
+    container_name: redis-dev
+    ports:
+      - 6379:6379
 
 volumes:
   dev-db:

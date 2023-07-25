@@ -40,6 +40,7 @@ include(
     "conf/timezone.py",
     "conf/basket.py",
     "conf/email.py",
+    "conf/cache.py"
 )
 
 if settings.DEBUG:

@@ -8,6 +8,7 @@ dependencies = [
     "django-split-settings",
     "bcrypt",
     "django-behaviors",
+    "redis",
     # "djangorestframework",  # djangorestframework-camel-case
     # "djangorestframework-simplejwt",  # drf-jwt
     # "django-filter",
