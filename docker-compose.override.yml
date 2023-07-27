@@ -9,9 +9,33 @@ version: '3.8'
 name: "django-shop-dev"
 
 services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: django-dev
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - 8000:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /src
+        - action: rebuild
+          path: dev-requirements.txt
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        window: 5s
+
   pgadmin:
     image: dpage/pgadmin4:7.6
-    # restart: always
     container_name: pg-admin
     ports:
       - '5555:80'  # http://localhost:5555/
@@ -23,5 +47,4 @@ services:
 
 volumes:
   pgadmin-dev:
-  # external: true
     name: "pgadmin-dev"

@@ -8,13 +8,6 @@ version: '3.8'
 name: "django-shop"
 
 services:
-  # django:
-  #   build: .
-  #   ports:
-  #     - "8000:8000"
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   volumes:
-  #     - .:/src
 
   postgres:
     image: postgres:13-alpine
@@ -37,5 +30,4 @@ services:
 
 volumes:
   dev-db:
-  # external: true
     name: "dev-db"
