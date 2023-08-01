@@ -9,6 +9,7 @@ dependencies = [
     "bcrypt",
     "django-behaviors",
     "redis",
+    "celery",
     # "djangorestframework",  # djangorestframework-camel-case
     # "djangorestframework-simplejwt",  # drf-jwt
     # "django-filter",

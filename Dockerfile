@@ -49,3 +49,7 @@ EXPOSE 8000
 
 CMD python3 manage.py runserver 8000
 # Run the application
+
+FROM dev AS worker
+
+CMD celery --app app --workdir /src worker --events -l info
