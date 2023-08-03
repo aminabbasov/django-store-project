@@ -1,3 +1,6 @@
+from app.conf.environ import env
+
+
 USE_TZ = True
 
-TIME_ZONE = "UTC"
+TIME_ZONE = env("TIME_ZONE", cast=str, default="Asia/Baku")

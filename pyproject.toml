@@ -13,14 +13,11 @@ dependencies = [
     # "djangorestframework",  # djangorestframework-camel-case
     # "djangorestframework-simplejwt",  # drf-jwt
     # "django-filter",
-    # "redis",
 
     "django-health-check",  # https://github.com/revsys/django-health-check/tree/master
     # "drf-spectacular-sidecar",
-    # "django-healthchecks",  # deprecated
     # "sentry-sdk",
     "psycopg2-binary",
-    # "celery",
 
     # "django-ipware",
     # "django-axes",
@@ -35,7 +32,17 @@ dev = [
     "django-debug-toolbar",
     # "dotenv-linter",
 
-    # "pytest",
+    "mixer",
+    "pytest-django",
+    "pytest-cov",
+    "pytest-deadfixtures",
+    "pytest-randomly",
+    "pytest-xdist",
+    # "pytest-env",
+    # "pytest-freezegun",
+    # "pytest-mock",
+    # "pytest-repeat",
+    # "pytest-httpx",
 
     # "mypy",
 
@@ -58,3 +65,12 @@ use_parentheses = true
 extra_standard_library = ["pytest"]
 known_django = ["django"]  # "restframework"
 sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "app.settings"
+
+filterwarnings = [
+  "ignore::django.utils.deprecation.RemovedInDjango50Warning:django.conf",
+]
+
+python_files = "test*.py"
