@@ -25,7 +25,7 @@ import debug_toolbar
 urlpatterns = [
     path("admin/", admin.site.urls),
     
-    path('healthcheck/', include('health_check.urls')),
+    path('ht/', include('health_check.urls')),
     
     path('account/', include('users.urls', namespace='users')),
     path('checkout/', include('checkout.urls', namespace='checkout')),

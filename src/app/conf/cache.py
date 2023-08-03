@@ -11,4 +11,6 @@ else:
         "default": env.cache("REDIS_URL"),
     }
 
+REDIS_URL = env("REDIS_URL")  # for "django-health-check" package
+
 CACHE_TTL = 10
