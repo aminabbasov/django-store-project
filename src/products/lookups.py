@@ -1,15 +1,27 @@
-from django.db.models import Lookup, CharField
-from django.db.models.functions import Cast
+from django.db.models import Lookup
+from django.contrib.postgres.fields import ArrayField
 
 
+@ArrayField.register_lookup
 class ArrayIContains(Lookup):
+    """
+    Without it I'd be forsed to use `.extra()` method::
+    
+        class Foo(models.Model):
+            values = ArrayField(base_field=models.CharField(max_length=255))
+        
+        >>> value = "bar"
+        >>> Foo.objects.extra(
+        ...     where=['%s ILIKE ANY (values)'],
+        ...     params=[value],
+        ... )
+    """
+    
     lookup_name = "icontains"
 
     def as_sql(self, compiler, connection):
         lhs, lhs_params = self.process_lhs(compiler, connection)
         rhs, rhs_params = self.process_rhs(compiler, connection)
         params = rhs_params + lhs_params
-        
-        rhs = Cast(rhs, CharField())
         
         return "%s ILIKE ANY(%s)" % (rhs, lhs), params

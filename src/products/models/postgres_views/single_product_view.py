@@ -31,11 +31,9 @@ class SingleProductViewQuerySet(models.QuerySet):
         return self.filter(product_id__in=products)
     
     def by_option(self, value: str):
-        # I use .extra() here because django ORM doesn't support __icontains search lookup for ArrayField
-        product_option = ProductOption.objects.extra(
-            where=['%s ILIKE ANY (values)'],
-            params=[value],
-            )
+        product_option = ProductOption.objects.filter(
+            values__icontains=value  # icontains is a custom lookup
+        )
         product_ids = [item.product.id for item in product_option]
         return self.filter(product_id__in=product_ids)
     
