@@ -13,7 +13,7 @@ class UserManager(_UserManager):
         return self.get(username=username) or None
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True, blank=True, max_length=255)
+    email = models.EmailField(unique=True, null=True, blank=True, max_length=255)
     phone_number = models.CharField(max_length=15, unique=True, null=True, blank=True)
     # Only 15 because of  ITU-T E. 164 - (https://www.itu.int/rec/T-REC-E.164-201011-I/en)
     # "A.3.5 - Summary of number length" says that maximum number length is 15 digits.

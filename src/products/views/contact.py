@@ -1,7 +1,6 @@
 from django.views import generic
 from django.core.mail import BadHeaderError
 from django.http import JsonResponse, HttpResponse
-from django.conf import settings
 
 from ..tasks import send_mail
 

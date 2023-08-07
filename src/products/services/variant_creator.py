@@ -34,7 +34,7 @@ class ProductVariantCreator(BaseService):
     def __post_init__(self) -> None:
         # Get product by id if necessary
         if isinstance(self.product, int):
-            self.product = Product.objects.get(self.product)
+            self.product = Product.objects.get(pk=self.product)
     
     def act(self) -> ProductVariant:
         product_variant = self.create()

@@ -68,7 +68,7 @@ class ProductOption(TimestampedModel):
 
 class ProductVariant(TimestampedModel):
     product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="variants")
-    option = models.JSONField()  # Example: {"color": "red", "size": "xl"}
+    option = models.JSONField()  # Example: {"color": "black", "size": "XL"}
     price = models.DecimalField(max_digits=10, decimal_places=2)  # max: 99,999,999.99 TODO: make JsonField price like this https://shopify.dev/docs/api/admin-rest/2023-07/resources/product-variant#resource-object
     discount = models.IntegerField(default=0, validators=[validate_discount])
     quantity = models.PositiveIntegerField()

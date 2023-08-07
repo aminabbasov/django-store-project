@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import TypeAlias, Annotated, Any, Callable
+from typing import TypeAlias, Annotated, Callable
 from decimal import Decimal
 from itertools import product as all_combinations
 from enum import Enum
@@ -51,7 +51,7 @@ class ProductCreateComposer(BaseService):
         if not isinstance(self.price, Decimal):
             self.price = self._if_not_decimal(self.price)
     
-    def act(self) -> dict[ServiceResult, Any]:
+    def act(self) -> dict[ServiceResult, object]:
         if self.options is None:
             return self.create_if_no_options()
         
@@ -83,7 +83,7 @@ class ProductCreateComposer(BaseService):
     def _(self, price: str) -> Decimal:
         return Decimal(price)
     
-    def create_option(self) -> ProductOption:  
+    def create_option(self) -> ProductOption | list[ProductOption]:  
         product_options = ProductOptionCreator(
             product=self.product,
             options=self.options,
@@ -101,7 +101,7 @@ class ProductCreateComposer(BaseService):
 
         return result
 
-    def create_all_combinations(self) -> list[ProductVariant]:
+    def create_all_combinations(self) -> ProductVariant | list[ProductVariant]:
         """Create all product variants based on option combinations."""
         product_variants = []
         
@@ -116,10 +116,13 @@ class ProductCreateComposer(BaseService):
             )()
             product_variants.append(variant)
             
+        if len(product_variants) == 1:
+            return product_variants[0]
+            
         return product_variants
     
     @transaction.atomic
-    def create_if_no_options(self) -> dict[ServiceResult, Any]:
+    def create_if_no_options(self) -> dict[ServiceResult, object]:
         default_option = ProductOptionCreator(
             product=self.product,
             options={Default.KEY.value: [Default.VALUE.value]},

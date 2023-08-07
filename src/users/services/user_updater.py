@@ -4,7 +4,7 @@ from functools import singledispatchmethod
 
 # from django.contrib.auth import get_user_model
 from django.apps import apps
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Q
 
 from app.services import BaseService
 from users.models import User
@@ -54,4 +54,9 @@ class UserUpdater(BaseService):
     def _(self, user: username, user_data: dict) -> User:
         obj = apps.get_model('users.User').objects.filter(username=user)  # because .update() works only with QuerySet
         obj.update(**user_data)
+        
+        if obj.first() is None:
+            q = Q(username=user_data.get("username", "")) | Q(email=user_data.get("email", ""))
+            return apps.get_model('users.User').objects.get(q)
+
         return obj.first()  # to return User, not QuerySet

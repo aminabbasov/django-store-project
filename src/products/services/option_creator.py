@@ -20,14 +20,14 @@ class ProductOptionCreator(BaseService):
     def __post_init__(self) -> None:
         # Get product by id if necessary
         if isinstance(self.product, int):
-            self.product = Product.objects.get(self.product)
+            self.product = Product.objects.get(pk=self.product)
 
     def act(self) -> ProductOption | list[ProductOption]:
         product_options = self.create()
         return product_options
 
     @transaction.atomic
-    def create(self):
+    def create(self) -> ProductOption | list[ProductOption]:
         product_options = []
         for key, value in self.options.items():
             product_options.append(

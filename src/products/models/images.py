@@ -5,11 +5,11 @@ from products.models import Category, Product
 
 class Image(TimestampedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')  # related_query_name='images'
-    image = models.ImageField(upload_to=RandomFileName(r'product/%Y/%m/%d/'))  # may be name "src" would be better FIXME: look at product/%Y/%m/%d/ folder 0_o
+    image = models.ImageField(upload_to=RandomFileName(r'product/%Y/%m/%d/'))  # may be name "src" would be better
     
     def delete(self, *args, **kwargs):
         storage, path = self.image.storage, self.image.path
-        super(Category, self).delete(*args, **kwargs)
+        super().delete(*args, **kwargs)
         storage.delete(path)
 
     def __str__(self):

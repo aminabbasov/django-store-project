@@ -32,7 +32,9 @@ dev = [
     "django-debug-toolbar",
     # "dotenv-linter",
 
+    "faker",
     "mixer",
+    "pytest-factoryboy",
     "pytest-django",
     "pytest-cov",
     "pytest-deadfixtures",
@@ -68,9 +70,11 @@ sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLD
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "app.settings"
+addopts = "--reuse-db"
 
 filterwarnings = [
   "ignore::django.utils.deprecation.RemovedInDjango50Warning:django.conf",
+  "ignore::django.core.paginator.UnorderedObjectListWarning",
 ]
 
 python_files = "test*.py"

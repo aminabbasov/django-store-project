@@ -8,9 +8,6 @@ register = template.Library()
 
 @register.simple_tag
 def get_price_amount(category=None, price_start=0, price_end=0):
-    assert 0 < price_start and 0 < price_end, "Price must be greater than 0"
-    assert price_start <= price_end, "Start price must be less than end price"
-    
     queryset = SingleProductView.objects.all()
     
     if category:
