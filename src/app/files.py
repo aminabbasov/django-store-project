@@ -1,6 +1,6 @@
 import os
-from typing import Any
 from time import strftime
+from typing import Any
 import uuid
 
 from django.utils.deconstruct import deconstructible

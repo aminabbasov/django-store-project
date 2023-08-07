@@ -54,6 +54,10 @@ class Product(TimestampedModel):
         product = SingleProductView.objects.get(public_id=self.public_id)
         min_price = product.min_discounted_price
         max_price = product.max_discounted_price
+        
+        if min_price == max_price:
+            return f"${min_price}"
+        
         return f'${min_price} - ${max_price}'
 
     def __str__(self):

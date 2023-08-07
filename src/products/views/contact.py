@@ -20,7 +20,6 @@ class ProductsContactView(generic.TemplateView):
             return HttpResponse('Invalid header found.')
         
         except Exception:
-            #! logger.warning('User cannot send a message.', exc_info=True)                       XXXXXXXXXXXXXXXXXXXXXX
             return JsonResponse({'message': 'fail'}, status=500)
         
         return JsonResponse({'message': 'success'}, status=200)

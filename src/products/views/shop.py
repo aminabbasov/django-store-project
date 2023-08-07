@@ -200,7 +200,6 @@ class ProductsDetailView(generic.DetailView):
             messages.error(self.request, 'Please select an options.')
 
         except Exception:
-            #! logger.error('Product cannot be added to basket.', exc_info=True)                           XXXXXXXXXXXXXXXXXXXXXX
             messages.error(self.request, 'Something went wrong, please try again later.')
 
         return redirect('products:detail', pk=public_id)

@@ -19,35 +19,44 @@ class ProductAdmin(ModelAdmin):
         OptionInline,
         ImageInline,
     ]
+    list_display = ('name', "get_price_range", "short_description", 'views')
+    list_filter = ('category', 'created', 'modified', "available")
+    search_fields = ('name', 'short_description', 'description', 'information')
+    # raw_id_fields = ('category',)
+    date_hierarchy = 'created'
+    ordering = ['-created']
+    
+
+    @admin.display(
+        # ordering='variants__price',
+        description='price',
+    )
+    def get_price_range(self, obj):
+        return obj.price_range
+    
 
 
 @admin.register(ProductVariant)
 class ProductVariantAdmin(ModelAdmin):
-    ...
-    
-    # list_display = ('name', 'get_actual_price', 'color', 'size')
-    # list_filter = ('category', 'color', 'size')
-    # search_fields = ('name', 'short_description', 'description', 'information')
-    # # raw_id_fields = ('category',)
-    # date_hierarchy = 'created'
-    # ordering = ['-created']
-    
-    # @admin.display(
-    #     # ordering='price',
-    #     description='actual_price',
-    # )
-    # def get_actual_price(self, obj):
-    #     if obj.discount:
-    #         return round(obj.price - ((obj.price * obj.discount) / 100), 2)
-    #     return obj.price
+    list_display = ('product', 'option', "actual_price", 'price', 'discount', "quantity")
+    search_fields = ("product", "option")
+    list_filter = ('available', 'created', 'modified')
+    ordering = ['-created']
 
 
 @admin.register(Review)
 class ReviewAdmin(ModelAdmin):
-    ...
+    list_display = ('rating', 'product', "user", 'comment')
+    search_fields = ("product", "user", "comment")
+    list_filter = ('rating', 'created', 'modified')
+    ordering = ['-created']
 
 
 @admin.register(Category)
 class CategoryAdmin(ModelAdmin):
+    list_display = ('name', "description")
+    search_fields = ('name', "description")
+    list_filter = ('name', 'created', 'modified')
+    
     # prepopulated_fields = {"slug": ("category",)}
     exclude = ('slug',)

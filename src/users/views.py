@@ -7,7 +7,6 @@ from django.views import generic
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.base import TemplateView
 
 from users.forms import (
     UsersRegisterForm, UsersLoginForm, UsersPasswordChangeForm, UsersAccountForm
@@ -71,7 +70,7 @@ class UsersLoginView(SuccessMessageMixin, LoginView):
         return self.next_page
 
 
-class UsersAccountView(LoginRequiredMixin, TemplateView):
+class UsersAccountView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'users/account.html'
     
     def get_context_data(self, *args, **kwargs):

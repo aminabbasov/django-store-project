@@ -5,6 +5,7 @@ from checkout import models
 
 class OrderItemInline(admin.TabularInline):
     model = models.OrderItem
+    extra = 1
     raw_id_fields = ['product']
 
 @admin.register(models.Order)

@@ -25,7 +25,7 @@
                 <div class="bg-light p-4 mb-30">
                     <form method="GET" id='PriceForm'>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" name="price_filter" value="" {% if not selected_price %} checked {% endif %} class="custom-control-input" id="price-all" onclick="window.location.assign({% url 'products:shop' %})">
+                            <input type="checkbox" name="price_filter" value="" {% if not selected_price %} checked {% endif %} class="custom-control-input" id="price-all" onclick="clearAllPrices()">
                             <label class="custom-control-label" for="price-all">All Price</label>
                             <span class="badge border font-weight-normal">{% get_price_amount category %}</span>
                         </div>
@@ -54,13 +54,9 @@
                             <label class="custom-control-label" for="price-5">$400 +</label>
                             <span class="badge border font-weight-normal">{% get_price_amount category 400.01 %}</span>
                         </div>
-                        {% with parameters=request.GET.urlencode %}
-                          {% if parameters %}
-                            {% for key, value in parameters|split_url_parameters:"price_filter" %}
-                              <input type="hidden" name="{{ key }}" value="{{ value }}" />
-                            {% endfor %}
-                          {% endif %}
-                        {% endwith %}
+                        {% if search_query %}
+                          <input type="hidden" name="q" value="{{ search_query }}">
+                        {% endif %}
                     </form>
                 </div>
                 <!-- Price End -->
@@ -70,7 +66,7 @@
                 <div class="bg-light p-4 mb-30">
                     <form method="GET" id='ColorForm'>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" name="color_filter" value="" {% if not selected_color %} checked {% endif %} class="custom-control-input" id="color-all" onclick="window.location.assign({% url 'products:shop' %})">
+                            <input type="checkbox" name="color_filter" value="" {% if not selected_color %} checked {% endif %} class="custom-control-input" id="color-all" onclick="clearAllColors()">
                             <label class="custom-control-label" for="color-all">All Color</label>
                             <span class="badge border font-weight-normal">{% get_color_amount category  %}</span>
                         </div>
@@ -99,13 +95,9 @@
                             <label class="custom-control-label" for="color-5">Green</label>
                             <span class="badge border font-weight-normal">{% get_color_amount category 'green'  %}</span>
                         </div>
-                        {% with parameters=request.GET.urlencode %}
-                          {% if parameters %}
-                            {% for key, value in parameters|split_url_parameters:"color_filter" %}
-                              <input type="hidden" name="{{ key }}" value="{{ value }}" />
-                            {% endfor %}
-                          {% endif %}
-                        {% endwith %}
+                      {% if search_query %}
+                        <input type="hidden" name="q" value="{{ search_query }}">
+                      {% endif %}
                     </form>
                 </div>
                 <!-- Color End -->
@@ -115,7 +107,7 @@
                 <div class="bg-light p-4 mb-30">
                     <form method="GET" id='SizeForm'>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" name="size_filter" value=""  {% if not selected_size %} checked {% endif %} class="custom-control-input" id="size-all" onclick="window.location.assign({% url 'products:shop' %})">
+                            <input type="checkbox" name="size_filter" value=""  {% if not selected_size %} checked {% endif %} class="custom-control-input" id="size-all" onclick="clearAllSizes()">
                             <label class="custom-control-label" for="size-all">All Size</label>
                             <span class="badge border font-weight-normal">{% get_size_amount category  %}</span>
                         </div>
@@ -144,13 +136,9 @@
                             <label class="custom-control-label" for="size-5">XL</label>
                             <span class="badge border font-weight-normal">{% get_size_amount category 'XL'  %}</span>
                         </div>
-                        {% with parameters=request.GET.urlencode %}
-                          {% if parameters %}
-                            {% for key, value in parameters|split_url_parameters:"size_filter" %}
-                              <input type="hidden" name="{{ key }}" value="{{ value }}" />
-                            {% endfor %}
-                          {% endif %}
-                        {% endwith %}
+                      {% if search_query %}
+                        <input type="hidden" name="q" value="{{ search_query }}">
+                      {% endif %}
                     </form>
                 </div>
                 <!-- Size End -->
@@ -205,3 +193,41 @@
     <!-- Shop End -->
 
 {% endblock content %}
+
+{% block js %}
+<script>
+  function clearAllPrices() {
+      // Очищаем все параметры цветов
+      document.querySelectorAll('[name="price_filter"]').forEach(function (checkbox) {
+          checkbox.checked = false;
+      });
+
+      // Отправляем форму
+      document.getElementById('PriceForm').submit();
+  }
+</script>
+
+<script>
+  function clearAllColors() {
+      // Очищаем все параметры цветов
+      document.querySelectorAll('[name="color_filter"]').forEach(function (checkbox) {
+          checkbox.checked = false;
+      });
+
+      // Отправляем форму
+      document.getElementById('ColorForm').submit();
+  }
+</script>
+
+<script>
+  function clearAllSizes() {
+      // Очищаем все параметры цветов
+      document.querySelectorAll('[name="size_filter"]').forEach(function (checkbox) {
+          checkbox.checked = false;
+      });
+
+      // Отправляем форму
+      document.getElementById('SizeForm').submit();
+  }
+</script>
+{% endblock js %}

@@ -54,7 +54,7 @@ class Category(TimestampedModel):
     name = models.CharField(max_length=255, choices=CATEGORY_CHOICES, db_index=True, unique=True)
     description = models.CharField(max_length=255, blank=True)
     image = models.ImageField(upload_to='category', null=True, blank=True)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True)
     
     objects = CategoryQuerySet.as_manager()
 

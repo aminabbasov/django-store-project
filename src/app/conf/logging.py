@@ -40,10 +40,11 @@ LOGGING = {
         }
     },
 
-    #! 'loggers': {
-    #!     'website.views': {
-    #!         'handlers': ['console', 'file', 'mail_admins'],
-    #!         'level': 'DEBUG',
-    #!     }
-    #! }
+    # Example
+    # 'loggers': {
+    #     'website.views': {
+    #         'handlers': ['console', 'file', 'mail_admins'],
+    #         'level': 'DEBUG',
+    #     }
+    # }
 }
