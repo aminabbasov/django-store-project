@@ -11,8 +11,9 @@ from app.services import BaseService
 from products.models import Product
 from products.models import ProductOption
 from products.models import ProductVariant
-from products.services import ProductOptionCreator
-from products.services import ProductVariantCreator
+
+from .option_creator import ProductOptionCreator
+from .variant_creator import ProductVariantCreator
 
 
 name: TypeAlias = str

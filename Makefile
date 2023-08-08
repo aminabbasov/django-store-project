@@ -1,5 +1,22 @@
 SIMULTANEOUS_TEST_JOBS=4
 
+install-deps: deps
+	pip-sync requirements.txt
+
+deps:
+	pip install --upgrade pip pip-tools
+	pip-compile --output-file requirements.txt --resolver=backtracking pyproject.toml
+
+install-dev-deps: dev-deps
+	pip-sync dev-requirements.txt
+
+dev-deps: deps
+	pip install --upgrade pip pip-tools
+	pip-compile --extra=dev --output-file dev-requirements.txt --resolver=backtracking pyproject.tom
+
+server:
+	cd src && ./manage.py migrate && ./manage.py runserver
+
 worker:
 	docker compose exec django celery --app app --workdir /src worker --events -l info
 

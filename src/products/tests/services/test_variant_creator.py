@@ -9,7 +9,7 @@ pytestmark = [pytest.mark.django_db]
 
 
 @pytest.fixture
-def variant_data(category):
+def variant_data():
     return {"option": {"default": "default"}}
 
 

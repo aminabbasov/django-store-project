@@ -1,7 +1,8 @@
 from app.files import RandomFileName
 from app.models import models
 from app.models import TimestampedModel
-from products.models import Product
+
+from .products import Product
 
 
 class Image(TimestampedModel):
