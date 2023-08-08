@@ -1,5 +1,6 @@
 from app.conf.environ import env
 
+
 if env("NO_CACHE", cast=bool, default=False):
     CACHES = {
         "default": {

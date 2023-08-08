@@ -1,18 +1,18 @@
 from decimal import Decimal
-
 import pytest
 
+from products.models import Product
+from products.models import ProductOption
+from products.models import ProductVariant
 from products.services import ProductCreateComposer
-from products.models import Product, ProductOption, ProductVariant
 
 
 pytestmark = [pytest.mark.django_db]
 
+
 @pytest.fixture
 def composer_data():
-    return {
-        "options": {"default": ["default"]}
-    }
+    return {"options": {"default": ["default"]}}
 
 
 @pytest.fixture
@@ -56,7 +56,7 @@ def test_with_no_options_product_create_composer(product, price):
         int(10),
         float(10),
         str(10),
-    ]
+    ],
 )
 def test_with_no_options_product_create_composer(product, price):
     composer = ProductCreateComposer(product, price=price)()
@@ -70,7 +70,7 @@ def test_price_is_negative_product_create_composer(product, composer_data):
     with pytest.raises(ValueError):
         composer_data["price"] = Decimal(-1)
         ProductCreateComposer(product, **composer_data)()
-        
+
 
 def test_quantity_is_negative_product_create_composer(product, composer_data):
     with pytest.raises(ValueError):

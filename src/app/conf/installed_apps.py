@@ -8,7 +8,6 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
     "django.contrib.postgres",
 ]
 
@@ -16,9 +15,7 @@ APPS = [
     # "app",
     # "a12n",
     # "users",
-
     "app",
-    
     "users",
     "products",
     "checkout",
@@ -26,12 +23,11 @@ APPS = [
 
 THIRD_PARTY_APPS = [
     # health_check
-    'health_check',
-    'health_check.db',
-    'health_check.contrib.migrations',
-    'health_check.contrib.redis',
-    'health_check.contrib.celery_ping',
-     
+    "health_check",
+    "health_check.db",
+    "health_check.contrib.migrations",
+    "health_check.contrib.redis",
+    "health_check.contrib.celery_ping",
     # "drf_spectacular",
     # "drf_spectacular_sidecar",
     # "rest_framework",

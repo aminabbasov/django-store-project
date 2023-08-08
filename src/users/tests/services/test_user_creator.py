@@ -1,7 +1,7 @@
 import pytest
 
-from users.services import UserCreator
 from users.models import User
+from users.services import UserCreator
 
 
 @pytest.mark.django_db

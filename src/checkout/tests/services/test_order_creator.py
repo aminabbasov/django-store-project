@@ -1,5 +1,4 @@
 from decimal import Decimal
-
 import pytest
 
 from checkout.models import Order
@@ -8,6 +7,7 @@ from checkout.tests.factories import CheckoutOrderCreateFormFactory
 
 
 pytestmark = [pytest.mark.django_db]
+
 
 @pytest.fixture
 def order_data():
@@ -21,7 +21,7 @@ def order_data():
         int(10),
         float(10),
         str(10),
-    ]
+    ],
 )
 def test_order_creator(user, order_data, price):
     order_data["price"] = price

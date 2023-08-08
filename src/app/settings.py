@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from django.conf import settings
 from split_settings.tools import include
 
+from django.conf import settings
+
 from app.conf.environ import env
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
@@ -39,7 +41,7 @@ include(
     "conf/timezone.py",
     "conf/basket.py",
     "conf/email.py",
-    "conf/cache.py"
+    "conf/cache.py",
 )
 
 if settings.DEBUG:

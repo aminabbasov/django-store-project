@@ -31,5 +31,5 @@ def test_image_model_delete(image, product):
     image_path = image.image.path
     image.delete()
     assert not Image.objects.filter(pk=image.pk).exists()  # Image should be deleted from the database
-    assert not image.image.storage.exists(image_path)      # Image file should be deleted from storage
-    assert not product.images.count()                      # No images should be associated with the product
+    assert not image.image.storage.exists(image_path)  # Image file should be deleted from storage
+    assert not product.images.count()  # No images should be associated with the product

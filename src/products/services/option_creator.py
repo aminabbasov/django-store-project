@@ -4,7 +4,8 @@ from typing import TypeAlias
 from django.db import transaction
 
 from app.services import BaseService
-from products.models import Product, ProductOption
+from products.models import Product
+from products.models import ProductOption
 
 
 name: TypeAlias = str

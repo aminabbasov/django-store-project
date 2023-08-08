@@ -12,12 +12,10 @@ DJANGO_MIDDLEWARE = [
 ]
 
 CUSTOM_MIDDLEWARE = [
-    'checkout.middleware.BasketMiddleware',
+    "checkout.middleware.BasketMiddleware",
 ]
 
-THIRD_PARTY_MIDDLEWARE = [
-    
-]
+THIRD_PARTY_MIDDLEWARE = []
 
 if settings.DEBUG:
     THIRD_PARTY_MIDDLEWARE += [

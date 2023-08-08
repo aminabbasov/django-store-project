@@ -1,18 +1,16 @@
 from decimal import Decimal
-
 import pytest
 
-from products.services import ProductVariantCreator
 from products.models import ProductVariant
+from products.services import ProductVariantCreator
 
 
 pytestmark = [pytest.mark.django_db]
 
+
 @pytest.fixture
 def variant_data(category):
-    return {
-        "option": {"default": "default"}
-    }
+    return {"option": {"default": "default"}}
 
 
 def test_variant_creator(product, variant_data):
@@ -35,7 +33,7 @@ def test_price_is_negative_variant_creator(product, variant_data):
     with pytest.raises(ValueError):
         variant_data["price"] = Decimal(-1)
         ProductVariantCreator(product, **variant_data)()
-        
+
 
 def test_quantity_is_negative_variant_creator(product, variant_data):
     with pytest.raises(ValueError):

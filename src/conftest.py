@@ -7,6 +7,7 @@ pytest_plugins = [
     "app.fixtures",
 ]
 
+
 @pytest.fixture(autouse=True)
 def _cache(request):
     """Clear django cache after each test run."""

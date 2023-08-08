@@ -7,3 +7,8 @@ test:
 	cd src && pytest -n ${SIMULTANEOUS_TEST_JOBS}
 	cd src && pytest --cov=.
 	cd src && pytest --dead-fixtures
+
+format:
+	cd src && autoflake --in-place --remove-all-unused-imports --recursive .
+	cd src && isort .
+	cd src && black .

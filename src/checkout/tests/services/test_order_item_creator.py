@@ -1,12 +1,12 @@
 from decimal import Decimal
-
 import pytest
 
-from checkout.services import OrderItemCreator
 from checkout.models import OrderItem
+from checkout.services import OrderItemCreator
 
 
 pytestmark = [pytest.mark.django_db]
+
 
 @pytest.fixture
 def order(mixer):
@@ -20,11 +20,7 @@ def product(mixer):
 
 @pytest.fixture
 def options():
-    return {
-        "option": {
-            "default": "default"
-        }
-    }
+    return {"option": {"default": "default"}}
 
 
 @pytest.mark.parametrize(
@@ -34,7 +30,7 @@ def options():
         int(10),
         float(10),
         str(10),
-    ]
+    ],
 )
 def test_order_item_creator(order, product, options, price):
     options["price"] = price

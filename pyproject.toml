@@ -29,6 +29,7 @@ dev = [
     "ipython",
     "black",
     "isort",
+    "autoflake",
     "django-debug-toolbar",
     # "dotenv-linter",
 
@@ -62,6 +63,7 @@ dev = [
 [tool.isort]
 profile = "google"
 line_length = 120
+lines_after_imports=2
 multi_line_output = 3
 use_parentheses = true
 extra_standard_library = ["pytest"]

@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from typing import Callable
-import uuid
 from uuid import UUID
+from uuid import uuid4
 
 from app.services import BaseService
-from products.models import Product, Category
+from products.models import Category
+from products.models import Product
 
 
 @dataclass
@@ -16,15 +16,15 @@ class ProductCreator(BaseService):
     information: str = "No information"
     available: bool = True
     public_id: UUID | None = None
-    
-    def __post_init__(self) -> None:        
-        self.public_id = self.public_id if self.public_id is not None else uuid.uuid4()
+
+    def __post_init__(self) -> None:
+        self.public_id = self.public_id if self.public_id is not None else uuid4()
         self.category = self.category if isinstance(self.category, list) else [self.category]
-    
+
     def act(self) -> Product:
         product = self.create()
         return product
-    
+
     def create(self) -> Product:
         product = Product.objects.create(
             name=self.name,
@@ -36,5 +36,5 @@ class ProductCreator(BaseService):
             public_id=self.public_id,
         )
         product.category.add(*self.category)  # because category is m2m field
-        
+
         return product

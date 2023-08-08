@@ -4,6 +4,7 @@ from django.template.defaultfilters import stringfilter
 
 register = template.Library()
 
+
 @register.filter
 @stringfilter
 def split_url_parameters(stdin: str, exclude: str) -> list[list[str, str]]:

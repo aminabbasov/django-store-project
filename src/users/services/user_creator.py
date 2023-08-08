@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from users.models import User
 from app.services import BaseService
+from users.models import User
 
 
 @dataclass
@@ -15,15 +15,13 @@ class UserCreator(BaseService):
     def act(self) -> User:
         user = self.create()
         return user
-        
+
     def create(self) -> User:
         user = User.objects.create_user(
-            first_name= self.first_name,
+            first_name=self.first_name,
             last_name=self.last_name,
             username=self.username,
             email=self.email,
             password=self.password,
         )
         return user
-    
-    

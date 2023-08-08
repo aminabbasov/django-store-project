@@ -6,17 +6,14 @@ class NameValidatorMixin:
         if not value:
             return
         if not value.isalpha():
-            raise ValidationError(
-                f'Field "{field_name}" must contain only letters.',
-                code='invalid'
-            )
+            raise ValidationError(f'Field "{field_name}" must contain only letters.', code="invalid")
 
     def clean_first_name(self):
-        value = self.cleaned_data.get('first_name', False)
+        value = self.cleaned_data.get("first_name", False)
         self._name_validator(str(value), "first name")
         return value
-        
+
     def clean_last_name(self):
-        value = self.cleaned_data.get('last_name', False)
+        value = self.cleaned_data.get("last_name", False)
         self._name_validator(str(value), "last name")
         return value

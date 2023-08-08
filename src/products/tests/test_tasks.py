@@ -1,4 +1,5 @@
 import pytest
+
 import faker
 
 from django.core import mail
@@ -11,7 +12,7 @@ def mail_data():
     fake = faker.Faker()
     return {
         "name": fake.name(),
-        "email": 'from@example.com',
+        "email": "from@example.com",
         "subject": fake.sentence(),
         "message": fake.text(),
     }
@@ -20,4 +21,4 @@ def mail_data():
 def test_send_mail(mail_data):
     send_mail(**mail_data)
     assert len(mail.outbox) == 1
-    assert mail.outbox[0].from_email == 'from@example.com'
+    assert mail.outbox[0].from_email == "from@example.com"

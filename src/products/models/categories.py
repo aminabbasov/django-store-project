@@ -1,9 +1,13 @@
-from django.db.models import Case, When, Value, IntegerField, Count
+from django.db.models import Case
+from django.db.models import Count
+from django.db.models import IntegerField
+from django.db.models import Value
+from django.db.models import When
 from django.urls import reverse
 from django.utils.text import slugify
 
-
-from app.models import TimestampedModel, models
+from app.models import models
+from app.models import TimestampedModel
 
 
 #! class CategoryManager(models.Manager):
@@ -16,46 +20,45 @@ class CategoryQuerySet(models.QuerySet):
     def manual_order(self, categories: list[str]):
         """Order of the categories will follow the order in the list."""
         ordered_categories = self.filter(name__in=categories).order_by(
-                Case(
-                    *[When(name=name, then=Value(value)) for value, name in enumerate(categories, 1)],
-                    output_field=IntegerField(),
-                )
+            Case(
+                *[When(name=name, then=Value(value)) for value, name in enumerate(categories, 1)],
+                output_field=IntegerField(),
             )
+        )
         return ordered_categories
-    
+
     def annotate_product_count(self):
-        return self.annotate(product_amount=Count('product'))
+        return self.annotate(product_amount=Count("product"))
 
 
 class Category(TimestampedModel):
-    
     # because models.TextChoices doesn't support nesting
     CATEGORY_CHOICES = [
-        (None, 'Select category'),
-        
-        ('Dresses', (
-                ('man', 'Men\'s Dresses'),
-                ('woman', 'Women\'s Dresses'),
-                ('baby', 'Baby\'s Dresses'),
-            )
+        (None, "Select category"),
+        (
+            "Dresses",
+            (
+                ("man", "Men's Dresses"),
+                ("woman", "Women's Dresses"),
+                ("baby", "Baby's Dresses"),
+            ),
         ),
-
-        ('shirts', 'Shirts'),
-        ('jeans', 'Jeans'),
-        ('swimwear', 'Swimwear'),
-        ('sleepwear', 'Sleepwear'),
-        ('sportswear', 'Sportswear'),
-        ('jumpsuits', 'Jumpsuits'),
-        ('blazers', 'Blazers'),
-        ('jackets', 'Jackets'),
-        ('shoes', 'Shoes'),
+        ("shirts", "Shirts"),
+        ("jeans", "Jeans"),
+        ("swimwear", "Swimwear"),
+        ("sleepwear", "Sleepwear"),
+        ("sportswear", "Sportswear"),
+        ("jumpsuits", "Jumpsuits"),
+        ("blazers", "Blazers"),
+        ("jackets", "Jackets"),
+        ("shoes", "Shoes"),
     ]
 
     name = models.CharField(max_length=255, choices=CATEGORY_CHOICES, db_index=True, unique=True)
     description = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='category', null=True, blank=True)
+    image = models.ImageField(upload_to="category", null=True, blank=True)
     slug = models.SlugField(unique=True)
-    
+
     objects = CategoryQuerySet.as_manager()
 
     def get_absolute_url(self):
@@ -72,14 +75,14 @@ class Category(TimestampedModel):
 
     @property
     def get_image_url(self):
-        if self.image and hasattr(self.image, 'url'):
+        if self.image and hasattr(self.image, "url"):
             return self.image.url
-        return ''
-    
+        return ""
+
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = "Categories"
         # ordering = ['category']
         # TODO: find how to sort by CATEGORY_CHOICES

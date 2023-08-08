@@ -1,10 +1,11 @@
 import pytest
 
-from products.services import ProductOptionCreator
 from products.models import ProductOption
+from products.services import ProductOptionCreator
 
 
 pytestmark = [pytest.mark.django_db]
+
 
 @pytest.fixture
 def multiple_option_data():

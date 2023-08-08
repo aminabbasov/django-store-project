@@ -1,7 +1,7 @@
 import pytest
 
-from products.services import ProductCreator
 from products.models import Product
+from products.services import ProductCreator
 
 
 @pytest.fixture

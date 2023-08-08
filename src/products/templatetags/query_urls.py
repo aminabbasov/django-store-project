@@ -1,6 +1,6 @@
-from django import template
-
 from urllib.parse import urlencode
+
+from django import template
 
 
 register = template.Library()
@@ -45,16 +45,16 @@ def query_url(parameters, **kwargs):
     Returns a URL query string with the given parameters and key-value pairs.
     If parameters is not None, any key-value pairs whose keys are not in kwargs will be filtered out.
     """
-    url = f'?{urlencode(kwargs)}'
+    url = f"?{urlencode(kwargs)}"
 
     if parameters:
-        querystring = parameters.split('&')
+        querystring = parameters.split("&")
         used_fields = kwargs.keys()
-        filtered_querystring = filter(lambda param: param.split('=')[0] not in used_fields, querystring)
-        encoded_querystring = '&'.join(filtered_querystring)
-        
+        filtered_querystring = filter(lambda param: param.split("=")[0] not in used_fields, querystring)
+        encoded_querystring = "&".join(filtered_querystring)
+
         if encoded_querystring:
-            url += f'&{encoded_querystring}'
+            url += f"&{encoded_querystring}"
 
     return url
 
@@ -66,7 +66,7 @@ def query_url(parameters, **kwargs):
 #     If parameters is not None, any key-value pairs whose keys are not in kwargs will be filtered out.
 #     """
 #     query_dict = kwargs.copy()
-    
+
 #     if parameters:
 #         allowed_fields = set(parameters.split('&'))
 #         query_dict = {key: value for key, value in kwargs.items() if key in allowed_fields}

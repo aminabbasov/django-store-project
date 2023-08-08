@@ -4,9 +4,9 @@
 from django.urls import reverse_lazy
 
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = "users.User"
 
-AUTHENTICATION_BACKENDS = ['users.backends.UsernameOrEmailModelBackend']
+AUTHENTICATION_BACKENDS = ["users.backends.UsernameOrEmailModelBackend"]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -23,11 +23,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('users:account')
+LOGIN_REDIRECT_URL = reverse_lazy("users:account")
 
-LOGIN_URL = reverse_lazy('users:login')
+LOGIN_URL = reverse_lazy("users:login")
 
-LOGOUT_URL = reverse_lazy('users:logout')
+LOGOUT_URL = reverse_lazy("users:logout")
 
 
 # Using plain bcrypt for password storage.

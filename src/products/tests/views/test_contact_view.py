@@ -1,4 +1,5 @@
 import pytest
+
 from faker import Faker
 
 from django.urls import reverse
@@ -16,12 +17,12 @@ def mail_data():
 
 
 def test_contact_view_get_method(client):
-    url = reverse('products:contact')
+    url = reverse("products:contact")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_contact_view_valid_post_method(client, mail_data):
-    url = reverse('products:contact')
+    url = reverse("products:contact")
     response = client.post(url, mail_data)
     assert response.status_code == 200

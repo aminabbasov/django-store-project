@@ -7,13 +7,13 @@ from django.db.models import Q
 
 class UsernameOrEmailModelBackend(ModelBackend):
     """
-    Custom authentication Backend for login using email or username 
+    Custom authentication Backend for login using email or username
     with password
     """
 
     def authenticate(self, request, username=None, password=None, **kwargs):
         user_model = get_user_model()
-        
+
         if username is None:
             username = kwargs.get(user_model.USERNAME_FIELD)
 
@@ -22,7 +22,7 @@ class UsernameOrEmailModelBackend(ModelBackend):
 
         try:
             user = user_model.objects.get(
-                Q(**{f'{user_model.USERNAME_FIELD}__iexact': username}) | Q(email__iexact=username)
+                Q(**{f"{user_model.USERNAME_FIELD}__iexact": username}) | Q(email__iexact=username)
             )
         except user_model.DoesNotExist:
             user_model().set_password(password)

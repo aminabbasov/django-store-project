@@ -1,6 +1,7 @@
 """Read .env file"""
 import environ  # type: ignore
 
+
 env = environ.Env(
     DEBUG=(bool, False),
     CI=(bool, False),

@@ -1,8 +1,9 @@
 from django.utils.translation import gettext_lazy as _
 
-from app.models import models, TimestampedModel
-from users.models import User
+from app.models import models
+from app.models import TimestampedModel
 from products.models import Product
+from users.models import User
 
 
 class OrderQuerySet(models.QuerySet):
@@ -12,23 +13,22 @@ class OrderQuerySet(models.QuerySet):
 
 
 class Order(TimestampedModel):
-    
     class COUNTRY(models.TextChoices):
-        US = 'US', _('United States')
-        DE = 'DE', _('Germany')
-        TR = 'TR', _('Turkey')
-        AE = 'AE', _('United Arab Emirates')
-        TH = 'TH', _('Thailand')
-        JP = 'JP', _('Japan')
+        US = "US", _("United States")
+        DE = "DE", _("Germany")
+        TR = "TR", _("Turkey")
+        AE = "AE", _("United Arab Emirates")
+        TH = "TH", _("Thailand")
+        JP = "JP", _("Japan")
 
     class STATUS(models.TextChoices):
-        NOT_PAID = 'Not paid', _('Not paid')
-        PENDING = 'Pending', _('Pending')
-        APPROVED = 'Approved', _('Approved')
-        IN_TRANSIT = 'In transit', _('In transit')
-        SHIPPED = 'Shipped', _('Shipped')
+        NOT_PAID = "Not paid", _("Not paid")
+        PENDING = "Pending", _("Pending")
+        APPROVED = "Approved", _("Approved")
+        IN_TRANSIT = "In transit", _("In transit")
+        SHIPPED = "Shipped", _("Shipped")
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='address')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="address")
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
@@ -43,9 +43,9 @@ class Order(TimestampedModel):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     paid = models.BooleanField(default=False)
     status = models.CharField(default=STATUS.NOT_PAID, max_length=255, choices=STATUS.choices)
-    
+
     objects = OrderQuerySet.as_manager()
-    
+
     def __str__(self):
         return str(self.id)
 
@@ -54,9 +54,9 @@ class Order(TimestampedModel):
         return sum(item.get_cost() for item in self.items.all())
 
 
-class OrderItem(TimestampedModel):    
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name='ordered_items')
+class OrderItem(TimestampedModel):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="ordered_items")
     option = models.JSONField()  # Example: {"color": "red", "size": "xl"}
     price = models.DecimalField(max_digits=7, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
