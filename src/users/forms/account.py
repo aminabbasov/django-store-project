@@ -1,6 +1,6 @@
 from django import forms
 
-from .mixins import NameValidatorMixin
+from users.forms.mixins import NameValidatorMixin
 
 
 class UsersAccountForm(forms.Form, NameValidatorMixin):

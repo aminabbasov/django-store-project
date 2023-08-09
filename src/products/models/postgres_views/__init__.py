@@ -1,5 +1,5 @@
-from .product_view import ProductView
-from .single_product_view import SingleProductView
+from products.models.postgres_views.product_view import ProductView
+from products.models.postgres_views.single_product_view import SingleProductView
 
 
 __all__ = [

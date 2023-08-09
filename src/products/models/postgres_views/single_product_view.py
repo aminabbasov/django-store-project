@@ -6,9 +6,8 @@ from django.urls import reverse
 
 from app.models import DefaultModel
 from app.models import models
-
-from ..products import Product
-from ..products import ProductOption
+from products.models.products import Product
+from products.models.products import ProductOption
 
 
 class SingleProductViewQuerySet(models.QuerySet):

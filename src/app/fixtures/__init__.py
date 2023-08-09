@@ -1,4 +1,4 @@
-from .factory import mixer
+from app.fixtures.factory import mixer
 
 
 __all__ = [

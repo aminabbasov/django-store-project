@@ -1,5 +1,5 @@
-from .user_creator import UserCreator
-from .user_updater import UserUpdater
+from users.services.user_creator import UserCreator
+from users.services.user_updater import UserUpdater
 
 
 __all__ = [

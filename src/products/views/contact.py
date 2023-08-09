@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views import generic
 
-from ..tasks import send_mail
+from products.tasks import send_mail
 
 
 class ProductsContactView(generic.TemplateView):

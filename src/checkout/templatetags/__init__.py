@@ -1,4 +1,4 @@
-from .json_humanize import json_humanize
+from checkout.templatetags.json_humanize import json_humanize
 
 
 __all__ = [

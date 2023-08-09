@@ -1,11 +1,11 @@
-from .categories import Category
-from .images import Image
-from .postgres_views import ProductView
-from .postgres_views import SingleProductView
-from .products import Product
-from .products import ProductOption
-from .products import ProductVariant
-from .reviews import Review
+from products.models.categories import Category
+from products.models.images import Image
+from products.models.postgres_views import ProductView
+from products.models.postgres_views import SingleProductView
+from products.models.products import Product
+from products.models.products import ProductOption
+from products.models.products import ProductVariant
+from products.models.reviews import Review
 
 
 __all__ = [

@@ -1,10 +1,10 @@
-from .contact import ProductsContactView
-from .index import ProductsIndexView
-from .search import ProductSearchView
-from .shop import ProductsCategoryView
-from .shop import ProductsDetailView
-from .shop import ProductsReviewView
-from .shop import ProductsShopView
+from products.views.contact import ProductsContactView
+from products.views.index import ProductsIndexView
+from products.views.search import ProductSearchView
+from products.views.shop import ProductsCategoryView
+from products.views.shop import ProductsDetailView
+from products.views.shop import ProductsReviewView
+from products.views.shop import ProductsShopView
 
 
 __all__ = [

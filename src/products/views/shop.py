@@ -9,12 +9,12 @@ from django.urls import reverse_lazy
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views import generic
 
-from ..forms import ProductsReviewForm
-from ..models import Category
-from ..models import Product
-from ..models import ProductOption
-from ..models import ProductView
-from ..models import SingleProductView
+from products.forms import ProductsReviewForm
+from products.models import Category
+from products.models import Product
+from products.models import ProductOption
+from products.models import ProductView
+from products.models import SingleProductView
 
 
 class ProductsShopView(generic.ListView):

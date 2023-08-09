@@ -3,7 +3,7 @@ from django.contrib.postgres.search import SearchQuery
 from django.contrib.postgres.search import SearchRank
 from django.contrib.postgres.search import SearchVector
 
-from .shop import ProductsShopView
+from products.views.shop import ProductsShopView
 
 
 # Change to SearchVectorField, postgres trigger and GinIndex

@@ -3,9 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
 
+from users.forms.mixins import NameValidatorMixin
 from users.models import User
-
-from .mixins import NameValidatorMixin
 
 
 class UsersRegisterForm(UserCreationForm, NameValidatorMixin):

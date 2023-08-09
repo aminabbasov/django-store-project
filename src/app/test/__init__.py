@@ -1,4 +1,4 @@
-from .factories import BaseFormFactory
+from app.test.factories import BaseFormFactory
 
 
 __all__ = [
