@@ -33,8 +33,6 @@ class ProductsShopView(generic.ListView):
             return super().paginate_queryset(queryset, page_size)
         except Http404:
             self.kwargs["page"] = paginator.num_pages
-
-            # self.request.GET['page'] = 1  #. FIXME: FIX INCORRECT URL ON PAGE RESET!!!
             return super().paginate_queryset(queryset, page_size)
 
     def get_queryset(self):
@@ -65,9 +63,7 @@ class ProductsShopView(generic.ListView):
         options = ProductOption.objects.filter(filter_q)
         product_ids = [item.product.id for item in options]
 
-        queryset = queryset.filter(product_id__in=product_ids)
-
-        return queryset
+        return queryset.filter(product_id__in=product_ids)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -80,7 +76,7 @@ class ProductsShopView(generic.ListView):
         return context
 
     def get_ordering(self):
-        ordering = self.request.GET.get("sort", None)
+        ordering = self.request.GET.get("sort")
 
         if ordering == "latest":
             return "-created"
@@ -89,8 +85,7 @@ class ProductsShopView(generic.ListView):
         elif ordering == "rating":
             products = Product.objects.average_rating()
             products = products.order_by("-avg_rating")
-            product_ids = [item.id for item in products]
-            return product_ids
+            return [item.id for item in products]
 
         return ordering
 
@@ -135,9 +130,7 @@ class ProductsCategoryView(ProductsShopView):
     def get_queryset(self):
         queryset = super().get_queryset()
         slug = self.kwargs.get("slug")
-        queryset = queryset.by_category(slug=slug)
-
-        return queryset
+        return queryset.by_category(slug=slug)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -153,8 +146,7 @@ class ProductsDetailView(generic.DetailView):
 
     def get_object(self):
         public_id = self.kwargs.get(self.pk_url_kwarg)
-        product = self.model.objects.get(public_id=public_id)
-        return product
+        return self.model.objects.get(public_id=public_id)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -195,7 +187,7 @@ class ProductsDetailView(generic.DetailView):
         except MultiValueDictKeyError:
             messages.error(self.request, "Please select an options.")
 
-        except Exception:
+        except Exception:  # noqa: PIE786
             messages.error(self.request, "Something went wrong, please try again later.")
 
         return redirect("products:detail", pk=public_id)

@@ -12,7 +12,7 @@ pytestmark = [pytest.mark.django_db]
 @pytest.fixture
 def product(mixer):
     product = mixer.blend("products.Product")
-    variant = mixer.blend(
+    mixer.blend(
         "products.ProductVariant",
         product=product,
         option={"size": "XL", "color": "black"},

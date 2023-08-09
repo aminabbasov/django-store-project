@@ -12,5 +12,4 @@ def split_url_parameters(stdin: str, exclude: str) -> list[list[str, str]]:
     splitted_parameters = list(map(lambda x: x.split("="), parameters))
     filtered_parameters = list(filter(lambda params: params[0] != exclude, splitted_parameters))
     unique_parameters = [list(param) for param in set(tuple(param_list) for param_list in filtered_parameters)]
-    without_empty_values = list(filter(lambda x: x[1], unique_parameters))
-    return without_empty_values
+    return list(filter(lambda x: x[1], unique_parameters))  # without_empty_values

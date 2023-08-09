@@ -1,4 +1,3 @@
-# from django.utils.deprecation import MiddlewareMixin
 from checkout.basket import Basket
 
 
@@ -15,7 +14,7 @@ class BasketMiddleware:
         # Code to be executed for each request/response after
         # the view is called.
 
-        return response
+        return response  # noqa: PIE781
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         request.basket = Basket(request)

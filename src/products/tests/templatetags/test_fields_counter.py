@@ -20,7 +20,7 @@ def products(mixer, categories):
 
 
 @pytest.fixture(autouse=True)
-def product_options(mixer, products):
+def _product_options(mixer, products):
     for product in products:
         mixer.cycle(2).blend(
             "products.ProductOption",

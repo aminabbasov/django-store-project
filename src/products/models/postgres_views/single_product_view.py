@@ -25,7 +25,7 @@ class SingleProductViewQuerySet(models.QuerySet):
         return self.with_discount().order_by("-created")
 
     def by_category(self, slug: str):
-        products = Product.objects.filter(category__slug=slug)  # XXX .values_list("id")
+        products = Product.objects.filter(category__slug=slug)
         return self.filter(product_id__in=products)
 
     def related_products(self, categories, exclude_model=None):
@@ -43,13 +43,12 @@ class SingleProductViewQuerySet(models.QuerySet):
 
     def manual_order(self, ids: list[int]):
         """Order of the products will follow the order in the list."""
-        ordered_products = self.filter(product_id__in=ids).order_by(
+        return self.filter(product_id__in=ids).order_by(
             Case(
                 *[When(product_id=pk, then=Value(value)) for value, pk in enumerate(ids, 1)],
                 output_field=BigIntegerField(),
             )
         )
-        return ordered_products
 
 
 class SingleProductView(DefaultModel):
@@ -86,12 +85,12 @@ class SingleProductView(DefaultModel):
 
     @property
     def images(self):
-        product = Product.objects.get(pk=self.product_id)  # X TODO: think about better realization
+        product = Product.objects.get(pk=self.product_id)
         return product.images
 
     @property
     def reviews(self):
-        product = Product.objects.get(pk=self.product_id)  # X TODO: think about better realization
+        product = Product.objects.get(pk=self.product_id)
         return product.reviews
 
     @property

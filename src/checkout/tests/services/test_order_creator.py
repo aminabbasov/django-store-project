@@ -30,6 +30,6 @@ def test_order_creator(user, order_data, price):
 
 
 def test_price_less_than_0_order_creator(user, order_data):
-    with pytest.raises(ValueError):
-        order_data["price"] = -1
+    order_data["price"] = -1
+    with pytest.raises(ValueError, match="Price can't be less than zero"):
         OrderCreator(user, **order_data)()

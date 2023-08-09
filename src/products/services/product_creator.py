@@ -22,8 +22,7 @@ class ProductCreator(BaseService):
         self.category = self.category if isinstance(self.category, list) else [self.category]
 
     def act(self) -> Product:
-        product = self.create()
-        return product
+        return self.create()
 
     def create(self) -> Product:
         product = Product.objects.create(

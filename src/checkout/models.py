@@ -8,8 +8,7 @@ from users.models import User
 
 class OrderQuerySet(models.QuerySet):
     def filter_by_user(self, user):
-        filtered_orders = Order.objects.annotate().filter(user=user)
-        return filtered_orders
+        return Order.objects.annotate().filter(user=user)
 
 
 class Order(TimestampedModel):

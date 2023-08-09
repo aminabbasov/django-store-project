@@ -21,7 +21,7 @@ class ProductsContactView(generic.TemplateView):
         except BadHeaderError:
             return HttpResponse("Invalid header found.")
 
-        except Exception:
+        except Exception:  # noqa: PIE786
             return JsonResponse({"message": "fail"}, status=500)
 
         return JsonResponse({"message": "success"}, status=200)

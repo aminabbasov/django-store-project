@@ -23,7 +23,7 @@ class ProductViewQuerySet(models.QuerySet):
         return self.with_discount().order_by("-product_created")
 
     def by_category(self, slug: str):
-        products = Product.objects.filter(category__slug=slug)  # XXX .values_list("id")
+        products = Product.objects.filter(category__slug=slug)
         return self.filter(product_id__in=products)
 
     def related_products(self, categories):
@@ -83,7 +83,7 @@ class ProductView(DefaultModel):
 
     @property
     def images(self):
-        product = Product.objects.get(pk=self.product_id)  # X TODO: think about better realization
+        product = Product.objects.get(pk=self.product_id)
         return product.images
 
     @property

@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from functools import singledispatchmethod
 from typing import Callable, TypeAlias
 
-# from django.contrib.auth import get_user_model
 from django.apps import apps
 from django.db.models import Q
 from django.db.models import QuerySet
@@ -20,8 +19,7 @@ class UserUpdater(BaseService):
     user_data: dict
 
     def act(self) -> User:
-        user = self.update(self.user, self.user_data)
-        return user
+        return self.update(self.user, self.user_data)
 
     def _if_user_is_queryset(self) -> None:
         if isinstance(self.user, QuerySet):
@@ -46,8 +44,6 @@ class UserUpdater(BaseService):
                 setattr(user, key, value or getattr(user, key))
             else:
                 raise AttributeError(f"{user} has no field named '{key}'")
-                # print(f"{user} has no field named '{key}'")
-                # TODO: realize logging
 
         user.save()
         return user
@@ -58,7 +54,7 @@ class UserUpdater(BaseService):
         obj.update(**user_data)
 
         if obj.first() is None:
-            q = Q(username=user_data.get("username", "")) | Q(email=user_data.get("email", ""))
-            return apps.get_model("users.User").objects.get(q)
+            query = Q(username=user_data.get("username", "")) | Q(email=user_data.get("email", ""))
+            return apps.get_model("users.User").objects.get(query)
 
         return obj.first()  # to return User, not QuerySet

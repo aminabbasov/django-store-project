@@ -32,9 +32,7 @@ class ProductQuerySet(models.QuerySet):
 
 class Product(TimestampedModel):
     name = models.CharField(max_length=255)
-    category = models.ManyToManyField(
-        "products.Category"
-    )  # related_name='categories' TODO: look to https://shopify.dev/docs/api/admin-rest/2023-07/resources/collection
+    category = models.ManyToManyField("products.Category")  # related_name="categories"
     short_description = models.CharField(max_length=255)
     description = models.TextField()
     information = models.TextField()
@@ -73,9 +71,7 @@ class ProductOption(TimestampedModel):
 class ProductVariant(TimestampedModel):
     product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="variants")
     option = models.JSONField()  # Example: {"color": "black", "size": "XL"}
-    price = models.DecimalField(
-        max_digits=10, decimal_places=2
-    )  # max: 99,999,999.99 TODO: make JsonField price like this https://shopify.dev/docs/api/admin-rest/2023-07/resources/product-variant#resource-object
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # max: 99,999,999.99
     discount = models.IntegerField(default=0, validators=[validate_discount])
     quantity = models.PositiveIntegerField()
     available = models.BooleanField(default=True)
@@ -88,8 +84,8 @@ class ProductVariant(TimestampedModel):
         return self.price
 
     @property
-    def get_name(self) -> str:  # names may conflict, they are not unique TODO: fix it
-        name = {"product": self.product.name, **self.option}
+    def get_name(self) -> str:
+        name = {"id": self.id, "product": self.product.name, **self.option}
         return str(name)
 
     def __str__(self) -> str:

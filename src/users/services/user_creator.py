@@ -13,15 +13,13 @@ class UserCreator(BaseService):
     password: str
 
     def act(self) -> User:
-        user = self.create()
-        return user
+        return self.create()
 
     def create(self) -> User:
-        user = User.objects.create_user(
+        return User.objects.create_user(
             first_name=self.first_name,
             last_name=self.last_name,
             username=self.username,
             email=self.email,
             password=self.password,
         )
-        return user

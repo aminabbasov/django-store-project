@@ -6,9 +6,6 @@ from django.conf import settings
 from django.http import HttpRequest
 
 
-# from django.contrib.sessions.backends.signed_cookies import SessionStore
-
-
 @dataclass
 class Basket:
     request: HttpRequest
@@ -49,7 +46,6 @@ class Basket:
         for key, value in options.items():
             self.basket[variant_id][key] = value
 
-        # . TODO: find better realisation
         self.basket[variant_id]["total_price"] = str(
             Decimal(self.basket[variant_id]["quantity"]) * Decimal(self.basket[variant_id]["price"])
         )

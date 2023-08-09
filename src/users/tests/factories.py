@@ -1,3 +1,5 @@
+from random import choice
+
 import factory
 from mixer.backend.django import mixer
 from pytest_factoryboy import register
@@ -29,7 +31,10 @@ class UsersLoginFormFactory(BaseFormFactory):
     class Meta:
         model = UsersLoginForm
 
-    username = factory.Faker("user_name")  # TODO: add email
+    class Params:
+        username_or_email = factory.Faker(choice(["user_name", "email"]))
+
+    username = factory.SelfAttribute("username_or_email")
     password = factory.Faker("password")
 
 

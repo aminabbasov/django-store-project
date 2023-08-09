@@ -6,7 +6,7 @@ from .products import Product
 
 
 class Image(TimestampedModel):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")  # related_query_name='images'
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to=RandomFileName(r"product/%Y/%m/%d/"))  # may be name "src" would be better
 
     def delete(self, *args, **kwargs):
@@ -21,6 +21,3 @@ class Image(TimestampedModel):
         if self.image and hasattr(self.image, "url"):
             return self.image.url
         return ""
-
-    # class Meta:
-    #     default_related_name = 'images'

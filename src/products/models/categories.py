@@ -19,13 +19,12 @@ from app.models import TimestampedModel
 class CategoryQuerySet(models.QuerySet):
     def manual_order(self, categories: list[str]):
         """Order of the categories will follow the order in the list."""
-        ordered_categories = self.filter(name__in=categories).order_by(
+        return self.filter(name__in=categories).order_by(
             Case(
                 *[When(name=name, then=Value(value)) for value, name in enumerate(categories, 1)],
                 output_field=IntegerField(),
             )
         )
-        return ordered_categories
 
     def annotate_product_count(self):
         return self.annotate(product_amount=Count("product"))
@@ -84,5 +83,3 @@ class Category(TimestampedModel):
 
     class Meta:
         verbose_name_plural = "Categories"
-        # ordering = ['category']
-        # TODO: find how to sort by CATEGORY_CHOICES

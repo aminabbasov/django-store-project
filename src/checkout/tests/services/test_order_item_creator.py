@@ -39,12 +39,12 @@ def test_order_item_creator(order, product, options, price):
 
 
 def test_price_less_than_0_order_creator(order, product, options):
-    with pytest.raises(ValueError):
-        options["price"] = -1
+    options["price"] = -1
+    with pytest.raises(ValueError, match="Price can't be less than zero"):
         OrderItemCreator(order, product, **options)()
 
 
 def test_quantity_less_than_0_order_creator(order, product, options):
-    with pytest.raises(ValueError):
-        options["quantity"] = -1
+    options["quantity"] = -1
+    with pytest.raises(ValueError, match="Quantity can't be less than zero"):
         OrderItemCreator(order, product, **options)()

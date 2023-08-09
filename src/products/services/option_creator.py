@@ -24,8 +24,7 @@ class ProductOptionCreator(BaseService):
             self.product = Product.objects.get(pk=self.product)
 
     def act(self) -> ProductOption | list[ProductOption]:
-        product_options = self.create()
-        return product_options
+        return self.create()
 
     @transaction.atomic
     def create(self) -> ProductOption | list[ProductOption]:

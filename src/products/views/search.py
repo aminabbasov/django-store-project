@@ -6,7 +6,7 @@ from django.contrib.postgres.search import SearchVector
 from .shop import ProductsShopView
 
 
-# . TODO: Change to SearchVectorField, postgres trigger and GinIndex
+# Change to SearchVectorField, postgres trigger and GinIndex
 class ProductSearchView(ProductsShopView):
     def get_queryset(self):
         query = self.request.GET.get("q") or ""

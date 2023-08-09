@@ -67,24 +67,24 @@ def test_with_no_options_product_create_composer(product, price):
 
 
 def test_price_is_negative_product_create_composer(product, composer_data):
-    with pytest.raises(ValueError):
-        composer_data["price"] = Decimal(-1)
+    composer_data["price"] = Decimal(-1)
+    with pytest.raises(ValueError, match="Price can't be less than zero"):
         ProductCreateComposer(product, **composer_data)()
 
 
 def test_quantity_is_negative_product_create_composer(product, composer_data):
-    with pytest.raises(ValueError):
-        composer_data["quantity"] = -1
-        ProductCreateComposer(product, **composer_data)()
-
-
-def test_discount_more_than_100_product_create_composer(product, composer_data):
-    with pytest.raises(ValueError):
-        composer_data["discount"] = 101
+    composer_data["quantity"] = -1
+    with pytest.raises(ValueError, match="Quantity can't be less than zero"):
         ProductCreateComposer(product, **composer_data)()
 
 
 def test_discount_less_than_0_product_create_composer(product, composer_data):
-    with pytest.raises(ValueError):
-        composer_data["discount"] = -1
+    composer_data["discount"] = -1
+    with pytest.raises(ValueError, match="Discount can't be less than zero"):
+        ProductCreateComposer(product, **composer_data)()
+
+
+def test_discount_more_than_100_product_create_composer(product, composer_data):
+    composer_data["discount"] = 101
+    with pytest.raises(ValueError, match="Discount can't be more than hundred"):
         ProductCreateComposer(product, **composer_data)()

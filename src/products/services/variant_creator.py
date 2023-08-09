@@ -38,11 +38,10 @@ class ProductVariantCreator(BaseService):
             self.product = Product.objects.get(pk=self.product)
 
     def act(self) -> ProductVariant:
-        product_variant = self.create()
-        return product_variant
+        return self.create()
 
     def create(self) -> ProductVariant:
-        product_variant = ProductVariant.objects.create(
+        return ProductVariant.objects.create(
             product=self.product,
             option=self.option,
             price=self.price,
@@ -50,11 +49,10 @@ class ProductVariantCreator(BaseService):
             quantity=self.quantity,
             available=self.available,
         )
-        return product_variant
 
     def validate_price_is_decimal(self) -> None:
         if not isinstance(self.price, Decimal):
-            raise AttributeError(f"Price must be decimal. Given type is: {type(self.price)}")
+            raise TypeError(f"Price must be decimal. Given type is: {type(self.price)}")
 
     def validate_price_is_not_negative(self):
         if self.price < Decimal(0):

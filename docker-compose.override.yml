@@ -15,6 +15,10 @@ services:
       dockerfile: Dockerfile
       target: dev
     container_name: django-dev
+    environment:
+      REDIS_URL: redis://redis
+      DATABASE_URL: postgres://postgres:secret@postgres:5432/postgres
+      # FIXME: This is not acceptable. I must fix this 
     depends_on:
       - postgres
       - redis

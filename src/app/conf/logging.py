@@ -36,11 +36,4 @@ LOGGING = {
             "formatter": "verbose",
         },
     },
-    # Example
-    # 'loggers': {
-    #     'website.views': {
-    #         'handlers': ['console', 'file', 'mail_admins'],
-    #         'level': 'DEBUG',
-    #     }
-    # }
 }

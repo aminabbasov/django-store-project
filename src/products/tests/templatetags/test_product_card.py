@@ -1,5 +1,7 @@
 import pytest
 
+from django.template import TemplateSyntaxError
+
 from products.templatetags.product_cards import product_card
 
 
@@ -12,7 +14,7 @@ def product(mixer):
 
 
 @pytest.mark.parametrize(
-    "model, template",
+    ("model", "template"),
     [
         ("product", "index"),
         ("product", "shop"),
@@ -25,5 +27,5 @@ def test_valid_product_card(model, template, request):
 
 
 def test_invalid_product_card(product):
-    with pytest.raises(ValueError):
+    with pytest.raises(TemplateSyntaxError):
         product_card(product=product, template="INVALID VALUE")

@@ -31,8 +31,7 @@ class OrderCreator(BaseService):
             self.price = self._if_not_decimal(self.price)
 
     def act(self) -> Order:
-        order = self.create()
-        return order
+        return self.create()
 
     @singledispatchmethod
     def _if_not_decimal(self, price):
@@ -52,7 +51,7 @@ class OrderCreator(BaseService):
         return Decimal(price)
 
     def create(self) -> Order:
-        order = Order.objects.create(
+        return Order.objects.create(
             user=self.user,
             first_name=self.first_name,
             last_name=self.last_name,
@@ -68,7 +67,6 @@ class OrderCreator(BaseService):
             paid=self.paid,
             status=self.status,
         )
-        return order
 
     def validate_price_is_not_negative(self):
         if self.price < Decimal(0):

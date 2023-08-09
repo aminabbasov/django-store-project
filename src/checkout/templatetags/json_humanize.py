@@ -15,5 +15,4 @@ def json_humanize(stdin: json) -> str:
     for key, value in stdin.items():
         text.append(f"{key} - {value}")
 
-    text = "; ".join(text).strip()
-    return text
+    return "; ".join(text).strip()

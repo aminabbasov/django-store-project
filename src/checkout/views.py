@@ -78,7 +78,7 @@ class CheckoutView(generic.FormView):
                 quantity=options["quantity"],
             )()
 
-        # . TODO: self.request.basket.clear()  # XXX
+        self.request.basket.clear()
         messages.success(self.request, "Order created successfully.")
 
         return super().form_valid(form)

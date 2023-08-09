@@ -27,12 +27,10 @@ class ProductAdmin(ModelAdmin):
     list_display = ("name", "get_price_range", "short_description", "views")
     list_filter = ("category", "created", "modified", "available")
     search_fields = ("name", "short_description", "description", "information")
-    # raw_id_fields = ('category',)
     date_hierarchy = "created"
     ordering = ["-created"]
 
     @admin.display(
-        # ordering='variants__price',
         description="price",
     )
     def get_price_range(self, obj):
@@ -60,6 +58,4 @@ class CategoryAdmin(ModelAdmin):
     list_display = ("name", "description")
     search_fields = ("name", "description")
     list_filter = ("name", "created", "modified")
-
-    # prepopulated_fields = {"slug": ("category",)}
     exclude = ("slug",)

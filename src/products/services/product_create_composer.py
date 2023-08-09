@@ -28,7 +28,7 @@ class ServiceResult(Enum):
 
 class Default(Enum):
     KEY = "default"
-    VALUE = "default"
+    VALUE = "default"  # noqa: PIE796
 
 
 @dataclass
@@ -87,11 +87,10 @@ class ProductCreateComposer(BaseService):
         return Decimal(price)
 
     def create_option(self) -> ProductOption | list[ProductOption]:
-        product_options = ProductOptionCreator(
+        return ProductOptionCreator(
             product=self.product,
             options=self.options,
         )()
-        return product_options
 
     def _option_combinations(self) -> list:
         """Generate all possible combinations of product options."""
