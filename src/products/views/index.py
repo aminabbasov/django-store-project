@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.views import generic
 
 from products.models import Category
@@ -7,7 +9,7 @@ from products.models import SingleProductView
 class ProductsIndexView(generic.TemplateView):
     template_name = "products/index.html"
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: dict[str, Any]) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
 
         context["carousel"] = Category.objects.manual_order(["man", "woman", "baby"])

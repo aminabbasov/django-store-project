@@ -1,9 +1,9 @@
-from typing import TypeAlias
+from typing import Any, TypeAlias
 
 from django import template
 
 
-json: TypeAlias = str
+json: TypeAlias = dict[str, Any]
 register = template.Library()
 
 

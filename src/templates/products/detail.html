@@ -4,30 +4,9 @@
 
 {% block content %}
 
-    {% comment %}
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Shop Detail</span>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
-    {% endcomment %}
-
     <!-- Messages Start -->
     {% include 'inc/_messages.html' %}
     <!-- Messages End -->
-
-    <!-- Breadcrumb Start -->
-    {% include 'inc/_breadcrumbs.html' %}
-    <!-- Breadcrumb End -->
-
 
     <!-- Shop Detail Start -->
     <div class="container-fluid pb-5">
@@ -71,7 +50,6 @@
                     <p class="mb-4">{{ product.short_description }}</p>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
-                        {% comment %} <form> {% endcomment %}
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" value="XS" class="custom-control-input" id="size-1" name="size" form="basket-form">
                                 <label class="custom-control-label" for="size-1">XS</label>
@@ -92,11 +70,9 @@
                                 <input type="radio" value="XL" class="custom-control-input" id="size-5" name="size" form="basket-form">
                                 <label class="custom-control-label" for="size-5">XL</label>
                             </div>
-                        {% comment %} </form> {% endcomment %}
                     </div>
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Colors:</strong>
-                        {% comment %} <form> {% endcomment %}
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" value="black" class="custom-control-input" id="color-1" name="color" form="basket-form">
                                 <label class="custom-control-label" for="color-1">Black</label>
@@ -117,7 +93,6 @@
                                 <input type="radio" value="green" class="custom-control-input" id="color-5" name="color" form="basket-form">
                                 <label class="custom-control-label" for="color-5">Green</label>
                             </div>
-                        {% comment %} </form> {% endcomment %}
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">

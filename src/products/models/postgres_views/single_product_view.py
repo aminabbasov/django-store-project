@@ -1,33 +1,39 @@
+from typing import Any, Type
+
 from django.db.models import BigIntegerField
 from django.db.models import Case
+from django.db.models import Model
 from django.db.models import Value
 from django.db.models import When
 from django.urls import reverse
 
 from app.models import DefaultModel
 from app.models import models
+from products.models.categories import CategoryQuerySet
 from products.models.products import Product
 from products.models.products import ProductOption
 
 
 class SingleProductViewQuerySet(models.QuerySet):
-    def newest(self):
+    def newest(self) -> "SingleProductViewQuerySet":
         return self.order_by("-created")
 
-    def with_discount(self):
+    def with_discount(self) -> "SingleProductViewQuerySet":
         return self.filter(max_discount__gt=0)
 
-    def highest_discount(self):
+    def highest_discount(self) -> "SingleProductViewQuerySet":
         return self.with_discount().order_by("-max_discount")
 
-    def newest_discount(self):
+    def newest_discount(self) -> "SingleProductViewQuerySet":
         return self.with_discount().order_by("-created")
 
-    def by_category(self, slug: str):
+    def by_category(self, slug: str) -> "SingleProductViewQuerySet":
         products = Product.objects.filter(category__slug=slug)
         return self.filter(product_id__in=products)
 
-    def related_products(self, categories, exclude_model=None):
+    def related_products(
+        self, categories: CategoryQuerySet, exclude_model: Type[Model] | None = None
+    ) -> "SingleProductViewQuerySet":
         products = Product.objects.filter(category__in=categories)
 
         if exclude_model:
@@ -35,12 +41,12 @@ class SingleProductViewQuerySet(models.QuerySet):
 
         return self.filter(product_id__in=products)
 
-    def by_option(self, value: str):
+    def by_option(self, value: str) -> "SingleProductViewQuerySet":
         product_option = ProductOption.objects.filter(values__icontains=value)  # icontains is a custom lookup
         product_ids = [item.product.id for item in product_option]
         return self.filter(product_id__in=product_ids)
 
-    def manual_order(self, ids: list[int]):
+    def manual_order(self, ids: list[int]) -> "SingleProductViewQuerySet":
         """Order of the products will follow the order in the list."""
         return self.filter(product_id__in=ids).order_by(
             Case(
@@ -83,33 +89,33 @@ class SingleProductView(DefaultModel):
     objects = SingleProductViewQuerySet.as_manager()
 
     @property
-    def images(self):
+    def images(self) -> Any:
         product = Product.objects.get(pk=self.product_id)
         return product.images
 
     @property
-    def reviews(self):
+    def reviews(self) -> Any:
         product = Product.objects.get(pk=self.product_id)
         return product.reviews
 
     @property
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("products:detail", kwargs={"pk": self.public_id})
 
     @property
-    def has_discount(self):
+    def has_discount(self) -> bool:
         if self.max_discount:
             return True
         return False
 
     @property
-    def price_range(self):
+    def price_range(self) -> str:
         if self.min_price != self.max_price:
             return f"${self.min_price} - ${self.max_price}"
         return f"${self.max_price}"
 
     @property
-    def discounted_price_range(self):
+    def discounted_price_range(self) -> str:
         if self.min_discounted_price != self.max_discounted_price:
             return f"${self.min_discounted_price} - ${self.max_discounted_price}"
         return f"${self.max_discounted_price}"

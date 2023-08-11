@@ -33,7 +33,7 @@ class ProductAdmin(ModelAdmin):
     @admin.display(
         description="price",
     )
-    def get_price_range(self, obj):
+    def get_price_range(self, obj: Product) -> str:
         return obj.price_range
 
 

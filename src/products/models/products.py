@@ -17,16 +17,14 @@ from app.models import TimestampedModel
 
 
 # not a class method because i can't write it after attributes definition
-def validate_discount(number: int) -> int:
+def validate_discount(number: int) -> None:
     """Validate and return a discount value within the range 0 to 100."""
     if not (0 <= number <= 100):
         raise ValidationError(_(f"The number must be in the range from 0 to 100. Given number is: {number}"))
 
-    return number
-
 
 class ProductQuerySet(models.QuerySet):
-    def average_rating(self):
+    def average_rating(self) -> "ProductQuerySet":
         return self.annotate(avg_rating=Coalesce(Avg("reviews__rating"), Value(0.0)))
 
 
@@ -42,11 +40,11 @@ class Product(TimestampedModel):
 
     objects = ProductQuerySet.as_manager()
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("products:detail", kwargs={"pk": self.public_id})
 
     @property
-    def price_range(self):
+    def price_range(self) -> str:
         from products.models import SingleProductView  # due to circular import exception
 
         product = SingleProductView.objects.get(public_id=self.public_id)
@@ -58,7 +56,7 @@ class Product(TimestampedModel):
 
         return f"${min_price} - ${max_price}"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 

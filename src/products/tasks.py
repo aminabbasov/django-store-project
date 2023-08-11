@@ -5,7 +5,7 @@ from app.celery import celery
 
 
 @celery.task
-def send_mail(name, email, subject, message):
+def send_mail(name: str, email: str, subject: str, message: str) -> None:
     body = f"""
         You have received a new message from your website contact form.\n\n
         Here are the details:\n\n

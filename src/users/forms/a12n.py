@@ -1,3 +1,5 @@
+from typing import Any
+
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import PasswordChangeForm
@@ -8,7 +10,7 @@ from users.models import User
 
 
 class UsersRegisterForm(UserCreationForm, NameValidatorMixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.fields["username"].widget.attrs.pop("autofocus")
 

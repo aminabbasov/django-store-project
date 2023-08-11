@@ -121,3 +121,4 @@ src/static/images/category/*
 !.gitkeep
 
 .cache
+backup

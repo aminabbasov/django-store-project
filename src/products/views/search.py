@@ -1,14 +1,17 @@
+from typing import Any
+
 from django.contrib.postgres.search import SearchHeadline
 from django.contrib.postgres.search import SearchQuery
 from django.contrib.postgres.search import SearchRank
 from django.contrib.postgres.search import SearchVector
+from django.db.models import QuerySet
 
 from products.views.shop import ProductsShopView
 
 
 # Change to SearchVectorField, postgres trigger and GinIndex
 class ProductSearchView(ProductsShopView):
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         query = self.request.GET.get("q") or ""
         search_vector = (
             SearchVector("name", weight="A")
@@ -28,7 +31,7 @@ class ProductSearchView(ProductsShopView):
         order = super().get_ordering()
         return queryset.order_by("-rank") if not order else queryset
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs: dict[str, Any]) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
         context["search_query"] = self.request.GET.get("q") or ""
         return context

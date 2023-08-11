@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.utils.translation import gettext_lazy as _
 
 from app.models import models
@@ -7,8 +9,8 @@ from users.models import User
 
 
 class OrderQuerySet(models.QuerySet):
-    def filter_by_user(self, user):
-        return Order.objects.annotate().filter(user=user)
+    def filter_by_user(self, user: int) -> "OrderQuerySet":
+        return self.annotate().filter(user=user)
 
 
 class Order(TimestampedModel):
@@ -45,11 +47,11 @@ class Order(TimestampedModel):
 
     objects = OrderQuerySet.as_manager()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.id)
 
     @property
-    def get_total_cost(self):
+    def get_total_cost(self) -> int | float:
         return sum(item.get_cost() for item in self.items.all())
 
 
@@ -60,8 +62,8 @@ class OrderItem(TimestampedModel):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.id)
 
-    def get_cost(self):
+    def get_cost(self) -> Decimal:
         return self.price * self.quantity

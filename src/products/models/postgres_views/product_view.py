@@ -1,35 +1,36 @@
-from decimal import Decimal
+from typing import Any
 
 from django.db.models import Q
 from django.urls import reverse
 
 from app.models import DefaultModel
 from app.models import models
+from products.models.categories import CategoryQuerySet
 from products.models.products import Product
 
 
 class ProductViewQuerySet(models.QuerySet):
-    def newest(self):
+    def newest(self) -> "ProductViewQuerySet":
         return self.order_by("-product_created")
 
-    def with_discount(self):
+    def with_discount(self) -> "ProductViewQuerySet":
         return self.filter(discount__gt=0)
 
-    def highest_discount(self):
+    def highest_discount(self) -> "ProductViewQuerySet":
         return self.with_discount().order_by("-discount")
 
-    def newest_discount(self):
+    def newest_discount(self) -> "ProductViewQuerySet":
         return self.with_discount().order_by("-product_created")
 
-    def by_category(self, slug: str):
+    def by_category(self, slug: str) -> "ProductViewQuerySet":
         products = Product.objects.filter(category__slug=slug)
         return self.filter(product_id__in=products)
 
-    def related_products(self, categories):
+    def related_products(self, categories: CategoryQuerySet) -> "ProductViewQuerySet":
         products = Product.objects.filter(category__in=categories)
         return self.filter(product_id__in=products)
 
-    def by_options(self, **options):
+    def by_options(self, **options: str) -> "ProductViewQuerySet":
         filters = Q()
 
         for option, value in options.items():
@@ -39,7 +40,7 @@ class ProductViewQuerySet(models.QuerySet):
 
 
 class ProductViewManager(models.Manager):
-    def get_queryset(self):
+    def get_queryset(self) -> models.QuerySet:
         return super().get_queryset().filter(product_available=True).filter(variant_available=True)
 
 
@@ -81,7 +82,7 @@ class ProductView(DefaultModel):
     internal = ProductViewQuerySet.as_manager()
 
     @property
-    def images(self):
+    def images(self) -> Any:
         product = Product.objects.get(pk=self.product_id)
         return product.images
 
@@ -93,13 +94,13 @@ class ProductView(DefaultModel):
         return Review.objects.filter(product=self.product_id).aggregate(models.Avg("rating"))["rating__avg"] or 0
 
     @property
-    def actual_price(self) -> Decimal:
+    def actual_price(self) -> str:
         """Calculate and return the actual price, considering discounts if applicable."""
         if self.discount:
             return f"${round(self.price - ((self.price * self.discount) / 100), 2)}"
         return f"${self.price}"
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("products:detail", kwargs={"pk": self.public_id})
 
     class Meta:

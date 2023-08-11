@@ -41,8 +41,8 @@ def test_multiple_options_product_create_composer(product, multiple_composer_dat
     assert isinstance(composer["variants"][0], ProductVariant)
 
 
-def test_with_no_options_product_create_composer(product, price):
-    composer = ProductCreateComposer(product, price=price)()
+def test_with_no_options_product_create_composer(product):
+    composer = ProductCreateComposer(product)()
     assert isinstance(composer, dict)
     assert isinstance(composer["product"], Product)
     assert isinstance(composer["options"], ProductOption)
@@ -58,7 +58,7 @@ def test_with_no_options_product_create_composer(product, price):
         str(10),
     ],
 )
-def test_with_no_options_product_create_composer(product, price):
+def test_prices_product_create_composer(product, price):
     composer = ProductCreateComposer(product, price=price)()
     assert isinstance(composer, dict)
     assert isinstance(composer["product"], Product)

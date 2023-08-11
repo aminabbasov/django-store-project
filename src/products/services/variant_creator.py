@@ -54,15 +54,15 @@ class ProductVariantCreator(BaseService):
         if not isinstance(self.price, Decimal):
             raise TypeError(f"Price must be decimal. Given type is: {type(self.price)}")
 
-    def validate_price_is_not_negative(self):
+    def validate_price_is_not_negative(self) -> None:
         if self.price < Decimal(0):
             raise ValueError("Price can't be less than zero")
 
-    def validate_quantity_is_not_negative(self):
+    def validate_quantity_is_not_negative(self) -> None:
         if self.quantity < 0:
             raise ValueError("Quantity can't be less than zero")
 
-    def validate_discount_is_between_0_and_100(self):
+    def validate_discount_is_between_0_and_100(self) -> None:
         if self.discount < 0:
             raise ValueError("Discount can't be less than zero")
         elif self.discount > 100:

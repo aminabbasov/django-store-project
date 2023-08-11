@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.utils.translation import gettext_lazy as _
 
 from app.models import models
@@ -22,8 +24,8 @@ class Review(TimestampedModel):
     comment = models.TextField(blank=True)
 
     @property
-    def get_date(self):
+    def get_date(self) -> datetime:
         return self.modified if self.modified else self.created
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"[{self.user.username} - {self.product.name}] - {self.comment}"

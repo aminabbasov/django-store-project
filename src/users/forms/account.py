@@ -5,7 +5,7 @@ from users.forms.mixins import NameValidatorMixin
 
 class UsersAccountForm(forms.Form, NameValidatorMixin):
     def __init__(self, user=None, *args, **kwargs):
-        super(UsersAccountForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["first_name"].widget.attrs["placeholder"] = getattr(user, "first_name", "")
         self.fields["last_name"].widget.attrs["placeholder"] = getattr(user, "last_name", "")
         self.fields["username"].widget.attrs["placeholder"] = getattr(user, "username", "")

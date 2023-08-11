@@ -1,8 +1,13 @@
+from typing import Any, Literal
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.db.models import QuerySet
 from django.http import Http404
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -23,11 +28,11 @@ class ProductsShopView(generic.ListView):
     template_name = "products/shop.html"
     paginate_by = 3
 
-    def get_paginate_by(self, queryset):
+    def get_paginate_by(self, queryset: QuerySet) -> int:
         self.paginate_by = self.request.GET.get("paginate_by", self.paginate_by)  # example: ?paginate_by3&page=2
-        return self.paginate_by
+        return int(self.paginate_by)
 
-    def paginate_queryset(self, queryset, page_size):
+    def paginate_queryset(self, queryset: QuerySet[SingleProductView], page_size: int) -> tuple:
         paginator = Paginator(queryset, page_size)
         try:
             return super().paginate_queryset(queryset, page_size)
@@ -35,8 +40,8 @@ class ProductsShopView(generic.ListView):
             self.kwargs["page"] = paginator.num_pages
             return super().paginate_queryset(queryset, page_size)
 
-    def get_queryset(self):
-        queryset = self.model.objects.all()
+    def get_queryset(self) -> QuerySet[SingleProductView]:
+        queryset = SingleProductView.objects.all()
 
         # order
         ordering = self.get_ordering()
@@ -65,8 +70,8 @@ class ProductsShopView(generic.ListView):
 
         return queryset.filter(product_id__in=product_ids)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs: dict[str, Any]) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
 
         context["paginate_by"] = self.paginate_by
         context["selected_price"] = self.request.GET.getlist("price_filter")
@@ -75,7 +80,7 @@ class ProductsShopView(generic.ListView):
 
         return context
 
-    def get_ordering(self):
+    def get_ordering(self) -> Literal["-created", "views"] | list[int] | None:
         ordering = self.request.GET.get("sort")
 
         if ordering == "latest":
@@ -89,7 +94,7 @@ class ProductsShopView(generic.ListView):
 
         return ordering
 
-    def _get_options_query(self, options_filter: list):
+    def _get_options_query(self, options_filter: list) -> Q:
         """Method for ProductOption."""
         option_q = Q()
 
@@ -99,7 +104,7 @@ class ProductsShopView(generic.ListView):
 
         return option_q
 
-    def _get_price_query(self):
+    def _get_price_query(self) -> Q:
         """Method for SingleProductView.
 
         Example:
@@ -127,13 +132,13 @@ class ProductsShopView(generic.ListView):
 
 
 class ProductsCategoryView(ProductsShopView):
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[SingleProductView]:
         queryset = super().get_queryset()
         slug = self.kwargs.get("slug")
         return queryset.by_category(slug=slug)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs: dict[str, Any]) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
         context["category"] = self.kwargs.get("slug")
 
         return context
@@ -144,12 +149,12 @@ class ProductsDetailView(generic.DetailView):
     template_name = "products/detail.html"
     context_object_name = "product"
 
-    def get_object(self):
+    def get_object(self) -> SingleProductView:
         public_id = self.kwargs.get(self.pk_url_kwarg)
         return self.model.objects.get(public_id=public_id)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs: dict[str, Any]) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
         context["related_products"] = self.model.objects.related_products(
             categories=Category.objects.all(), exclude_model=self.get_object()
         )[:5]
@@ -157,7 +162,7 @@ class ProductsDetailView(generic.DetailView):
 
         return context
 
-    def post(self, *args, **kwargs):
+    def post(self, *args: Any, **kwargs: dict[str, Any]) -> HttpResponseRedirect:
         if not (quantity := int(self.request.POST["quantity"])):
             messages.error(self.request, "Can't add less than one product.")
             return redirect("products:detail", pk=self.kwargs["pk"])
@@ -198,10 +203,10 @@ class ProductsReviewView(LoginRequiredMixin, generic.FormView):
     http_method_names = ["post"]
     form_class = ProductsReviewForm
 
-    def get_success_url(self):
+    def get_success_url(self) -> str:
         return reverse_lazy("products:detail", kwargs={"pk": self.kwargs["pk"]})
 
-    def form_valid(self, form):
+    def form_valid(self, form: ProductsReviewForm) -> HttpResponse:
         review = form.save(commit=False)
         review.product_id = SingleProductView.objects.get(
             public_id=self.kwargs["pk"]
@@ -212,7 +217,7 @@ class ProductsReviewView(LoginRequiredMixin, generic.FormView):
 
         return super(ProductsReviewView, self).form_valid(form)
 
-    def form_invalid(self, form):
+    def form_invalid(self, form: ProductsReviewForm) -> HttpResponse:
         if form.errors:
             for error in form.errors.values():
                 messages.error(self.request, error)

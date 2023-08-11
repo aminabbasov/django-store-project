@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.db.models import Case
 from django.db.models import Count
 from django.db.models import IntegerField
@@ -17,7 +19,7 @@ from app.models import TimestampedModel
 
 
 class CategoryQuerySet(models.QuerySet):
-    def manual_order(self, categories: list[str]):
+    def manual_order(self, categories: list[str]) -> "CategoryQuerySet":
         """Order of the categories will follow the order in the list."""
         return self.filter(name__in=categories).order_by(
             Case(
@@ -26,7 +28,7 @@ class CategoryQuerySet(models.QuerySet):
             )
         )
 
-    def annotate_product_count(self):
+    def annotate_product_count(self) -> "CategoryQuerySet":
         return self.annotate(product_amount=Count("product"))
 
 
@@ -60,25 +62,25 @@ class Category(TimestampedModel):
 
     objects = CategoryQuerySet.as_manager()
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("products:category", kwargs={"slug": self.slug})
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: dict[str, Any]) -> None:
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
+    def delete(self, *args: Any, **kwargs: dict[str, Any]) -> None:
         storage, path = self.image.storage, self.image.path
-        super(Category, self).delete(*args, **kwargs)
+        super().delete(*args, **kwargs)
         storage.delete(path)
 
     @property
-    def get_image_url(self):
+    def get_image_url(self) -> str:
         if self.image and hasattr(self.image, "url"):
             return self.image.url
         return ""
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
     class Meta:

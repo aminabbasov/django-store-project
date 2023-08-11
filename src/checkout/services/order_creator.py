@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from decimal import Decimal
 from functools import singledispatchmethod
-from typing import Callable
+from typing import Any, Callable
 
 from app.services import BaseService
 from checkout.models import Order
@@ -34,7 +34,7 @@ class OrderCreator(BaseService):
         return self.create()
 
     @singledispatchmethod
-    def _if_not_decimal(self, price):
+    def _if_not_decimal(self, price: Any) -> None:
         raise NotImplementedError("This method is not implemented for the given type")
 
     @_if_not_decimal.register(int)
@@ -68,7 +68,7 @@ class OrderCreator(BaseService):
             status=self.status,
         )
 
-    def validate_price_is_not_negative(self):
+    def validate_price_is_not_negative(self) -> None:
         if self.price < Decimal(0):
             raise ValueError("Price can't be less than zero")
 

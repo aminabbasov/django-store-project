@@ -28,11 +28,12 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ipython",
+  
     "black",
     "isort",
     "autoflake",
+  
     "django-debug-toolbar",
-    # "dotenv-linter",
 
     "faker",
     "mixer",
@@ -47,8 +48,6 @@ dev = [
     # "pytest-mock",
     # "pytest-repeat",
     # "pytest-httpx",
-
-    # "mypy",
 
     "flake8",
     "flake8-absolute-import",
@@ -88,7 +87,7 @@ lines_after_imports=2
 multi_line_output = 3
 use_parentheses = true
 extra_standard_library = ["pytest"]
-known_django = ["django"]  # "restframework"
+known_django = ["django"]
 sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
 
 
@@ -133,10 +132,9 @@ exclude = [
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "app.settings"
 addopts = "--reuse-db"
+python_files = "test*.py"
 
 filterwarnings = [
   "ignore::django.utils.deprecation.RemovedInDjango50Warning:django.conf",
   "ignore::django.core.paginator.UnorderedObjectListWarning",
 ]
-
-python_files = "test*.py"

@@ -8,10 +8,6 @@
 
 {% block content %}
 
-    <!-- Breadcrumb Start -->
-    {% include 'inc/_breadcrumbs.html' %}
-    <!-- Breadcrumb End -->
-
     <!-- Messages Start -->
     {% include 'inc/_messages.html' %}
     <!-- Messages End -->
@@ -25,9 +21,6 @@
                         <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab">Dashboard</a>
                         <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab">Orders</a>
                         <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab">Payment Method</a>
-                        {% comment %}! __________________________________________________________________________________________________ {% endcomment %}
-                        {% comment %}! <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab">Address</a> {% endcomment %}
-                        {% comment %}! __________________________________________________________________________________________________ {% endcomment %}
                         <a class="nav-item nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab">Account Details</a>
                         <a class="nav-link" href="{% url 'users:logout' %}" style="color: red;">Logout</a>
                     </div>
@@ -64,24 +57,6 @@
                                         {% empty %}
                                         <h5>You don't have any orders.</h5>
                                         {% endfor %}
-                                        {% comment %}
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Product Name</td>
-                                            <td>01 Jan 2020</td>
-                                            <td>$22</td>
-                                            <td>Approved</td>
-                                            <td><button>View</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Product Name</td>
-                                            <td>01 Jan 2020</td>
-                                            <td>$22</td>
-                                            <td>Approved</td>
-                                            <td><button>View</button></td>
-                                        </tr>
-                                        {% endcomment %}
                                     </tbody>
                                 </table>
                             </div>
@@ -92,26 +67,6 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
                             </p> 
                         </div>
-                        {% comment %}! __________________________________________________________________________________________________
-                        <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-                            <h4>Address</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5>Payment Address</h5>
-                                    <p>123 Payment Street, Los Angeles, CA</p>
-                                    <p>Mobile: 012-345-6789</p>
-                                    <button>Edit Address</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Shipping Address</h5>
-                                    <p>123 Shipping Street, Los Angeles, CA</p>
-                                    <p>Mobile: 012-345-6789</p>
-                                    <button>Edit Address</button>
-                                </div>
-                            </div>
-                        </div>
-                        {% endcomment %}
-                        {% comment %}! __________________________________________________________________________________________________ {% endcomment %}
                         <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
                             <h4>Account Details</h4>
                             <form method="POST" action="{% url 'users:edit-account-details' %}" id="AccountEditForm">

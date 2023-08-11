@@ -7,7 +7,7 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_price_amount(category=None, price_start=0, price_end=0):
+def get_price_amount(category: str | None = None, price_start: int | float = 0, price_end: int | float = 0) -> int:
     queryset = SingleProductView.objects.all()
 
     if category:
@@ -23,7 +23,7 @@ def get_price_amount(category=None, price_start=0, price_end=0):
 
 
 @register.simple_tag
-def get_color_amount(category=None, color=None):
+def get_color_amount(category: str | None = None, color: str | None = None) -> int:
     queryset = SingleProductView.objects.all()
 
     if category:
@@ -36,7 +36,7 @@ def get_color_amount(category=None, color=None):
 
 
 @register.simple_tag
-def get_size_amount(category=None, size=None):
+def get_size_amount(category: str | None = None, size: str | None = None) -> int:
     queryset = SingleProductView.objects.all()
 
     if category:

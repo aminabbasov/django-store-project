@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from functools import singledispatchmethod
-from typing import Callable, TypeAlias
+from typing import Any, Callable, TypeAlias
 
 from django.apps import apps
 from django.db.models import Q
@@ -16,9 +16,9 @@ username: TypeAlias = str
 @dataclass
 class UserUpdater(BaseService):
     user: User | username | QuerySet[User]
-    user_data: dict
+    user_data: dict[str, Any]
 
-    def act(self) -> User:
+    def act(self) -> User | None:
         return self.update(self.user, self.user_data)
 
     def _if_user_is_queryset(self) -> None:
@@ -34,11 +34,11 @@ class UserUpdater(BaseService):
         return [self._if_user_is_queryset]
 
     @singledispatchmethod
-    def update(self, user, user_data):
+    def update(self, user: Any, user_data: Any) -> None:
         raise NotImplementedError("Add dispatch methods")
 
     @update.register(User)
-    def _(self, user: User, user_data: dict) -> User:
+    def _(self, user: User, user_data: dict[str, Any]) -> User:
         for key, value in user_data.items():
             if hasattr(user, key):
                 setattr(user, key, value or getattr(user, key))
@@ -49,7 +49,7 @@ class UserUpdater(BaseService):
         return user
 
     @update.register(username)
-    def _(self, user: username, user_data: dict) -> User:
+    def _(self, user: username, user_data: dict[str, Any]) -> User:
         obj = apps.get_model("users.User").objects.filter(username=user)  # because .update() works only with QuerySet
         obj.update(**user_data)
 

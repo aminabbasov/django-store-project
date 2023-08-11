@@ -1,5 +1,3 @@
-from typing import Union  # noqa: I251
-
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager as _UserManager
 
@@ -10,8 +8,8 @@ class UserManager(_UserManager):
     def is_username_available(self, username: str) -> bool:
         return not self.filter(username=username).exists()
 
-    def get_by_username(self, username: str) -> Union["User", None]:  # noqa: SIM907. "User" | None gives TypeError
-        return self.get(username=username) or None
+    def get_by_username(self, username: str) -> "User":
+        return self.get(username=username)
 
 
 class User(AbstractUser):
@@ -22,8 +20,8 @@ class User(AbstractUser):
 
     objects = UserManager()
 
-    def __str__(self):
-        return self.email
+    def __str__(self) -> str:
+        return self.email or self.username
 
     class Meta(AbstractUser.Meta):
         constraints = [

@@ -1,4 +1,9 @@
+from typing import Any
+
 from django.contrib import messages
+from django.http import HttpRequest
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
@@ -14,16 +19,18 @@ class CheckoutBasketView(generic.TemplateView):
     template_name = "checkout/basket.html"
     http_method_names = ["get", "post", "delete", "head"]
 
-    def dispatch(self, *args, **kwargs):
-        method = self.request.POST.get("_method", "").lower()
+    def dispatch(
+        self, request: HttpRequest, *args: Any, **kwargs: dict[str, Any]
+    ) -> HttpResponse | HttpResponseRedirect:
+        method = request.POST.get("_method", "").lower()
 
         if method == "delete":
             return self.delete(*args, **kwargs)
 
-        return super(CheckoutBasketView, self).dispatch(*args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs: dict[str, Any]) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
         public_ids = list(map(int, self.request.basket.keys()))
         context["basket_and_products"] = zip(
             self.request.basket.values(), ProductView.objects.filter(variant_id__in=public_ids)
@@ -31,7 +38,7 @@ class CheckoutBasketView(generic.TemplateView):
 
         return context
 
-    def delete(self, *args, **kwargs):
+    def delete(self, *args: Any, **kwargs: dict[str, Any]) -> HttpResponseRedirect:
         variant_id = self.request.POST.get("delete_product")
         self.request.basket.remove(variant_id)
 
@@ -43,7 +50,7 @@ class CheckoutView(generic.FormView):
     success_url = reverse_lazy("users:account")
     form_class = CheckoutOrderCreateForm
 
-    def get_initial(self):
+    def get_initial(self) -> dict[str, str]:
         initial = super().get_initial()
         initial.update(
             {
@@ -56,7 +63,7 @@ class CheckoutView(generic.FormView):
         )
         return initial
 
-    def form_valid(self, form):
+    def form_valid(self, form: CheckoutOrderCreateForm) -> HttpResponse:
         if self.request.user.is_authenticated:
             cleaned_data = form.cleaned_data
             self._save_account_data(cleaned_data, self.request.user.username)
@@ -83,7 +90,7 @@ class CheckoutView(generic.FormView):
 
         return super().form_valid(form)
 
-    def form_invalid(self, form):
+    def form_invalid(self, form: CheckoutOrderCreateForm) -> HttpResponse:
         if form.errors:
             for field, error in form.errors.items():
                 messages.error(self.request, f"{field} - {error}")
@@ -92,8 +99,8 @@ class CheckoutView(generic.FormView):
 
         return super().form_invalid(form)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs: dict[str, Any]) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
         public_ids = list(map(int, self.request.basket.keys()))
         context["basket_and_products"] = zip(
             self.request.basket.values(), ProductView.objects.filter(variant_id__in=public_ids)
@@ -101,7 +108,7 @@ class CheckoutView(generic.FormView):
 
         return context
 
-    def _save_account_data(self, form_data, username):
+    def _save_account_data(self, form_data: dict[str, str], username: str) -> None:
         user = User.objects.get_by_username(username)
         user.first_name = user.first_name or form_data["first_name"]
         user.last_name = user.last_name or form_data["last_name"]

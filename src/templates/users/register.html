@@ -8,10 +8,6 @@
 
 {% block content %}
 
-    <!-- Breadcrumb Start -->
-    {% include 'inc/_breadcrumbs.html' %}
-    <!-- Breadcrumb End -->
-    
     <!-- Messages Start -->
     {% include 'inc/_messages.html' %}
     <!-- Messages End -->
@@ -44,12 +40,6 @@
                                 {{ form.email }}
                                 {{ form.email.errors }}
                             </div>
-                            {% comment %}
-                            <div class="col-md-6 form-group">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="Mobile No">
-                            </div>
-                            {% endcomment %}
                             <div class="col-md-6 form-group">
                                 <label>Password</label>
                                 {{ form.password1 }}

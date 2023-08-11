@@ -9,7 +9,7 @@ register = template.Library()
 
 
 @register.simple_tag
-def query_url(parameters, **kwargs):
+def query_url(parameters: str, **kwargs: dict[str, any]) -> str:
     """
     Returns a URL query string with the given parameters and key-value pairs.
     If parameters is not None, any key-value pairs whose keys are not in kwargs will be filtered out.

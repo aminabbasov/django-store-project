@@ -3,7 +3,7 @@ from decimal import Decimal
 from enum import Enum
 from functools import singledispatchmethod
 from itertools import product as all_combinations
-from typing import Annotated, Callable, TypeAlias
+from typing import Annotated, Any, Callable, Literal, TypeAlias
 
 from django.db import transaction
 
@@ -52,9 +52,11 @@ class ProductCreateComposer(BaseService):
 
     def __post_init__(self) -> None:
         if not isinstance(self.price, Decimal):
-            self.price = self._if_not_decimal(self.price)
+            self.price: Decimal = self._if_not_decimal(self.price)
 
-    def act(self) -> dict[ServiceResult, object]:
+    def act(
+        self,
+    ) -> dict[Literal["product", "options", "variants"], object | list[object]]:
         if self.options is None:
             return self.create_if_no_options()
 
@@ -69,7 +71,7 @@ class ProductCreateComposer(BaseService):
         }
 
     @singledispatchmethod
-    def _if_not_decimal(self, price):
+    def _if_not_decimal(self, price: Any) -> None:
         raise NotImplementedError("This method is not implemented for the given type")
 
     @_if_not_decimal.register(int)
@@ -78,8 +80,8 @@ class ProductCreateComposer(BaseService):
 
     @_if_not_decimal.register(float)
     def _(self, price: float) -> Decimal:
-        price = str(price)  # because passing float directly to Decimal constructor introduces a rounding error
-        return Decimal(price)
+        str_price = str(price)  # because passing float directly to Decimal constructor introduces a rounding error
+        return Decimal(str_price)
 
     @_if_not_decimal.register(str)
     def _(self, price: str) -> Decimal:
@@ -123,7 +125,7 @@ class ProductCreateComposer(BaseService):
         return product_variants
 
     @transaction.atomic
-    def create_if_no_options(self) -> dict[ServiceResult, object]:
+    def create_if_no_options(self) -> dict[Literal["product", "options", "variants"], object | list[object]]:
         default_option = ProductOptionCreator(
             product=self.product,
             options={Default.KEY.value: [Default.VALUE.value]},
@@ -144,15 +146,15 @@ class ProductCreateComposer(BaseService):
             ServiceResult.VARIANTS.value: default_variant,
         }
 
-    def validate_price_is_not_negative(self):
+    def validate_price_is_not_negative(self) -> None:
         if self.price < Decimal(0):
             raise ValueError("Price can't be less than zero")
 
-    def validate_quantity_is_not_negative(self):
+    def validate_quantity_is_not_negative(self) -> None:
         if self.quantity < 0:
             raise ValueError("Quantity can't be less than zero")
 
-    def validate_discount_is_between_0_and_100(self):
+    def validate_discount_is_between_0_and_100(self) -> None:
         if self.discount < 0:
             raise ValueError("Discount can't be less than zero")
         elif self.discount > 100:

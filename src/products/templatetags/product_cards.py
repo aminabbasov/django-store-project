@@ -1,12 +1,14 @@
 from django import template
 from django.template import TemplateSyntaxError
 
+from products.models import Product
+
 
 register = template.Library()
 
 
 @register.inclusion_tag("inc/_product_card.html")
-def product_card(product, template):
+def product_card(product: Product, template: str) -> dict[str, Product | str]:
     match template:
         case "index":
             context = {

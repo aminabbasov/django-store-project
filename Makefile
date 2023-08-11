@@ -8,7 +8,7 @@ deps:
 	pip-compile --output-file requirements.txt --resolver=backtracking pyproject.toml
 
 install-dev-deps: dev-deps
-	pip-sync requirements.txt dev-requirements.txt
+	pip-sync dev-requirements.txt
 
 dev-deps: deps
 	pip-compile --extra=dev --output-file dev-requirements.txt --resolver=backtracking pyproject.toml
@@ -22,7 +22,6 @@ worker:
 lint:
 	cd src && ./manage.py makemigrations --check --no-input --dry-run
 	flake8 src
-	# cd src && mypy
 
 format:
 	cd src && autoflake --in-place --remove-all-unused-imports --recursive .

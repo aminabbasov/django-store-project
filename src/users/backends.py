@@ -1,6 +1,11 @@
+from typing import Any
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
+from django.http import HttpRequest
+
+from users.models import User
 
 
 class UsernameOrEmailModelBackend(ModelBackend):
@@ -9,14 +14,16 @@ class UsernameOrEmailModelBackend(ModelBackend):
     with password
     """
 
-    def authenticate(self, request, username=None, password=None, **kwargs):
+    def authenticate(
+        self, request: HttpRequest, username: str | None = None, password: str | None = None, **kwargs: dict[str, Any]
+    ) -> User | None:
         user_model = get_user_model()
 
         if username is None:
             username = kwargs.get(user_model.USERNAME_FIELD)
 
         if username is None or password is None:
-            return
+            return None
 
         try:
             user = user_model.objects.get(
