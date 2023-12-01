@@ -18,7 +18,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+lib/*
 lib64/
 parts/
 sdist/
@@ -115,7 +115,7 @@ venv
 .env
 db.sqlite
 db.sqlite3
-
+!src/static/lib/*
 src/static/images/product/*
 src/static/images/category/*
 !.gitkeep

@@ -12,9 +12,6 @@ DJANGO_APPS = [
 ]
 
 APPS = [
-    # "app",
-    # "a12n",
-    # "users",
     "app",
     "users",
     "products",
@@ -22,19 +19,11 @@ APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    # health_check
     "health_check",
     "health_check.db",
     "health_check.contrib.migrations",
     "health_check.contrib.redis",
     "health_check.contrib.celery_ping",
-    # "drf_spectacular",
-    # "drf_spectacular_sidecar",
-    # "rest_framework",
-    # "rest_framework.authtoken",
-    # "rest_framework_jwt.blacklist",
-    # "django_filters",
-    # "axes",
 ]
 
 if settings.DEBUG:

@@ -12,7 +12,7 @@ bcrypt==4.0.1
     # via src (pyproject.toml)
 billiard==4.2.0
     # via celery
-celery==5.3.6
+celery==5.3.4
     # via src (pyproject.toml)
 click==8.1.7
     # via
@@ -34,19 +34,19 @@ django==4.2
     #   src (pyproject.toml)
 django-behaviors==0.5.1
     # via src (pyproject.toml)
-django-environ==0.11.2
+django-environ==0.10.0
     # via src (pyproject.toml)
 django-health-check==3.17.0
     # via src (pyproject.toml)
 django-split-settings==1.2.0
     # via src (pyproject.toml)
-kombu==5.3.4
+kombu==5.3.3
     # via celery
-pillow==10.1.0
+pillow==10.0.0
     # via src (pyproject.toml)
-prompt-toolkit==3.0.41
+prompt-toolkit==3.0.39
     # via click-repl
-psycopg2-binary==2.9.9
+psycopg2-binary==2.9.7
     # via src (pyproject.toml)
 python-dateutil==2.8.2
     # via celery
@@ -65,5 +65,5 @@ vine==5.1.0
     #   amqp
     #   celery
     #   kombu
-wcwidth==0.2.12
+wcwidth==0.2.6
     # via prompt-toolkit

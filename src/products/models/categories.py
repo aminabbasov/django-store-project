@@ -12,12 +12,6 @@ from app.models import models
 from app.models import TimestampedModel
 
 
-#! class CategoryManager(models.Manager):
-#!     def create_category(self, category, slug):
-#!         cat = self.create(category=category, slug=category)
-#!         return cat
-
-
 class CategoryQuerySet(models.QuerySet):
     def manual_order(self, categories: list[str]) -> "CategoryQuerySet":
         """Order of the categories will follow the order in the list."""

@@ -9,7 +9,8 @@ class BaseService(metaclass=ABCMeta):
       * Input variables should be done at the __init__ phase
       * Service should implement a single entrypoint without arguments
 
-    This is ok:
+    This is ok::
+
       @dataclass
       class UserCreator(BaseService):
         first_name: str
@@ -20,7 +21,8 @@ class BaseService(metaclass=ABCMeta):
 
         # user = UserCreator(first_name="Ivan", last_name="Petrov")()
 
-    This is not ok:
+    This is not ok::
+
       class UserCreator:
         def __call__(self, first_name: str, last_name: Optional[str]) -> User:
           return User.objects.create(first_name=self.first_name, last_name=self.last_name)

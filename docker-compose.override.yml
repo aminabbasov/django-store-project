@@ -6,44 +6,49 @@
 #  $ docker compose up
 
 version: '3.8'
-name: "django-shop-dev"
+name: "django-shop"
 
 services:
-  django:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: dev
-    container_name: django-dev
+  # server:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     target: dev
+  #   container_name: server-shop
+  #   environment:
+  #     REDIS_URL: redis://redis
+  #     DATABASE_URL: postgres://postgres:secret@postgres:5432/postgres
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   ports:
+  #     - 8000:8000  # http://localhost:8000/
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: ./src
+  #         target: /src
+  #       - action: rebuild
+  #         path: dev-requirements.txt
+  #   deploy:
+  #     restart_policy:
+  #       condition: on-failure
+  #       delay: 5s
+  #       window: 5s
+
+  postgres:
     environment:
-      REDIS_URL: redis://redis
-      DATABASE_URL: postgres://postgres:secret@postgres:5432/postgres
-      # FIXME: This is not acceptable. I must fix this 
-    depends_on:
-      - postgres
-      - redis
-    ports:
-      - 8000:8000  # http://localhost:8000/
-    command: python manage.py runserver 0.0.0.0:8000
-    develop:
-      watch:
-        - action: sync
-          path: ./src
-          target: /src
-        - action: rebuild
-          path: dev-requirements.txt
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        window: 5s
+      POSTGRES_HOST_AUTH_METHOD: trust
 
   worker:
     build:
       context: .
       dockerfile: Dockerfile
       target: worker
-    container_name: worker-dev
+    container_name: worker-shop
+    environment:
+      REDIS_URL: redis://redis
     depends_on:
       - postgres
       - redis
@@ -51,18 +56,18 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:7.6
-    container_name: pg-admin
+    container_name: pgadmin-shop
     ports:
       - '80:80'  # http://localhost:80/
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
-      - pgadmin-dev:/var/lib/pgadmin
+      - pgadmin-volume-shop:/var/lib/pgadmin
 
   flower:
     image: mher/flower:2.0
-    container_name: flower
+    container_name: flower-shop
     ports:
       - '5555:5555'  # http://localhost:5555/
     environment:
@@ -70,8 +75,8 @@ services:
       CELERY_RESULT_BACKEND: redis://redis
     depends_on:
       - redis
-      - django
+      # - django
 
 volumes:
-  pgadmin-dev:
-    name: "pgadmin-dev"
+  pgadmin-volume-shop:
+    name: "pgadmin-volume-shop"

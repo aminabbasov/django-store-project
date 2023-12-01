@@ -8,7 +8,7 @@ deps:
 	pip-compile --output-file requirements.txt --resolver=backtracking pyproject.toml
 
 install-dev-deps: dev-deps
-	pip-sync dev-requirements.txt
+	pip-sync requirements.txt dev-requirements.txt
 
 dev-deps: deps
 	pip-compile --extra=dev --output-file dev-requirements.txt --resolver=backtracking pyproject.toml
@@ -17,7 +17,7 @@ server:
 	cd src && ./manage.py migrate && ./manage.py runserver
 
 worker:
-	docker compose exec django celery --app app --workdir /src worker --events -l info
+	docker compose exec server celery --app app --workdir /src worker --events -l info
 
 lint:
 	cd src && ./manage.py makemigrations --check --no-input --dry-run

@@ -1,4 +1,6 @@
 """Read .env file"""
+import os.path
+
 import environ
 
 
@@ -7,7 +9,8 @@ env = environ.Env(
     CI=(bool, False),
 )
 
-environ.Env.read_env("app/.env")  # reading .env file
+if os.path.exists("app/.env"):
+    environ.Env.read_env("app/.env")  # reading .env file
 
 __all__ = [
     env,

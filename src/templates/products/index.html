@@ -43,7 +43,7 @@
                     <div class="product-offer mb-30" style="height: 200px;">
                         <img class="img-fluid" src="{{ product.images.first.get_absolute_url }}" alt="">
                         <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Save {{ product.discount }}%</h6>
+                            <h6 class="text-white text-uppercase">Save {{ product.max_discount }}%</h6>
                             <h3 class="text-white mb-3">Special Offer</h3>
                             <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
                         </div>
@@ -118,7 +118,6 @@
             {% for product in featured_products %}
                 {% product_card product 'index' %}
             {% endfor %}
-            </div>
         </div>
     </div>
     <!-- Products End -->
@@ -132,7 +131,7 @@
                     <div class="product-offer mb-30" style="height: 300px;">
                         <img class="img-fluid" src="{{ product.images.first.get_absolute_url }}" alt="">
                         <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Save {{ product.discount }}%</h6>
+                            <h6 class="text-white text-uppercase">Save {{ product.max_discount }}%</h6>
                             <h3 class="text-white mb-3">Special Offer</h3>
                             <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
                         </div>

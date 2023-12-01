@@ -11,23 +11,22 @@ services:
 
   postgres:
     image: postgres:13-alpine
-    container_name: postgres-dev
+    container_name: postgres-shop
     environment:
-      POSTGRES_HOST_AUTH_METHOD: trust
       PGDATESTYLE: ISO  # ISO, SQL, Postgres, German
     ports:
      - 5432:5432 
     command: --autovacuum=off --fsync=off --synchronous_commit=off --full_page_writes=off --work_mem=12MB --max-connections=10 --max_wal_senders=0
     volumes:
-      - dev-db:/var/lib/postgresql/data
+      - db-shop:/var/lib/postgresql/data
     shm_size: '2gb'
 
   redis:
     image: redis:6-alpine
-    container_name: redis-dev
+    container_name: redis-shop
     ports:
       - 6379:6379
 
 volumes:
-  dev-db:
-    name: "dev-db"
+  db-shop:
+    name: "db-shop"
