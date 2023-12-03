@@ -18,7 +18,7 @@ pip install --upgrade pip pip-tools
 
 Install dependencies:
 ```bash
-make install-dev-deps
+pip-sync dev-requirements.txt
 ```
 
 Configure postgres and redis. Use docker-compose:
@@ -34,6 +34,12 @@ cd src && cp app/.env.dev app/.env  # default environment variables
 ./manage.py migrate
 ./manage.py createsuperuser
 ./manage.py runserver
+```
+
+If you want, populate the database with test records:
+
+```bash
+./manage.py loaddata demodb.json
 ```
 
 ## Usage

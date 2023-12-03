@@ -1,0 +1,2080 @@
+[
+  {
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+      "created": "2023-12-02T18:15:49.631Z",
+      "modified": null,
+      "name": "man",
+      "description": "Men's Dresses",
+      "image": "examples/category/image_2023-01-23_14-44-36_5.png",
+      "slug": "man"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "created": "2023-12-02T18:16:32.479Z",
+      "modified": null,
+      "name": "woman",
+      "description": "Women's Dresses",
+      "image": "examples/category/image_2023-01-23_14-44-35_4.png",
+      "slug": "woman"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "created": "2023-12-02T18:16:58.251Z",
+      "modified": "2023-12-02T18:21:35.742Z",
+      "name": "baby",
+      "description": "Baby's Dresses",
+      "image": "examples/category/image_2023-01-23_14-44-41_8.png",
+      "slug": "baby"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "created": "2023-12-02T18:17:56.437Z",
+      "modified": null,
+      "name": "shirts",
+      "description": "Shirts",
+      "image": "examples/category/image_2023-01-23_14-44-36_8.png",
+      "slug": "shirts"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "created": "2023-12-02T18:18:22.513Z",
+      "modified": null,
+      "name": "jeans",
+      "description": "Jeans",
+      "image": "examples/category/image_2023-01-23_14-44-41_7.png",
+      "slug": "jeans"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+      "created": "2023-12-02T18:18:42.601Z",
+      "modified": "2023-12-02T18:18:56.172Z",
+      "name": "swimwear",
+      "description": "Swimwear",
+      "image": "examples/category/image_2023-01-23_14-44-37_6.png",
+      "slug": "swimwear"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+      "created": "2023-12-02T18:19:15.135Z",
+      "modified": null,
+      "name": "sleepwear",
+      "description": "Sleepwear",
+      "image": "examples/category/image_2023-01-23_14-44-35_5.png",
+      "slug": "sleepwear"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "created": "2023-12-02T18:19:37.095Z",
+      "modified": "2023-12-02T18:19:55.547Z",
+      "name": "sportswear",
+      "description": "Sportswear",
+      "image": "examples/category/image_2023-01-23_14-44-38_5.png",
+      "slug": "sportswear"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+      "created": "2023-12-02T18:20:12.190Z",
+      "modified": null,
+      "name": "jumpsuits",
+      "description": "Jumpsuits",
+      "image": "examples/category/image_2023-01-23_14-44-37_8_dzaokII.png",
+      "slug": "jumpsuits"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 10,
+    "fields": {
+      "created": "2023-12-02T18:20:34.191Z",
+      "modified": null,
+      "name": "blazers",
+      "description": "Blazers",
+      "image": "examples/category/image_2023-01-23_14-44-38_2.png",
+      "slug": "blazers"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 11,
+    "fields": {
+      "created": "2023-12-02T18:20:56.136Z",
+      "modified": null,
+      "name": "jackets",
+      "description": "Jackets",
+      "image": "examples/category/image_2023-01-23_14-44-41_6.png",
+      "slug": "jackets"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 12,
+    "fields": {
+      "created": "2023-12-02T18:21:20.359Z",
+      "modified": null,
+      "name": "shoes",
+      "description": "Shoes",
+      "image": "examples/category/image_2023-01-23_14-44-41_2.png",
+      "slug": "shoes"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "created": "2023-12-02T18:31:20.542Z",
+      "modified": "2023-12-02T18:57:10.973Z",
+      "name": "Product 1",
+      "short_description": "Short description for Product 1",
+      "description": "Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Id cursus metus aliquam eleifend mi in nulla. Cras sed felis eget velit aliquet. Quis blandit turpis cursus in hac habitasse platea dictumst.",
+      "information": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A scelerisque purus semper eget duis at tellus at urna. Scelerisque eleifend donec pretium vulputate sapien nec. Pharetra diam sit amet nisl suscipit adipiscing. Dui nunc mattis enim ut. Risus in hendrerit gravida rutrum quisque. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Integer enim neque volutpat ac tincidunt vitae semper. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Ornare aenean euismod elementum nisi quis eleifend. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. Sit amet consectetur adipiscing elit. Purus in mollis nunc sed id semper. Velit sed ullamcorper morbi tincidunt ornare massa. Risus pretium quam vulputate dignissim suspendisse in est ante in.",
+      "views": 0,
+      "available": true,
+      "public_id": "c562f3b3-51fd-4014-bd32-ce93d86d3b31",
+      "category": [
+        1,
+        4
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "created": "2023-12-02T18:44:14.238Z",
+      "modified": null,
+      "name": "Microfiber Jacket",
+      "short_description": "Short description for Microfiber Jacket",
+      "description": "Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Id cursus metus aliquam eleifend mi in nulla. Cras sed felis eget velit aliquet. Quis blandit turpis cursus in hac habitasse platea dictumst.",
+      "information": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A scelerisque purus semper eget duis at tellus at urna. Scelerisque eleifend donec pretium vulputate sapien nec. Pharetra diam sit amet nisl suscipit adipiscing. Dui nunc mattis enim ut. Risus in hendrerit gravida rutrum quisque. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Integer enim neque volutpat ac tincidunt vitae semper. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Ornare aenean euismod elementum nisi quis eleifend. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. Sit amet consectetur adipiscing elit. Purus in mollis nunc sed id semper. Velit sed ullamcorper morbi tincidunt ornare massa. Risus pretium quam vulputate dignissim suspendisse in est ante in.",
+      "views": 0,
+      "available": true,
+      "public_id": "2a0dfc3e-1679-4d01-a9a0-46e4487b5716",
+      "category": [
+        2,
+        11
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "created": "2023-12-02T18:52:48.671Z",
+      "modified": "2023-12-02T18:56:50.102Z",
+      "name": "Shoes for girls",
+      "short_description": "Short description for Shoes for girl",
+      "description": "Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Id cursus metus aliquam eleifend mi in nulla. Cras sed felis eget velit aliquet. Quis blandit turpis cursus in hac habitasse platea dictumst.",
+      "information": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A scelerisque purus semper eget duis at tellus at urna. Scelerisque eleifend donec pretium vulputate sapien nec. Pharetra diam sit amet nisl suscipit adipiscing. Dui nunc mattis enim ut. Risus in hendrerit gravida rutrum quisque. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Integer enim neque volutpat ac tincidunt vitae semper. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Ornare aenean euismod elementum nisi quis eleifend. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. Sit amet consectetur adipiscing elit. Purus in mollis nunc sed id semper. Velit sed ullamcorper morbi tincidunt ornare massa. Risus pretium quam vulputate dignissim suspendisse in est ante in.",
+      "views": 0,
+      "available": true,
+      "public_id": "c1b5d897-8ba9-4558-8fe3-227326a9ebc8",
+      "category": [
+        3,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "created": "2023-12-02T18:55:01.951Z",
+      "modified": "2023-12-02T18:57:03.278Z",
+      "name": "Product 2",
+      "short_description": "Short description for Product 2",
+      "description": "Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Id cursus metus aliquam eleifend mi in nulla. Cras sed felis eget velit aliquet. Quis blandit turpis cursus in hac habitasse platea dictumst.",
+      "information": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A scelerisque purus semper eget duis at tellus at urna. Scelerisque eleifend donec pretium vulputate sapien nec. Pharetra diam sit amet nisl suscipit adipiscing. Dui nunc mattis enim ut. Risus in hendrerit gravida rutrum quisque. Interdum varius sit amet mattis vulputate enim nulla aliquet porttitor. Integer enim neque volutpat ac tincidunt vitae semper. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Ornare aenean euismod elementum nisi quis eleifend. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. Sit amet consectetur adipiscing elit. Purus in mollis nunc sed id semper. Velit sed ullamcorper morbi tincidunt ornare massa. Risus pretium quam vulputate dignissim suspendisse in est ante in.",
+      "views": 0,
+      "available": true,
+      "public_id": "d1c9b6ff-c476-4f0f-a6b0-66a71e32a97e",
+      "category": [
+        1,
+        4
+      ]
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 5,
+    "fields": {
+      "created": "2023-12-02T18:37:39.529Z",
+      "modified": null,
+      "product": 2,
+      "name": "color",
+      "values": "[\"black\", \"white\", \"red\", \"blue\", \"green\"]"
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 6,
+    "fields": {
+      "created": "2023-12-02T18:37:39.535Z",
+      "modified": null,
+      "product": 2,
+      "name": "size",
+      "values": "[\"XS\", \"S\", \"M\", \"L\", \"XL\"]"
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 7,
+    "fields": {
+      "created": "2023-12-02T18:44:51.606Z",
+      "modified": null,
+      "product": 3,
+      "name": "color",
+      "values": "[\"black\", \"white\", \"red\", \"blue\", \"green\"]"
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 8,
+    "fields": {
+      "created": "2023-12-02T18:44:51.612Z",
+      "modified": null,
+      "product": 3,
+      "name": "size",
+      "values": "[\"XS\", \"S\", \"M\", \"L\", \"XL\"]"
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 9,
+    "fields": {
+      "created": "2023-12-02T18:53:34.795Z",
+      "modified": null,
+      "product": 4,
+      "name": "color",
+      "values": "[\"black\", \"white\", \"red\", \"blue\", \"green\"]"
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 10,
+    "fields": {
+      "created": "2023-12-02T18:53:34.801Z",
+      "modified": null,
+      "product": 4,
+      "name": "size",
+      "values": "[\"XS\", \"S\", \"M\", \"L\", \"XL\"]"
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 11,
+    "fields": {
+      "created": "2023-12-02T18:55:48.036Z",
+      "modified": null,
+      "product": 5,
+      "name": "color",
+      "values": "[\"black\", \"white\", \"red\", \"blue\", \"green\"]"
+    }
+  },
+  {
+    "model": "products.productoption",
+    "pk": 12,
+    "fields": {
+      "created": "2023-12-02T18:55:48.039Z",
+      "modified": null,
+      "product": 5,
+      "name": "size",
+      "values": "[\"XS\", \"S\", \"M\", \"L\", \"XL\"]"
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 1,
+    "fields": {
+      "created": "2023-12-02T18:37:39.539Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XS",
+        "color": "black"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 2,
+    "fields": {
+      "created": "2023-12-02T18:37:39.575Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "S",
+        "color": "black"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 3,
+    "fields": {
+      "created": "2023-12-02T18:37:39.593Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "M",
+        "color": "black"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 4,
+    "fields": {
+      "created": "2023-12-02T18:37:39.617Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "L",
+        "color": "black"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 5,
+    "fields": {
+      "created": "2023-12-02T18:37:39.640Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XL",
+        "color": "black"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 6,
+    "fields": {
+      "created": "2023-12-02T18:37:39.662Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XS",
+        "color": "white"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 7,
+    "fields": {
+      "created": "2023-12-02T18:37:39.678Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "S",
+        "color": "white"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 8,
+    "fields": {
+      "created": "2023-12-02T18:37:39.694Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "M",
+        "color": "white"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 9,
+    "fields": {
+      "created": "2023-12-02T18:37:39.709Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "L",
+        "color": "white"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 10,
+    "fields": {
+      "created": "2023-12-02T18:37:39.726Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XL",
+        "color": "white"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 11,
+    "fields": {
+      "created": "2023-12-02T18:37:39.742Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XS",
+        "color": "red"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 12,
+    "fields": {
+      "created": "2023-12-02T18:37:39.757Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "S",
+        "color": "red"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 13,
+    "fields": {
+      "created": "2023-12-02T18:37:39.773Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "M",
+        "color": "red"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 14,
+    "fields": {
+      "created": "2023-12-02T18:37:39.790Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "L",
+        "color": "red"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 15,
+    "fields": {
+      "created": "2023-12-02T18:37:39.802Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XL",
+        "color": "red"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 16,
+    "fields": {
+      "created": "2023-12-02T18:37:39.814Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XS",
+        "color": "blue"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 17,
+    "fields": {
+      "created": "2023-12-02T18:37:39.828Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "S",
+        "color": "blue"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 18,
+    "fields": {
+      "created": "2023-12-02T18:37:39.840Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "M",
+        "color": "blue"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 19,
+    "fields": {
+      "created": "2023-12-02T18:37:39.854Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "L",
+        "color": "blue"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 20,
+    "fields": {
+      "created": "2023-12-02T18:37:39.867Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XL",
+        "color": "blue"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 21,
+    "fields": {
+      "created": "2023-12-02T18:37:39.880Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XS",
+        "color": "green"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 22,
+    "fields": {
+      "created": "2023-12-02T18:37:39.896Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "S",
+        "color": "green"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 23,
+    "fields": {
+      "created": "2023-12-02T18:37:39.912Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "M",
+        "color": "green"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 24,
+    "fields": {
+      "created": "2023-12-02T18:37:39.925Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "L",
+        "color": "green"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 25,
+    "fields": {
+      "created": "2023-12-02T18:37:39.939Z",
+      "modified": null,
+      "product": 2,
+      "option": {
+        "size": "XL",
+        "color": "green"
+      },
+      "price": "95.50",
+      "discount": 0,
+      "quantity": 100,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 26,
+    "fields": {
+      "created": "2023-12-02T18:44:51.616Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XS",
+        "color": "black"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 27,
+    "fields": {
+      "created": "2023-12-02T18:44:51.649Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "S",
+        "color": "black"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 28,
+    "fields": {
+      "created": "2023-12-02T18:44:51.668Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "M",
+        "color": "black"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 29,
+    "fields": {
+      "created": "2023-12-02T18:44:51.686Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "L",
+        "color": "black"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 30,
+    "fields": {
+      "created": "2023-12-02T18:44:51.707Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XL",
+        "color": "black"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 31,
+    "fields": {
+      "created": "2023-12-02T18:44:51.731Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XS",
+        "color": "white"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 32,
+    "fields": {
+      "created": "2023-12-02T18:44:51.753Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "S",
+        "color": "white"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 33,
+    "fields": {
+      "created": "2023-12-02T18:44:51.772Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "M",
+        "color": "white"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 34,
+    "fields": {
+      "created": "2023-12-02T18:44:51.793Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "L",
+        "color": "white"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 35,
+    "fields": {
+      "created": "2023-12-02T18:44:51.811Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XL",
+        "color": "white"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 36,
+    "fields": {
+      "created": "2023-12-02T18:44:51.834Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XS",
+        "color": "red"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 37,
+    "fields": {
+      "created": "2023-12-02T18:44:51.858Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "S",
+        "color": "red"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 38,
+    "fields": {
+      "created": "2023-12-02T18:44:51.877Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "M",
+        "color": "red"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 39,
+    "fields": {
+      "created": "2023-12-02T18:44:51.896Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "L",
+        "color": "red"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 40,
+    "fields": {
+      "created": "2023-12-02T18:44:51.911Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XL",
+        "color": "red"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 41,
+    "fields": {
+      "created": "2023-12-02T18:44:51.925Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XS",
+        "color": "blue"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 42,
+    "fields": {
+      "created": "2023-12-02T18:44:51.941Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "S",
+        "color": "blue"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 43,
+    "fields": {
+      "created": "2023-12-02T18:44:51.965Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "M",
+        "color": "blue"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 44,
+    "fields": {
+      "created": "2023-12-02T18:44:51.985Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "L",
+        "color": "blue"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 45,
+    "fields": {
+      "created": "2023-12-02T18:44:52.009Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XL",
+        "color": "blue"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 46,
+    "fields": {
+      "created": "2023-12-02T18:44:52.033Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XS",
+        "color": "green"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 47,
+    "fields": {
+      "created": "2023-12-02T18:44:52.050Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "S",
+        "color": "green"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 48,
+    "fields": {
+      "created": "2023-12-02T18:44:52.073Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "M",
+        "color": "green"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 49,
+    "fields": {
+      "created": "2023-12-02T18:44:52.096Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "L",
+        "color": "green"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 50,
+    "fields": {
+      "created": "2023-12-02T18:44:52.118Z",
+      "modified": null,
+      "product": 3,
+      "option": {
+        "size": "XL",
+        "color": "green"
+      },
+      "price": "275.00",
+      "discount": 10,
+      "quantity": 57,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 51,
+    "fields": {
+      "created": "2023-12-02T18:53:34.805Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XS",
+        "color": "black"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 52,
+    "fields": {
+      "created": "2023-12-02T18:53:34.838Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "S",
+        "color": "black"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 53,
+    "fields": {
+      "created": "2023-12-02T18:53:34.858Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "M",
+        "color": "black"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 54,
+    "fields": {
+      "created": "2023-12-02T18:53:34.876Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "L",
+        "color": "black"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 55,
+    "fields": {
+      "created": "2023-12-02T18:53:34.893Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XL",
+        "color": "black"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 56,
+    "fields": {
+      "created": "2023-12-02T18:53:34.912Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XS",
+        "color": "white"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 57,
+    "fields": {
+      "created": "2023-12-02T18:53:34.931Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "S",
+        "color": "white"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 58,
+    "fields": {
+      "created": "2023-12-02T18:53:34.946Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "M",
+        "color": "white"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 59,
+    "fields": {
+      "created": "2023-12-02T18:53:34.961Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "L",
+        "color": "white"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 60,
+    "fields": {
+      "created": "2023-12-02T18:53:34.976Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XL",
+        "color": "white"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 61,
+    "fields": {
+      "created": "2023-12-02T18:53:34.991Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XS",
+        "color": "red"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 62,
+    "fields": {
+      "created": "2023-12-02T18:53:35.005Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "S",
+        "color": "red"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 63,
+    "fields": {
+      "created": "2023-12-02T18:53:35.020Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "M",
+        "color": "red"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 64,
+    "fields": {
+      "created": "2023-12-02T18:53:35.036Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "L",
+        "color": "red"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 65,
+    "fields": {
+      "created": "2023-12-02T18:53:35.050Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XL",
+        "color": "red"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 66,
+    "fields": {
+      "created": "2023-12-02T18:53:35.064Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XS",
+        "color": "blue"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 67,
+    "fields": {
+      "created": "2023-12-02T18:53:35.078Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "S",
+        "color": "blue"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 68,
+    "fields": {
+      "created": "2023-12-02T18:53:35.093Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "M",
+        "color": "blue"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 69,
+    "fields": {
+      "created": "2023-12-02T18:53:35.110Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "L",
+        "color": "blue"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 70,
+    "fields": {
+      "created": "2023-12-02T18:53:35.126Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XL",
+        "color": "blue"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 71,
+    "fields": {
+      "created": "2023-12-02T18:53:35.146Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XS",
+        "color": "green"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 72,
+    "fields": {
+      "created": "2023-12-02T18:53:35.161Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "S",
+        "color": "green"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 73,
+    "fields": {
+      "created": "2023-12-02T18:53:35.175Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "M",
+        "color": "green"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 74,
+    "fields": {
+      "created": "2023-12-02T18:53:35.190Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "L",
+        "color": "green"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 75,
+    "fields": {
+      "created": "2023-12-02T18:53:35.205Z",
+      "modified": null,
+      "product": 4,
+      "option": {
+        "size": "XL",
+        "color": "green"
+      },
+      "price": "17.00",
+      "discount": 27,
+      "quantity": 13,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 76,
+    "fields": {
+      "created": "2023-12-02T18:55:48.043Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XS",
+        "color": "black"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 77,
+    "fields": {
+      "created": "2023-12-02T18:55:48.076Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "S",
+        "color": "black"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 78,
+    "fields": {
+      "created": "2023-12-02T18:55:48.094Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "M",
+        "color": "black"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 79,
+    "fields": {
+      "created": "2023-12-02T18:55:48.110Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "L",
+        "color": "black"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 80,
+    "fields": {
+      "created": "2023-12-02T18:55:48.127Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XL",
+        "color": "black"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 81,
+    "fields": {
+      "created": "2023-12-02T18:55:48.149Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XS",
+        "color": "white"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 82,
+    "fields": {
+      "created": "2023-12-02T18:55:48.169Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "S",
+        "color": "white"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 83,
+    "fields": {
+      "created": "2023-12-02T18:55:48.190Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "M",
+        "color": "white"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 84,
+    "fields": {
+      "created": "2023-12-02T18:55:48.212Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "L",
+        "color": "white"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 85,
+    "fields": {
+      "created": "2023-12-02T18:55:48.230Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XL",
+        "color": "white"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 86,
+    "fields": {
+      "created": "2023-12-02T18:55:48.248Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XS",
+        "color": "red"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 87,
+    "fields": {
+      "created": "2023-12-02T18:55:48.280Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "S",
+        "color": "red"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 88,
+    "fields": {
+      "created": "2023-12-02T18:55:48.304Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "M",
+        "color": "red"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 89,
+    "fields": {
+      "created": "2023-12-02T18:55:48.322Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "L",
+        "color": "red"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 90,
+    "fields": {
+      "created": "2023-12-02T18:55:48.342Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XL",
+        "color": "red"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 91,
+    "fields": {
+      "created": "2023-12-02T18:55:48.361Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XS",
+        "color": "blue"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 92,
+    "fields": {
+      "created": "2023-12-02T18:55:48.380Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "S",
+        "color": "blue"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 93,
+    "fields": {
+      "created": "2023-12-02T18:55:48.400Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "M",
+        "color": "blue"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 94,
+    "fields": {
+      "created": "2023-12-02T18:55:48.427Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "L",
+        "color": "blue"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 95,
+    "fields": {
+      "created": "2023-12-02T18:55:48.450Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XL",
+        "color": "blue"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 96,
+    "fields": {
+      "created": "2023-12-02T18:55:48.474Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XS",
+        "color": "green"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 97,
+    "fields": {
+      "created": "2023-12-02T18:55:48.504Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "S",
+        "color": "green"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 98,
+    "fields": {
+      "created": "2023-12-02T18:55:48.533Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "M",
+        "color": "green"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 99,
+    "fields": {
+      "created": "2023-12-02T18:55:48.558Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "L",
+        "color": "green"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.productvariant",
+    "pk": 100,
+    "fields": {
+      "created": "2023-12-02T18:55:48.578Z",
+      "modified": null,
+      "product": 5,
+      "option": {
+        "size": "XL",
+        "color": "green"
+      },
+      "price": "412.98",
+      "discount": 0,
+      "quantity": 1,
+      "available": true
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 3,
+    "fields": {
+      "created": "2023-12-02T18:41:37.183Z",
+      "modified": null,
+      "product": 2,
+      "image": "examples/product/418e107c-38d9-4202-a3e7-2881b7e39f8e.png"
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 4,
+    "fields": {
+      "created": "2023-12-02T18:41:37.191Z",
+      "modified": null,
+      "product": 2,
+      "image": "examples/product/13f9b7cd-5a83-4f7c-9b44-4d0fd3202d31.png"
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 5,
+    "fields": {
+      "created": "2023-12-02T18:44:14.272Z",
+      "modified": null,
+      "product": 3,
+      "image": "examples/product/299804c9-931e-4359-8af0-300c37650ce4.png"
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 6,
+    "fields": {
+      "created": "2023-12-02T18:52:48.719Z",
+      "modified": null,
+      "product": 4,
+      "image": "examples/product/97a2da88-f0c9-46d4-861b-e73a566e5613.png"
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 7,
+    "fields": {
+      "created": "2023-12-02T18:55:01.994Z",
+      "modified": null,
+      "product": 5,
+      "image": "examples/product/ec08728f-60ca-4b05-aa87-415475403bdf.png"
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 8,
+    "fields": {
+      "created": "2023-12-02T18:55:02.001Z",
+      "modified": null,
+      "product": 5,
+      "image": "examples/product/a85b190f-14a1-4c38-bd92-5c3e43c0120d.png"
+    }
+  },
+  {
+    "model": "products.image",
+    "pk": 9,
+    "fields": {
+      "created": "2023-12-02T18:55:02.007Z",
+      "modified": null,
+      "product": 5,
+      "image": "examples/product/9390153b-167b-45d3-8270-5a447fd521c4.png"
+    }
+  }
+]
